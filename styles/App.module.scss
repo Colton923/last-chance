@@ -6,7 +6,6 @@
   top: 0;
   left: 0;
 
-  background-image: url('/images/beer.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -201,20 +200,23 @@
   width: 100%;
   height: 900px;
   z-index: 3;
-
-  background-image: url('/images/bloody.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-color: rgba(0, 0, 0, 0.4);
-  background-blend-mode: multiply;
-
-  border-top: 1px solid white;
-  border-bottom: 1px solid white;
-
-
 }
+
+.contentImage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  max-height: 450px;
+  z-index: -3;
+
+position: absolute;
+  border-top: 1px solid white;
+}
+
 .contentLeftWrapper {
   display: flex;
   flex-direction: column;
@@ -225,27 +227,28 @@
   height: 100%;
   z-index: 3;
 
-
+  position: relative;
+  top: 0;
 }
 .contentHeader {
   font-size: 1.6rem;
-  font-weight: 600;
+  font-weight: 900;
   letter-spacing: 6px;
   margin: 50px 30% 10px 30%;
   text-align: center;
   font-style: italic;
   z-index: 2;
 
-  text-shadow: 2px 2px 1px black;
-
+  text-shadow: 3px 3px 20px black;
 }
 .contentText {
   font-size: 1rem;
-  font-weight: 300;
+  font-weight: 900;
   margin: 0;
   text-align: center;
   z-index: 2;
-  text-shadow: black;
+  text-shadow: 3px 3px 20px black;
+
   padding: 3px;
 
   margin-bottom: 50px;
@@ -261,7 +264,6 @@
   height: 100%;
   min-height: 300px;
 
-  background-image: url('/images/food13.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -282,7 +284,6 @@
   height: 900px;
 
   z-index: 3;
-  background-image: url('/images/food14.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -316,7 +317,6 @@
   height: 100%;
   min-height: 300px;
 
-  background-image: url('/images/sunday2.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

@@ -1,49 +1,15 @@
-'use client'
-
 import styles from 'styles/App.module.scss'
 import Image from 'next/image'
-import food1 from 'public/images/food1.jpg'
-import food2 from 'public/images/food2.jpg'
-import food3 from 'public/images/food3.jpg'
-import food4 from 'public/images/food4.jpg'
-import food5 from 'public/images/food5.jpg'
-import food6 from 'public/images/food6.jpg'
-import food7 from 'public/images/food7.jpg'
-import food8 from 'public/images/food8.jpg'
-import food9 from 'public/images/food9.jpg'
-import food10 from 'public/images/food10.jpg'
-
-import { useEffect, useState } from 'react'
+import beer from 'public/images/beer.jpg'
+import bloody from 'public/images/bloody.jpg'
+import food13 from 'public/images/food13.jpg'
+import food14 from 'public/images/food14.jpg'
+import sunday2 from 'public/images/sunday2.jpg'
 
 export default function Index() {
-  const [currentImageIndexOne, setCurrentImageIndexOne] = useState(0)
-  const imageSetOne = [
-    food1,
-    food2,
-    food3,
-    food4,
-    food5,
-    food6,
-    food7,
-    food8,
-    food9,
-    food10,
-  ]
-
-  const imagesWidths = 1280
-  const imagesHeights = 720
-  const timeBetweenImagesOne = 4700
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentImageIndexOne((prevIndex) => (prevIndex + 1) % imageSetOne.length)
-    }, timeBetweenImagesOne)
-    return () => clearInterval(intervalId)
-  }, [])
-
   return (
     <>
-      <div className={styles.backgroundPhotoOne} />
+      <Image src={beer} alt="Beer" className={styles.backgroundPhotoOne} />
       <div className={styles.wrapper}>
         <div className={styles.hOneWrapper}>
           <div className={styles.lineSVGWrapper}>
@@ -71,7 +37,7 @@ export default function Index() {
           <div className={styles.contentWrapper}>
             <div className={styles.contentLeft}>
               <div className={styles.contentLeftWrapper}>
-                <h2 className={styles.contentHeader}>The Famous Breakfast</h2>
+                <h2 className={styles.contentHeader}>The Breakfast</h2>
                 <p className={styles.contentText}>
                   Pancakes, waffles, eggs, bacon, sausage, hash browns, biscuits and
                   gravy, and more!
@@ -80,12 +46,17 @@ export default function Index() {
                   On the weekend come to enjoy the Bloody Mary Bar, Mimosas, and our
                   beer specials.
                 </p>
+                <Image
+                  src={bloody}
+                  alt="Bloody Mary Bar"
+                  className={styles.contentImage}
+                />
               </div>
-              <div className={styles.contentTransition} />
+              <Image src={food13} alt="Food" className={styles.contentTransition} />
             </div>
             <div className={styles.contentRight}>
               <div className={styles.contentRightWrapper}>
-                <h2 className={styles.contentHeader}>Ashley Smells</h2>
+                <h2 className={styles.contentHeader}>The Ashley</h2>
                 <p className={styles.contentText}>
                   Ashley smells like a wet dog,
                   <br />
@@ -93,8 +64,17 @@ export default function Index() {
                   <br />
                   Ashley smells like a wet dog,
                 </p>
+                <Image
+                  src={food14}
+                  alt="Food again"
+                  className={styles.contentImage}
+                />
               </div>
-              <div className={styles.contentTransitionTwo} />
+              <Image
+                src={sunday2}
+                alt="sunday"
+                className={styles.contentTransitionTwo}
+              />
             </div>
           </div>
         </div>
