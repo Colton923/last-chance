@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "eqeqeq": "error",
+    "prettier/prettier": ["warn", { "endOfLine": "auto" }],
+    "space-before-function-paren": ["error", {
+      "anonymous": "always",
+      "named": "never",
+      "asyncArrow": "always"
+    }],
+    // Allow explicity `any` types when needed
+    "@typescript-eslint/no-explicit-any": "off",
+    // Allow to ignore ts errors when explicity needed
+    "@typescript-eslint/ban-ts-comment": "off",
+    "react-hooks/exhaustive-deps": "off",
+    // Don't need React to be in scope because it is global
+    "react/react-in-jsx-scope": "off",
+    // Ignore prop-types because we are using TypeScript
+    "react/prop-types": "off",
+    // allow importing from require
+    "@typescript-eslint/no-var-requires": 0
+  },
+  // Ignore CSS and SQL files from linting
+  "ignorePatterns": ["src/styles/**/*.css", "**/*.sql"]
+}

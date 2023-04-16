@@ -1,0 +1,326 @@
+.backgroundPhotoOne {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+
+  top: 0;
+  left: 0;
+
+  background-image: url('/images/beer.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
+  // filter: blur(3px);
+  // -webkit-filter: blur(3px);
+  // -moz-filter: blur(3px);
+  // -o-filter: blur(3px);
+  // -ms-filter: blur(3px);
+  // backdrop-filter: blur(3px);
+  z-index: -2;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  z-index: 2;
+  background-color: transparent;
+}
+
+.aychOne {
+  font-size: 2rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  text-align: center;
+  font-style: italic;
+  z-index: 2;
+  color: white;
+  text-shadow: 5px 5px 10px black;
+  width: 100%;
+  font-style: italic;
+}
+
+.hOneWrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+
+  z-index: 2;
+  padding: 10px 0 20px 0;
+  margin: 250px 0 250px 0;
+}
+
+.heroCard {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  background-color: transparent;
+  margin: 30px;
+  backdrop-filter: blur(75px);
+
+  @media (min-width: 768px) {
+   flex-direction: column;
+  }
+}
+
+.heroText {
+  font-size: 6rem;
+  font-weight: 900;
+  letter-spacing: 6px;
+  margin: 50px 30% 10px 30%;
+  text-align: center;
+  z-index: 2;
+
+  text-shadow: 2px 2px 1px black;
+}
+.line {
+  width: calc(60% + 50px);
+  height: 1px;
+  background-color: var(--white);
+  z-index: 2;
+}
+
+.lineLeft {
+  width: 30%;
+  height: 1px;
+  background-color: var(--white);
+  z-index: 2;
+}
+
+.lineRight {
+  width: 30%;
+  height: 1px;
+  background-color: var(--white);
+  z-index: 2;
+}
+
+.middleSVG {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  z-index: 2;
+  fill: white;
+}
+
+.lineSVGWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  z-index: 2;
+}
+
+.header {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 6px;
+  margin: 50px 30% 10px 30%;
+  text-align: center;
+  font-style: italic;
+  z-index: 2;
+
+  text-shadow: 2px 2px 1px black;
+}
+
+.statement{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  margin: 0 30px 0 30px;
+  padding: 20px;
+  z-index: 3;
+}
+
+.text{
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0;
+  text-align: center;
+  z-index: 2;
+  text-shadow: black;
+  padding: 3px;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+
+}
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+
+  @media (min-width: 768px) {
+   flex-direction: row;
+   justify-content: space-evenly;
+  }
+
+}
+.contentLeft {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 900px;
+  z-index: 3;
+
+  background-image: url('/images/bloody.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
+
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+
+
+}
+.contentLeftWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+
+
+}
+.contentHeader {
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: 6px;
+  margin: 50px 30% 10px 30%;
+  text-align: center;
+  font-style: italic;
+  z-index: 2;
+
+  text-shadow: 2px 2px 1px black;
+
+}
+.contentText {
+  font-size: 1rem;
+  font-weight: 300;
+  margin: 0;
+  text-align: center;
+  z-index: 2;
+  text-shadow: black;
+  padding: 3px;
+
+  margin-bottom: 50px;
+}
+
+.contentTransition {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+
+  background-image: url('/images/food13.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
+
+
+}
+
+.contentRight {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 900px;
+
+  z-index: 3;
+  background-image: url('/images/food14.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
+
+  border-top: 1px solid white;
+  border-bottom: 1px solid white;
+}
+
+.contentRightWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+
+}
+
+.contentTransitionTwo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+
+  background-image: url('/images/sunday2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: multiply;
+}
