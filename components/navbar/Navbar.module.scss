@@ -94,3 +94,10 @@
     margin: 15px;
   }
 }
+
+.navHeader {
+  font-size: 1.1rem;
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
+}

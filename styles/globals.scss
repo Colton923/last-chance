@@ -17,9 +17,10 @@ body {
   font-weight: 400;
   font-size: 16px;
   color: var(--white);
-  background-color: transparent;
+  background-color: var(--black);
   height: 99vh;
   width: 100vw;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }

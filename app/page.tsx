@@ -2,14 +2,21 @@ import styles from 'styles/App.module.scss'
 import Image from 'next/image'
 import beer from 'public/images/beer.jpg'
 import bloody from 'public/images/bloody.jpg'
-import food13 from 'public/images/food13.jpg'
+import beerGarden3 from 'public/images/beerGarden3.jpg'
 import food14 from 'public/images/food14.jpg'
 import sunday2 from 'public/images/sunday2.jpg'
+import taps from 'public/images/taps.jpg'
 
 export default function Index() {
   return (
     <>
-      <Image src={beer} alt="Beer" className={styles.backgroundPhotoOne} />
+      <Image
+        src={beer}
+        alt="Beer"
+        className={styles.backgroundPhotoOne}
+        width={1420}
+        height={1920}
+      />
       <div className={styles.wrapper}>
         <div className={styles.hOneWrapper}>
           <div className={styles.lineSVGWrapper}>
@@ -34,46 +41,63 @@ export default function Index() {
           <div className={styles.line} />
         </div>
         <div className={styles.content}>
-          <div className={styles.contentWrapper}>
-            <div className={styles.contentLeft}>
-              <div className={styles.contentLeftWrapper}>
-                <h2 className={styles.contentHeader}>The Breakfast</h2>
-                <p className={styles.contentText}>
-                  Pancakes, waffles, eggs, bacon, sausage, hash browns, biscuits and
-                  gravy, and more!
-                  <br />
-                  <br />
-                  On the weekend come to enjoy the Bloody Mary Bar, Mimosas, and our
-                  beer specials.
-                </p>
-                <Image
-                  src={bloody}
-                  alt="Bloody Mary Bar"
-                  className={styles.contentImage}
-                />
-              </div>
-              <Image src={food13} alt="Food" className={styles.contentTransition} />
+          <div className={styles.hero}>
+            <h2 className={styles.contentHeader}>
+              The Weekend <br />
+              Bloody Mary Bar
+            </h2>
+            <div className={styles.imageWrapper}>
+              <Image
+                src={bloody}
+                alt="Bloody Mary Bar"
+                className={styles.centerImage}
+              />
             </div>
-            <div className={styles.contentRight}>
-              <div className={styles.contentRightWrapper}>
-                <h2 className={styles.contentHeader}>The Ashley</h2>
-                <p className={styles.contentText}>
-                  Ashley smells like a wet dog,
-                  <br />
-                  Ashley smells like a wet dog,
-                  <br />
-                  Ashley smells like a wet dog,
-                </p>
-                <Image
-                  src={food14}
-                  alt="Food again"
-                  className={styles.contentImage}
-                />
-              </div>
+          </div>
+        </div>
+        <div className={styles.content}>
+          <div className={styles.hero}>
+            <h2 className={styles.contentHeader}>
+              Year Round <br />
+              Beer Garden
+            </h2>
+            <div className={styles.imageWrapper}>
+              <Image
+                src={beerGarden3}
+                alt="Beer Garden"
+                className={styles.centerImage}
+              />
+            </div>
+          </div>
+        </div>
+        <div className={styles.content}>
+          <div className={styles.hero}>
+            <h2 className={styles.contentHeader}>
+              Sunday
+              <br />
+              Funday
+            </h2>
+            <div className={styles.imageWrapper}>
               <Image
                 src={sunday2}
-                alt="sunday"
-                className={styles.contentTransitionTwo}
+                alt="Sunday Funday"
+                className={styles.centerImage}
+              />
+            </div>
+          </div>
+        </div>
+        <div className={styles.content}>
+          <div className={styles.hero}>
+            <h2 className={styles.contentHeader}>
+              Delectable
+              <br />
+              Drafts
+            </h2>
+            <div className={styles.imageWrapper}>
+              <Image
+                src={taps}
+                alt="Delectable Drafts"
+                className={styles.centerImage}
               />
             </div>
           </div>
