@@ -1,3 +1,19 @@
+import food1 from 'public/images/food1.jpg'
+import food2 from 'public/images/food2.jpg'
+import food3 from 'public/images/food3.jpg'
+import food4 from 'public/images/food4.jpg'
+import food5 from 'public/images/food5.jpg'
+import food6 from 'public/images/food6.jpg'
+import food7 from 'public/images/food7.jpg'
+import food8 from 'public/images/food8.jpg'
+import food9 from 'public/images/food9.jpg'
+import food10 from 'public/images/food10.jpg'
+import food11 from 'public/images/food11.jpg'
+import food12 from 'public/images/food12.jpg'
+import food13 from 'public/images/food13.jpg'
+import food14 from 'public/images/food14.jpg'
+import { StaticImageData } from 'next/image'
+
 export type MainMenu = {
   [key: string]: MenuGroup[]
 }
@@ -9,6 +25,7 @@ export type MenuItem = {
   name: string
   description: string
   price: string
+  image?: StaticImageData
 }
 
 const thisMenu: MainMenu = {
@@ -28,6 +45,7 @@ const thisMenu: MainMenu = {
           description:
             'with sausage gravy, your choice of potatoes, two eggs and toast',
           price: '$12',
+          image: food1,
         },
         {
           id: '3',
@@ -60,6 +78,7 @@ const thisMenu: MainMenu = {
           description:
             '2 Pancakes, two eggs, choice of potatoes, and choice of bacon or sausage patties or links',
           price: '$13',
+          image: food13,
         },
         {
           id: '7',
@@ -462,6 +481,7 @@ const thisMenu: MainMenu = {
           name: 'Bowl',
           description: '',
           price: '$5',
+          image: food4,
         },
       ],
     },
@@ -563,6 +583,7 @@ const thisMenu: MainMenu = {
           name: 'Chili Cheeseburger',
           description: 'Topped with bacon, cheese sauce, and chili',
           price: '$11',
+          image: food2,
         },
         {
           id: '77',

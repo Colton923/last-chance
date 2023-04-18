@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import styles from './Menu.module.scss'
 
 import type { MenuGroup, MenuItem } from './menu'
@@ -17,7 +18,6 @@ export default function Menu() {
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.header}>Menu</h2>
       <div className={styles.menu}>
         {menu.map((group: MenuGroup, index) => {
           const groupName = Object.keys(group)[0]
@@ -28,11 +28,23 @@ export default function Menu() {
               <ul className={styles.items}>
                 {items.map((item: MenuItem, index) => {
                   return (
-                    <li className={styles.item} key={'item' + index}>
+                    <li
+                      className={styles.item}
+                      key={'item' + index}
+                      style={item.image ? {} : { color: `var(--black)` }}
+                    >
                       <div className={styles.itemHeader}>
                         <div className={styles.itemName}>{FixTitle(item.name)}</div>
                         <div className={styles.itemPrice}>{item.price}</div>
                       </div>
+                      {item.image && (
+                        <Image
+                          src={item.image}
+                          alt={item.name}
+                          className={styles.image}
+                          loading="lazy"
+                        />
+                      )}
                       <div className={styles.itemDescription}>
                         {item.description}
                       </div>

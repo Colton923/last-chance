@@ -2,7 +2,30 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
 
+.backgroundImageWrapper{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background-image: url(https://images.unsplash.com/photo-1519680772-8b5c1b2b1b1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
+
+.backgroundImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 .menu {
   display: flex;
@@ -20,12 +43,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem;
-  padding: 1rem;
-  background-color: white;
+  background-color: transparent;
   border-radius: 1rem;
   border: 1px solid white;
   width: 350px;
+  margin: 2rem;
+  backdrop-filter: blur(5px);
   @media (min-width: 768px) {
     width: auto;
   }
@@ -56,19 +79,10 @@
   position: relative;
   flex-direction: column;
   align-items: left;
-  padding: 2rem;
-  margin: .5rem;
-  background-color: transparent;
-  border: 1px solid var(--black);
   border-radius: 1rem;
   color: white;
 
   z-index: 0;
-  @media (min-width: 768px) {
-    min-width: 450px;
-    min-height: 250px;
-    margin: 0;
-  }
 }
 .itemHeader{
   display: flex;
@@ -76,14 +90,12 @@
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  margin: 1rem;
   z-index: 1;
 }
 .itemName{
   font-size: 1.5rem;
   text-align: left;
   text-shadow: 1px 1px 1px var(--black);
-  margin: 1rem;
 
   border-bottom: 1px solid var(--black);
   text-transform: capitalize;
@@ -94,40 +106,10 @@
   font-weight: 900;
   text-align: left;
   align-self: baseline;
-  margin: 1rem;
-  padding: 1rem;
-
+  text-indent: 15px;
   z-index: 1;
 
   @media (min-width: 768px) {
     font-size: 2rem;
-  }
-}
-.itemDescription{
-  font-size: 1rem;
-  text-align: left;
-
-  text-indent: 10px;
-  z-index: 1;
-
-}
-
-.image {
-  display: flex;
-  position: absolute;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 1rem;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  filter: contrast(0.5) saturate(120%);
-
-  @media (min-width: 768px) {
-    width: 100%;
-    height: 100%;
   }
 }

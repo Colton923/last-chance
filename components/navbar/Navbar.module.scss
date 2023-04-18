@@ -93,11 +93,22 @@
     padding: 5px;
     margin: 15px;
   }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 }
 
 .navHeader {
   font-size: 1.1rem;
   @media (max-width: 768px) {
     font-size: 10px;
+  }
+}
+
+.svg {
+  @media (max-width: 768px) {
+    width: 30px;
+    height: 30px;
   }
 }
