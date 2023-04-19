@@ -45,17 +45,23 @@ export const SiteContextProvider = (props: Props) => {
           resolve(response)
         })
       })
+      if (response) {
+        response.then((res: any) => {
+          setPageId(res.id)
+        })
+      }
     }
-    if (response) {
-      response.then((res: any) => {
-        setPageId(res.id)
-      })
+  }, [])
+
+  useEffect(() => {
+    if (window.FB && pageId !== '') {
       window.FB.api(`/${pageId}/posts`, (response: any) => {
-        setPostId(response.data[0].id)
+        const post = response.data[0]
+        setPostId(post.id)
       })
       setIsInitialized(true)
     }
-  }, [])
+  }, [pageId])
 
   const contextValue = useMemo<SiteContextScope | null>(
     () => ({

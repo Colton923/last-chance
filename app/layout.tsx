@@ -21,7 +21,7 @@ export default async function RootLayout({ children }: Props) {
           async
           defer
           crossOrigin="anonymous"
-          src="https://connect.facebook.net/en_US/sdk.js"
+          src="//connect.facebook.net/en_US/sdk.js"
         ></script>
       </head>
       <body>

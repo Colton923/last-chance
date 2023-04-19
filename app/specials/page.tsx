@@ -5,6 +5,14 @@ import { useSiteContext } from 'components/context/SiteContext'
 
 export default function Specials() {
   const { pageId, postId } = useSiteContext()
+
+  if (!pageId || !postId)
+    return (
+      <div className={styles.wrapper}>
+        <h2 className={styles.header}>Specials</h2>
+        <p>loading...</p>
+      </div>
+    )
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.header}>Specials</h2>
