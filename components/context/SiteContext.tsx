@@ -16,7 +16,8 @@ interface Props {
 }
 
 export interface SiteContextScope {
-  params?: any
+  pageId: string
+  postId: string
 }
 
 export const SiteContext = createContext<SiteContextScope | null>(null)
@@ -24,6 +25,8 @@ export const SiteContext = createContext<SiteContextScope | null>(null)
 export const SiteContextProvider = (props: Props) => {
   const { children } = props
   const [isInitialized, setIsInitialized] = useState(false)
+  const [pageId, setPageId] = useState('')
+  const [postId, setPostId] = useState('')
 
   useEffect(() => {
     if (window.FB) {
@@ -44,18 +47,23 @@ export const SiteContextProvider = (props: Props) => {
       })
     }
     if (response) {
-      console.log('response', response)
+      response.then((res: any) => {
+        setPageId(res.id)
+      })
+      window.FB.api(`/${pageId}/posts`, (response: any) => {
+        setPostId(response.data[0].id)
+      })
       setIsInitialized(true)
     }
   }, [])
 
-  const contextValue = useMemo<SiteContextScope | null>(() => ({}), [])
-
-  if (!isInitialized) {
-    console.log('not initialized')
-  } else {
-    console.log('initialized')
-  }
+  const contextValue = useMemo<SiteContextScope | null>(
+    () => ({
+      pageId,
+      postId,
+    }),
+    [pageId, postId]
+  )
 
   return (
     <SiteContext.Provider value={contextValue as SiteContextScope}>

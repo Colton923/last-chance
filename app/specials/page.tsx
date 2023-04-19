@@ -1,9 +1,8 @@
 import styles from './Specials.module.scss'
+import { useSiteContext } from 'components/context/SiteContext'
 
 export default function Specials() {
-  const pageId = 'lastchancebarandgrill'
-  const postId = '1015829006183873'
-
+  const { pageId, postId } = useSiteContext()
   return (
     <div className={styles.wrapper}>
       <h2 className={styles.header}>Specials</h2>
