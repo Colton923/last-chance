@@ -1,3 +1,5 @@
+'use client'
+
 import styles from './Specials.module.scss'
 import { useSiteContext } from 'components/context/SiteContext'
 
