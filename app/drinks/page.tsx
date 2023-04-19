@@ -2,7 +2,7 @@ import styles from './Drinks.module.scss'
 import DrinkMenu from './drinks'
 import type { Beverage, BeverageMenu, Beverages } from './drinks'
 import Image from 'next/image'
-import bar from 'public/images/bar.jpg'
+import bar from 'public/images/bar.jpeg'
 
 export default function Drinks() {
   const date = Object.keys(DrinkMenu)[0]
@@ -19,7 +19,13 @@ export default function Drinks() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.backgroundImageWrapper}>
-        <Image src={bar} alt="bar" className={styles.backgroundImage} />
+        <Image
+          src={bar}
+          alt="bar"
+          className={styles.backgroundImage}
+          width={3840}
+          height={2372}
+        />
       </div>
       <div className={styles.menu}>
         {menu.map((group: BeverageMenu, index) => {
