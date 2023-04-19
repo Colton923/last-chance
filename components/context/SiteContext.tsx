@@ -18,6 +18,7 @@ interface Props {
 export interface SiteContextScope {
   pageId: string
   postId: string
+  isInitialized: boolean
 }
 
 export const SiteContext = createContext<SiteContextScope | null>(null)
@@ -67,6 +68,7 @@ export const SiteContextProvider = (props: Props) => {
     () => ({
       pageId,
       postId,
+      isInitialized,
     }),
     [pageId, postId]
   )
