@@ -1,5 +1,6 @@
 import styles from './Footer.module.scss'
 import Link from 'next/link'
+
 const Footer = () => {
   return (
     <div className={styles.wrapper}>
@@ -70,6 +71,9 @@ const Footer = () => {
           <span>Friday: 8:00am - 2:00am</span>
           <span>Saturday: 8:00am - 2:00am</span>
           <span>Sunday: 8:00am - 2:00am</span>
+          <Link href={'/privaryPolicy'} className={styles.link}>
+            Privacy Policy
+          </Link>
         </div>
       </div>
     </div>

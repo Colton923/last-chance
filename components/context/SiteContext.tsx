@@ -1,22 +1,12 @@
 'use client'
 
-import {
-  useMemo,
-  memo,
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-} from 'react'
+import { useMemo, memo, createContext, useContext, useState, useEffect } from 'react'
 
 interface Props {
   children: React.ReactNode
 }
 
 export interface SiteContextScope {
-  pageId: string
   postId: string
   isInitialized: boolean
 }
@@ -26,51 +16,45 @@ export const SiteContext = createContext<SiteContextScope | null>(null)
 export const SiteContextProvider = (props: Props) => {
   const { children } = props
   const [isInitialized, setIsInitialized] = useState(false)
-  const [pageId, setPageId] = useState('')
   const [postId, setPostId] = useState('')
+  const [token, setToken] = useState('')
+
+  const GetFBToken = async () => {
+    const res = await fetch('/api/facebookToken', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const json = await res.json()
+    setToken(json.access_token)
+  }
 
   useEffect(() => {
-    if (window.FB) {
-      window.FB.init({
-        appId: process.env.FACEBOOK_APP_ID,
-        autoLogAppEvents: true,
-        xfbml: true,
-        version: 'v16.0',
-      })
-    }
-
-    let response
-    if (typeof window !== 'undefined' && window.FB) {
-      response = new Promise((resolve) => {
-        window.FB.api('/lastchance17', { fields: 'id' }, (response) => {
-          resolve(response)
-        })
-      })
-      if (response) {
-        response.then((res: any) => {
-          setPageId(res.id)
-        })
-      }
-    }
-  }, [])
+    GetFBToken()
+  }, [GetFBToken])
 
   useEffect(() => {
-    if (window.FB && pageId !== '') {
-      window.FB.api(`/${pageId}/posts`, (response: any) => {
-        const post = response.data[0]
-        setPostId(post.id)
-      })
-      setIsInitialized(true)
+    if (token === '') return
+    try {
+      fetch(`https://graph.facebook.com/271350786209066/posts?access_token=${token}`)
+        .then((res) => res.json())
+        .then((res) => {
+          const post = res.data[0]
+          setPostId(post.id)
+          setIsInitialized(true)
+        })
+    } catch (error) {
+      console.log(error)
     }
-  }, [pageId])
+  }, [token])
 
   const contextValue = useMemo<SiteContextScope | null>(
     () => ({
-      pageId,
       postId,
       isInitialized,
     }),
-    [pageId, postId]
+    [postId, isInitialized]
   )
 
   return (

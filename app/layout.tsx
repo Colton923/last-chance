@@ -17,12 +17,11 @@ export default async function RootLayout({ children }: Props) {
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
         <meta name="description" content="Last-Chance" />
-        <script
-          async
-          defer
-          crossOrigin="anonymous"
-          src="//connect.facebook.net/en_US/sdk.js"
-        ></script>
+        <meta name="author" content="Colton McClintock - Webdev Solutions LLC" />
+        <meta name="keywords" content="Last-Chance" />
+        <meta name="theme-color" content="#000000" />
+        <link rel="icon" href="/favicon.ico" />
+        <title>The-Last-Chance</title>
       </head>
       <body>
         <main>
