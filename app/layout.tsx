@@ -16,7 +16,13 @@ export default async function RootLayout({ children }: Props) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1"
         />
-        <meta name="description" content="Go-Events" />
+        <meta name="description" content="Last-Chance" />
+        <script
+          async
+          defer
+          crossOrigin="anonymous"
+          src="https://connect.facebook.net/en_US/sdk.js"
+        ></script>
       </head>
       <body>
         <main>

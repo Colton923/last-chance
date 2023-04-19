@@ -1,0 +1,96 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 20px;
+}
+.header {
+  display: flex;
+}
+.form{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+}
+.label {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0.5rem;
+  width: 100%;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    font-size: 1rem;
+  }
+}
+.textInput {
+  display: flex;
+  width: 10rem;
+  height: 2rem;
+  width: 100%;
+  margin: 0.5rem;
+}
+.emailInput {
+  display: flex;
+  width: 10rem;
+  height: 2rem;
+  width: 100%;
+  margin: 0.5rem;
+}
+.telInput {
+  display: flex;
+  width: 10rem;
+  height: 2rem;
+  width: 100%;
+  margin: 0.5rem;
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+}
+.submitInput {
+  display: flex;
+  width: 10rem;
+  height: 2rem;
+  margin: 0.5rem;
+
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+
+  grid-column: 1 / 2;
+
+  color: white;
+  text-transform: uppercase;
+  font-weight: 900;
+  border-bottom: 1px solid white;
+
+  &:hover {
+    color: #a3fd32a0;
+    border-bottom: 1px solid #a3fd32a0;
+  }
+
+  &:active {
+    color: #a3fd32a0;
+    border-bottom: 1px solid #a3fd32a0;
+  }
+
+  @media (max-width: 1000px) {
+    font-size: 1rem;
+    grid-column: 1 ;
+  }
+}
