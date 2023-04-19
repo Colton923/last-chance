@@ -71,7 +71,7 @@ const Footer = () => {
           <span>Friday: 8:00am - 2:00am</span>
           <span>Saturday: 8:00am - 2:00am</span>
           <span>Sunday: 8:00am - 2:00am</span>
-          <Link href={'/privaryPolicy'} className={styles.link}>
+          <Link href={'/privacyPolicy'} className={styles.link}>
             Privacy Policy
           </Link>
         </div>
