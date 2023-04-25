@@ -4,7 +4,7 @@ import React from 'react'
 import Link from 'next/link'
 import styles from './Navbar.module.scss'
 
-const NavLinks = (props: { isMobile: any; closeMobileMenu: () => any }) => {
+const NavLinks = (props: any) => {
   return (
     <div>
       <div className={styles.navLinksWrapper}>
@@ -30,7 +30,7 @@ const NavLinks = (props: { isMobile: any; closeMobileMenu: () => any }) => {
         </Link>
 
         <Link
-          className={styles.navItem} 
+          className={styles.navItem}
           href="/menu"
           onClick={() => props.isMobile && props.closeMobileMenu()}
         >
