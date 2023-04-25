@@ -7,9 +7,15 @@
   --brown: #974900;
   --grey: #1A1B21;
   --green: #00750C;
-  --red: #B62025;
+  --red: #b62025;
   --white: #ffffff;
   --black: #1a1b21;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -20,7 +26,8 @@ body {
   background-color: var(--black);
   height: 99vh;
   width: 100vw;
+
   margin: 0;
   padding: 0;
   overflow-x: hidden;
-}
+ }
