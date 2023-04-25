@@ -2,39 +2,44 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-
+  padding-top: 2rem;
 }
 .menu {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
+  // display: flex;
+  // justify-content: center;
+  // flex-direction: column;
+  // align-items: center;
+  margin: 0 auto;
+  width: 90%;
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: baseline;
-  }
+  // @media (min-width: 768px) {
+  //   flex-direction: row;
+  //   flex-wrap: wrap;
+  //   align-items: baseline;
+  // }
 }
 .group{
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 1rem;
+  // margin: 1rem;
   padding: 1rem;
   background-color: white;
   border-radius: 1rem;
-  border: 1px solid white;
-  width: 350px;
+  // border: 1px solid white;
+  // width: 350px;
+  margin-bottom: 2rem;
+
   @media (min-width: 768px) {
     width: auto;
   }
 }
 .groupName {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
+  line-height: 2rem;
   font-weight: 900;
   text-align: center;
-
+  color: var(--black);
   text-transform: uppercase;
 }
 .items {
@@ -44,6 +49,7 @@
   align-items: center;
   margin: 0;
   padding: 0;
+
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -56,12 +62,13 @@
   position: relative;
   flex-direction: column;
   align-items: left;
-  padding: 2rem;
-  margin: .5rem;
+  padding: 1rem;
+  // margin: .5rem;
   background-color: transparent;
-  border: 1px solid var(--black);
+  // border: 1px solid var(--black);
   border-radius: 1rem;
-  color: white;
+  // color: white;
+
 
   z-index: 0;
   @media (min-width: 768px) {
@@ -72,29 +79,29 @@
 }
 .itemHeader{
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 1rem;
+  // margin: 1rem;
   z-index: 1;
 }
 .itemName{
   font-size: 1.5rem;
-  text-align: left;
+  line-height: 1.8rem;
+  // text-align: left;
   text-shadow: 1px 1px 1px var(--black);
-  margin: 1rem;
+  // margin: 1rem;
 
   border-bottom: 1px solid var(--black);
   text-transform: capitalize;
   z-index: 1;
 }
 .itemPrice{
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 900;
   text-align: left;
   align-self: baseline;
-  margin: 1rem;
+  // margin: 1rem;
   padding: 1rem;
 
   z-index: 1;
@@ -107,7 +114,7 @@
   font-size: 1rem;
   text-align: left;
 
-  text-indent: 10px;
+  // text-indent: 10px;
   z-index: 1;
 
 }
