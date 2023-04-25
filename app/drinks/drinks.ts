@@ -34,14 +34,6 @@ const Drinks: Beverages = {
       ],
     },
     {
-      wine: [
-        { name: 'White', price: '$6' },
-        { name: 'Red', price: '$6' },
-        { name: 'Rose', price: '$6' },
-        { name: 'Champagne', price: '$6' },
-      ],
-    },
-    {
       liquor: [
         { name: 'Whiskey', price: '$6' },
         { name: 'Vodka', price: '$6' },
@@ -56,6 +48,14 @@ const Drinks: Beverages = {
         { name: 'Liqueurs', price: '$6' },
         { name: 'Schnapps', price: '$6' },
         { name: 'Cocktails', price: '$6' },
+      ],
+    },
+    {
+      wine: [
+        { name: 'White', price: '$6' },
+        { name: 'Red', price: '$6' },
+        { name: 'Rose', price: '$6' },
+        { name: 'Champagne', price: '$6' },
       ],
     },
     {

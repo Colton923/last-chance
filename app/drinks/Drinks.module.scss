@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
+  padding: 2rem;
 }
 
 .backgroundImageWrapper{
@@ -37,30 +38,35 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: transparent;
   border-radius: 1rem;
-  border: 1px solid white;
-  width: 350px;
+  border: 1px solid var(--white);
+  width: 80%;
+  max-width: 400px;
   margin: 2rem;
-  backdrop-filter: blur(5px);
+  padding: 2rem 1rem;
+  background-color: rgba(0,0,0,0.9);
+
   @media (min-width: 768px) {
-    width: auto;
+    max-width: 500px;
   }
 }
 .groupName {
   font-size: 1.5rem;
   font-weight: 900;
   text-align: center;
-
+  margin-bottom: 1rem;
   text-transform: uppercase;
 }
 .items {
-  display: flex;
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: 1fr;
   justify-content: center;
-  flex-direction: column;
   align-items: center;
+  width: 100%;
   margin: 0;
   padding: 0;
+
   @media (min-width: 768px) {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -68,42 +74,27 @@
     align-items: baseline;
   }
 }
-.item{
-  display: flex;
-  position: relative;
-  flex-direction: column;
-  align-items: left;
-  border-radius: 1rem;
-  color: white;
 
-  z-index: 0;
-}
 .itemHeader{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
+  gap: 1.2rem;
   width: 100%;
   z-index: 1;
 }
+
 .itemName{
   font-size: 1.5rem;
-  text-align: left;
   text-shadow: 1px 1px 1px var(--black);
-
   border-bottom: 1px solid var(--black);
   text-transform: capitalize;
   z-index: 1;
 }
-.itemPrice{
-  font-size: 1rem;
-  font-weight: 900;
-  text-align: left;
-  align-self: baseline;
-  text-indent: 15px;
-  z-index: 1;
 
-  @media (min-width: 768px) {
-    font-size: 2rem;
-  }
+.itemPrice{
+  font-size: 1.5rem;
+  font-weight: 400;
+  z-index: 1;
 }
