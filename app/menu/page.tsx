@@ -59,8 +59,10 @@ export default async function Menu() {
 }
 
 export async function TheMenu() {
-  const menu = await fetch('http://localhost:3000/api/firestoreData').then((res) =>
-    res.json()
-  )
+  const menu = await fetch(
+    process.env.NEXT_PUBLIC_ENVIRONMENT === 'development'
+      ? 'http://localhost:3000/api/firestoreData'
+      : 'https://lastchancepeoria.com/api/firestoreData'
+  ).then((res) => res.json())
   return menu.body
 }
