@@ -1,6 +1,6 @@
 import 'styles/globals.scss'
 import Navbar from 'components/navbar/Navbar'
-import SiteContext from 'components/context/SiteContext'
+import { SiteContextProvider } from 'components/context/SiteContext'
 import Footer from 'components/footer/Footer'
 
 interface Props {
@@ -25,11 +25,11 @@ export default async function RootLayout({ children }: Props) {
       </head>
       <body>
         <main>
-          <SiteContext>
+          <SiteContextProvider>
             <Navbar />
             {children}
             <Footer />
-          </SiteContext>
+          </SiteContextProvider>
         </main>
       </body>
     </html>

@@ -1,18 +1,16 @@
 import Image from 'next/image'
 import styles from './Menu.module.scss'
-
 import type { MenuGroup, MenuItem } from './menu'
 import TheMenu from './menu'
+
 export default function Menu() {
-  const date = Object.keys(TheMenu)[0]
-  const menu = TheMenu[date]
+  const menu = TheMenu
 
   const FixTitle = (title: string) => {
     const words = title.split(/(?=[A-Z])/)
     for (let i = 0; i < words.length; i++) {
       words[i] = words[i][0].toUpperCase() + words[i].slice(1)
     }
-
     return words.join(' ')
   }
 
