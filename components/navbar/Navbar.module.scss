@@ -1,100 +1,101 @@
 .navbarWrapper {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  background-color: transparent;
-  backdrop-filter: blur(6px);
-  overflow: hidden;
-  border-bottom: 1px solid var(--white);
-}
+    background-color: rgba(0, 0, 0, 0.8);
+    width: 100%;
+        
+    .navigation {
+        display: none;
 
-.wrapper{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-}
+        .navLinksWrapper {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-right: 1rem;
 
-.imageWrapper{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  width: 67%;
-}
-.image{
-  max-width: 90vw;
-}
-.wordsWrapper{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-}
-.words{
-  height: 100%;
-  width: 100%;
-  color: var(--black);
-  letter-spacing: 1px;
-  font-weight: 200;
-  font-size: 1.5rem;
-  text-transform: uppercase;
-}
-.navigation{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  width: 100%;
-  background-color: transparent;
-}
+            .navItem {
+                display: flex;
+                gap: 0.8rem;
+                align-items: center;
 
-.navItem {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  font-size: 1.2rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  text-decoration: none;
-  margin: 10px;
-  transition: all 0.3s ease-in-out;
-  color: white;
+                .svg {
+                    display: none;
+                }
+            }
+            .navHeader {
+                margin: 0;
+            }
+        }
+        .brandImage {
+            height: 80px;
+            width: auto;
+        }
 
-  &:hover {
-    color: var(--red);
-  }
-  &:hover {
-    color: var(--red);
-  }
+        @media (min-width: 768px) {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            width: 100%;
+            
+        }
+    }
 
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-}
+    .mobileNavigationWrapper {
+       
+        .mobileNavigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
 
-.navHeader {
-  font-size: 1.1rem;
-  @media (max-width: 768px) {
-    font-size: 10px;
-  }
-}
+            .brandImage {
+                width: 100px;
+                height: auto;
+            }
+        }
+        .navLinksWrapper {
+            padding: 1.5rem 0;      
+        }
+        .navItem {
+            display: flex;
+            flex-direction: column-reverse;
+            justify-content: center;
+            align-items: center;  
+            z-index: 10;    
+            margin-bottom: 1rem;
+        }
 
-.svg {
-  @media (max-width: 768px) {
-    width: 30px;
-    height: 30px;
-  }
+        @media (min-width: 768px) {
+            display: none;
+        } 
+    }
+
+    .navItem {
+        padding: 10px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-decoration: none;
+        transition: all 0.3s ease-in-out;
+        color: white;
+      
+        &:hover {
+          color: var(--red);
+        }
+        &:hover {
+          color: var(--red);
+        }
+      }
+
+    .navHeader {
+        font-size: 10px;
+        @media (min-width: 768px) {
+          font-size: 1rem;
+        }
+      }
+      
+    .svg {
+        width: 35px;
+        height: 35px;
+      }
 }
