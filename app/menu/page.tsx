@@ -1,10 +1,9 @@
 import Image from 'next/image'
 import styles from './Menu.module.scss'
 import type { MenuGroup, MenuItem } from './menu'
-import TheMenu from './menu'
 
-export default function Menu() {
-  const menu = TheMenu
+export default async function Menu() {
+  const menu = await TheMenu()
 
   const FixTitle = (title: string) => {
     const words = title.split(/(?=[A-Z])/)
@@ -14,10 +13,11 @@ export default function Menu() {
     return words.join(' ')
   }
 
+  if (!menu) return null
   return (
     <div className={styles.wrapper}>
       <div className={styles.menu}>
-        {menu.map((group: MenuGroup, index) => {
+        {menu.map((group: MenuGroup, index: any) => {
           const groupName = Object.keys(group)[0]
           const items = group[groupName]
           return (
@@ -56,4 +56,11 @@ export default function Menu() {
       </div>
     </div>
   )
+}
+
+export async function TheMenu() {
+  const menu = await fetch('http://localhost:3000/api/firestoreData').then((res) =>
+    res.json()
+  )
+  return menu.body
 }
