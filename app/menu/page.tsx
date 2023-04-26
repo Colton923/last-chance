@@ -5,6 +5,14 @@ import styles from './Menu.module.scss'
 import type { MenuGroup, MenuItem } from './menu'
 import { useEffect, useState } from 'react'
 
+export const FixTitle = (title: string) => {
+  const words = title.split(/(?=[A-Z])/)
+  for (let i = 0; i < words.length; i++) {
+    words[i] = words[i][0].toUpperCase() + words[i].slice(1)
+  }
+  return words.join(' ')
+}
+
 export default function Menu() {
   const [menuGroups, setMenuGroups] = useState<MenuGroup[]>([])
 
@@ -26,14 +34,6 @@ export default function Menu() {
       setMenuGroups(menuGroups)
     })
   }, [])
-
-  const FixTitle = (title: string) => {
-    const words = title.split(/(?=[A-Z])/)
-    for (let i = 0; i < words.length; i++) {
-      words[i] = words[i][0].toUpperCase() + words[i].slice(1)
-    }
-    return words.join(' ')
-  }
 
   if (!menuGroups) return null
   return (

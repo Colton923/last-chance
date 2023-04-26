@@ -9,6 +9,7 @@ import { useSiteContext } from '../context/SiteContext'
 import { useEffect, useState } from 'react'
 import { MenuGroup, MenuItem } from 'app/menu/menu'
 import { useFirebaseContext } from 'components/context/FirebaseContext'
+import { FixTitle } from 'app/menu/page'
 
 export default function Grid() {
   const { screenWidth } = useSiteContext()
@@ -133,7 +134,7 @@ export default function Grid() {
         className={styles.choice}
         onClick={() => setChoice(group)}
       >
-        {Object.keys(group)[0]}
+        {FixTitle(Object.keys(group)[0])}
       </div>
     )
   })
