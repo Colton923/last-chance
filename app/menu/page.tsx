@@ -1,23 +1,45 @@
+'use client'
+
 import Image from 'next/image'
 import styles from './Menu.module.scss'
 import type { MenuGroup, MenuItem } from './menu'
+import { useEffect, useState } from 'react'
 
-export default async function Menu() {
-  const menu = await TheMenu()
-
-  const FixTitle = (title: string) => {
-    const words = title.split(/(?=[A-Z])/)
-    for (let i = 0; i < words.length; i++) {
-      words[i] = words[i][0].toUpperCase() + words[i].slice(1)
-    }
-    return words.join(' ')
+export const FixTitle = (title: string) => {
+  const words = title.split(/(?=[A-Z])/)
+  for (let i = 0; i < words.length; i++) {
+    words[i] = words[i][0].toUpperCase() + words[i].slice(1)
   }
+  return words.join(' ')
+}
 
-  if (!menu) return null
+export default function Menu() {
+  const [menuGroups, setMenuGroups] = useState<MenuGroup[]>([])
+
+  useEffect(() => {
+    const getMeu = async () => {
+      const menu = await fetch(
+        process.env.NEXT_PUBLIC_ENVIRONMENT === 'development'
+          ? 'http://localhost:3000/api/firestoreData'
+          : 'https://lastchancepeoria.com/api/firestoreData'
+      )
+      if (!menu.ok) return null
+      const menuData = await menu.json()
+      const menuGroups = menuData.body as MenuGroup[]
+
+      return menuGroups
+    }
+    getMeu().then((menuGroups) => {
+      if (!menuGroups) return null
+      setMenuGroups(menuGroups)
+    })
+  }, [])
+
+  if (!menuGroups) return null
   return (
     <div className={styles.wrapper}>
       <div className={styles.menu}>
-        {menu.map((group: MenuGroup, index: any) => {
+        {menuGroups.map((group: MenuGroup, index: any) => {
           const groupName = Object.keys(group)[0]
           const items = group[groupName]
           return (
@@ -62,13 +84,4 @@ export default async function Menu() {
       </div>
     </div>
   )
-}
-
-export async function TheMenu() {
-  const menu = await fetch(
-    process.env.NEXT_PUBLIC_ENVIRONMENT === 'development'
-      ? 'http://localhost:3000/api/firestoreData'
-      : 'https://lastchancepeoria.com/api/firestoreData'
-  ).then((res) => res.json())
-  return menu.body
 }
