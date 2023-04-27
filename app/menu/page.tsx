@@ -29,7 +29,11 @@ export default async function Menu() {
                     <li
                       className={styles.item}
                       key={'item' + index}
-                      style={item.image ? {} : { color: `var(--black)` }}
+                      style={
+                        item.image
+                          ? { textShadow: `1px 1px 1px var(--black)` }
+                          : { color: `var(--black)` }
+                      }
                     >
                       <div className={styles.itemHeader}>
                         <div className={styles.itemName}>{FixTitle(item.name)}</div>
@@ -41,6 +45,8 @@ export default async function Menu() {
                           alt={item.name}
                           className={styles.image}
                           loading="lazy"
+                          fill
+                          style={{ maxWidth: '400px' }}
                         />
                       )}
                       <div className={styles.itemDescription}>
