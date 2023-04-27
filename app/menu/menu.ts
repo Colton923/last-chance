@@ -16,6 +16,7 @@ export type MenuItem = {
   group?: string
 }
 
+
 export const thisMenu: MenuGroup[] = [
   {
     breakfastFavorites: [

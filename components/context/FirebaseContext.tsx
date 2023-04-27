@@ -4,6 +4,7 @@ import { useMemo, memo, createContext, useContext, useState } from 'react'
 import { RecaptchaVerifier, getAuth, signInWithPhoneNumber } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
 import { MenuItem } from 'app/menu/menu'
+import { getStorage } from 'firebase/storage'
 
 interface Props {
   children: React.ReactNode
@@ -31,6 +32,8 @@ export const FirebaseContextProvider = (props: Props) => {
     messagingSenderId: process.env.NEXT_PUBLIC_MESSAGE_SENDER_ID,
     appId: process.env.NEXT_PUBLIC_APP_ID,
   })
+
+  const storage = getStorage(app)
 
   const handleSignIn = async () => {
     const auth = getAuth(app)

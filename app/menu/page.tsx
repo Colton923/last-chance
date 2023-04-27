@@ -4,6 +4,7 @@ import Image from 'next/image'
 import styles from './Menu.module.scss'
 import type { MenuGroup, MenuItem } from './menu'
 import { useEffect, useState } from 'react'
+import { getDownloadURL, ref } from 'firebase/storage'
 
 export const FixTitle = (title: string) => {
   const words = title.split(/(?=[A-Z])/)
@@ -47,6 +48,12 @@ export default function Menu() {
               <h3 className={styles.groupName}>{FixTitle(groupName)}</h3>
               <ul className={styles.items}>
                 {items.map((item: MenuItem, index) => {
+                  if (item.image) {
+                    const storageRef = ref(storage, 'images/' + item.image)
+                    getDownloadURL(storageRef).then((url) => {
+                      // Add url to image src, typescript problem though
+                    })
+                  }
                   return (
                     <li
                       className={styles.item}
