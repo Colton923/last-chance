@@ -9,7 +9,8 @@ import { useSiteContext } from '../context/SiteContext'
 import { useEffect, useState } from 'react'
 import { MenuGroup, MenuItem } from 'app/menu/menu'
 import { useFirebaseContext } from 'components/context/FirebaseContext'
-import { FixTitle } from 'app/menu/page'
+import { FixTitle } from 'app/menu/FixTitle'
+import GridImageCellRenderer from './GridImageCellRenderer'
 
 export default function Grid() {
   const { screenWidth } = useSiteContext()
@@ -29,13 +30,11 @@ export default function Grid() {
     UpdateDB(params.data as MenuItem)
     return true
   }
-
-  const imageValueGetter = (params: any) => {
-    if (params.data[params.colDef.field]) {
-      return `<img src="${params.data[params.colDef.field].src}" />`
-    } else {
-      return ''
-    }
+  const imageValueSetter = (params: any) => {
+    params.data[params.colDef.field] = params.newValue
+    console.log('imageValueSetter', params.data)
+    UpdateDB(params.data as MenuItem)
+    return true
   }
 
   const MakeGrid = (group: MenuGroup) => {
@@ -67,7 +66,12 @@ export default function Grid() {
         {
           headerName: 'Image',
           field: 'image',
-          valueGetter: imageValueGetter,
+          autoHeight: true,
+          valueSetter: imageValueSetter,
+          cellRendererFramework: GridImageCellRenderer({
+            value: valueGetter,
+            valueSetter: imageValueSetter,
+          }),
         },
       ],
     }
@@ -113,6 +117,7 @@ export default function Grid() {
   useEffect(() => {
     getMenu()
       .then((res: { body: MenuGroup[] }) => {
+        ///   why is this objext here
         const newRes = res.body.map((group) => {
           const newGroup = { ...group }
           newGroup[Object.keys(group)[0]].forEach((item) => {

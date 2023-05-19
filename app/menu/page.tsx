@@ -4,21 +4,15 @@ import Image from 'next/image'
 import styles from './Menu.module.scss'
 import type { MenuGroup, MenuItem } from './menu'
 import { useEffect, useState } from 'react'
-import { getDownloadURL, ref } from 'firebase/storage'
-
-export const FixTitle = (title: string) => {
-  const words = title.split(/(?=[A-Z])/)
-  for (let i = 0; i < words.length; i++) {
-    words[i] = words[i][0].toUpperCase() + words[i].slice(1)
-  }
-  return words.join(' ')
-}
+import { FixTitle } from './FixTitle'
+import CloudImage from './CloudImage'
 
 export default function Menu() {
   const [menuGroups, setMenuGroups] = useState<MenuGroup[]>([])
+  const [image, setImage] = useState<Blob | null>(null)
 
   useEffect(() => {
-    const getMeu = async () => {
+    const getMenu = async () => {
       const menu = await fetch(
         process.env.NEXT_PUBLIC_ENVIRONMENT === 'development'
           ? 'http://localhost:3000/api/firestoreData'
@@ -30,7 +24,8 @@ export default function Menu() {
 
       return menuGroups
     }
-    getMeu().then((menuGroups) => {
+
+    getMenu().then((menuGroups) => {
       if (!menuGroups) return null
       setMenuGroups(menuGroups)
     })
@@ -48,12 +43,6 @@ export default function Menu() {
               <h3 className={styles.groupName}>{FixTitle(groupName)}</h3>
               <ul className={styles.items}>
                 {items.map((item: MenuItem, index) => {
-                  if (item.image) {
-                    const storageRef = ref(storage, 'images/' + item.image)
-                    getDownloadURL(storageRef).then((url) => {
-                      // Add url to image src, typescript problem though
-                    })
-                  }
                   return (
                     <li
                       className={styles.item}
