@@ -58,13 +58,12 @@ export default function Menu() {
                         <div className={styles.itemPrice}>{item.price}</div>
                       </div>
                       {item.image && (
-                        <Image
-                          src={item.image}
+                        <CloudImage
+                          imageName={item.image.src}
                           alt={item.name}
-                          className={styles.image}
-                          loading="lazy"
-                          fill
-                          style={{ maxWidth: '400px' }}
+                          className={styles.itemImage}
+                          width={item.image.width}
+                          height={item.image.height}
                         />
                       )}
                       <div className={styles.itemDescription}>
