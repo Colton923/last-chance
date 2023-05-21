@@ -14,7 +14,8 @@ export async function POST(request: Request) {
   const { imageName } = await request.json()
 
   const today = new Date()
-  const expirationDate = new Date(today.getTime() + 60 * 1000)
+  // expiration date is in 10 years
+  const expirationDate = new Date(today.getTime() + 60 * 1000 * 60 * 24 * 365 * 10)
 
   if (!imageName) {
     return NextResponse.json(
@@ -44,8 +45,7 @@ export async function POST(request: Request) {
       }
     )
   }
-
-  const [url] = await file.getSignedUrl({
+  const url = await file.getSignedUrl({
     action: 'read',
     expires: expirationDate,
   })

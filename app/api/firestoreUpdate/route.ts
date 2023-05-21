@@ -1,5 +1,4 @@
-import { thisMenu } from 'app/menu/menu'
-import type { MenuGroup, MenuItem } from 'app/menu/menu'
+import type { MenuItem } from 'app/menu/menu'
 import { NextResponse } from 'next/server'
 import * as admin from 'firebase-admin'
 
@@ -12,18 +11,22 @@ if (!admin.apps.length) {
   })
 }
 
-export async function POST(request: Request) {
-  const oldMenu: MenuGroup[] = thisMenu
+// I cheated the type coming in
 
+type InboundType = MenuItem & { group: string }
+
+// where id is the docID in that collection
+
+export async function POST(request: Request) {
   const body = await request.json()
-  const reqMenu: MenuItem = body.menu
+  const reqMenu: InboundType = body.menu
 
   const docID = reqMenu.group
   if (!docID) {
     return NextResponse.json({
       status: 400,
       body: {
-        message: 'No group ID provided',
+        message: 'No dice',
       },
     })
   }
@@ -36,6 +39,7 @@ export async function POST(request: Request) {
       .get()
       .then((doc) => {
         if (!doc.exists) {
+          console.log('No such document!')
           return null
         }
         return doc.data()
@@ -46,27 +50,6 @@ export async function POST(request: Request) {
       })
 
     if (menu === null || menu === undefined) {
-      // If there is no menu in the database, use the default menu
-      const MakeAllNewDocs = async () => {
-        const NewMenus = oldMenu.map(async (group) => {
-          const groupKey = Object.keys(group)[0]
-          await admin
-            .firestore()
-            .collection('menu')
-            .doc(groupKey)
-            .set(group)
-            .then(() => {
-              return true
-            })
-            .catch((err) => {
-              console.log('err', err)
-              return false
-            })
-        })
-        await Promise.all(NewMenus)
-      }
-      await MakeAllNewDocs()
-
       return NextResponse.json({
         status: 400,
         body: {
@@ -75,10 +58,9 @@ export async function POST(request: Request) {
       })
     }
 
-    const NewMenu = menu[docID] as MenuItem[]
+    const oldMenu = menu[docID] as MenuItem[]
 
-    if (NewMenu === null || NewMenu === undefined) {
-      // If there is no menu in the database, use the default menu
+    if (oldMenu === null || oldMenu === undefined) {
       return NextResponse.json({
         status: 400,
         body: {
@@ -86,42 +68,52 @@ export async function POST(request: Request) {
         },
       })
     }
-
-    const updatedMenu = NewMenu.map((item) => {
+    let didFind = false
+    const updateThis = oldMenu.map((item) => {
       if (item.id === reqMenu.id) {
-        item = reqMenu
+        didFind = true
+        return reqMenu
+      } else {
+        didFind = false
+        return item
       }
-      return item
     })
 
-    const updateThis = { [docID]: updatedMenu }
+    if (!didFind) {
+      updateThis.push(reqMenu)
+    }
 
-    const update = await admin
+    const updateObject = { [docID]: updateThis }
+
+    await admin
       .firestore()
       .collection('menu')
       .doc(docID)
-      .update(updateThis)
+      .set(updateObject)
       .then(() => {
-        return true
+        return NextResponse.json({
+          status: 200,
+          body: {
+            message: 'Menu updated',
+            data: updateThis,
+          },
+        })
       })
       .catch((err) => {
         console.log('err', err)
-        return false
+        return NextResponse.json({
+          status: 400,
+          body: {
+            message: 'Menu not updated',
+          },
+        })
       })
-
-    if (update) {
-      return NextResponse.json({
-        status: 200,
-        body: {
-          message: 'Menu updated',
-        },
-      })
-    }
 
     return NextResponse.json({
-      status: 400,
+      status: 200,
       body: {
-        message: 'Menu not updated',
+        message: 'Menu updated',
+        data: updateThis,
       },
     })
   } catch (err) {
@@ -129,7 +121,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       status: 400,
       body: {
-        message: 'Menu not updated',
+        message: 'Error caught',
       },
     })
   }

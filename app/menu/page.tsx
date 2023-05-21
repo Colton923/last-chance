@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import styles from './Menu.module.scss'
 import type { MenuGroup, MenuItem } from './menu'
 import { useEffect, useState } from 'react'
@@ -9,8 +8,10 @@ import CloudImage from './CloudImage'
 
 export default function Menu() {
   const [menuGroups, setMenuGroups] = useState<MenuGroup[]>([])
-  const [image, setImage] = useState<Blob | null>(null)
-
+  const FixImagePath = (fullPath: string) => {
+    const path = fullPath.split('/')
+    return path[path.length - 1]
+  }
   useEffect(() => {
     const getMenu = async () => {
       const menu = await fetch(
@@ -32,12 +33,14 @@ export default function Menu() {
   }, [])
 
   if (!menuGroups) return null
+  if (menuGroups.length === 0) return null
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.menu}>
-        {menuGroups.map((group: MenuGroup, index: any) => {
-          const groupName = Object.keys(group)[0]
-          const items = group[groupName]
+        {menuGroups.map((part: MenuGroup, index: any) => {
+          const groupName = Object.keys(part)[0]
+          const items = part[groupName]
           return (
             <div className={styles.group} key={'group' + index}>
               <h3 className={styles.groupName}>{FixTitle(groupName)}</h3>
@@ -57,13 +60,11 @@ export default function Menu() {
                         <div className={styles.itemName}>{FixTitle(item.name)}</div>
                         <div className={styles.itemPrice}>{item.price}</div>
                       </div>
-                      {item.image && (
+                      {item.storagePath && (
                         <CloudImage
-                          imageName={item.image.src}
+                          imageName={FixImagePath(item.storagePath)}
                           alt={item.name}
                           className={styles.itemImage}
-                          width={item.image.width}
-                          height={item.image.height}
                         />
                       )}
                       <div className={styles.itemDescription}>

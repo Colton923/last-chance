@@ -1,84 +1,115 @@
 import CloudImage from 'app/menu/CloudImage'
-import { useFirebaseContext } from 'components/context/FirebaseContext'
-import {
-  getStorage,
-  ref,
-  uploadBytesResumable,
-  getDownloadURL,
-} from 'firebase/storage'
 
-type Props = {
-  value: any
-  valueSetter: any
-}
+const GridImageCellRenderer = (params: any) => {
+  const { handleInput } = params
 
-const GridImageCellRenderer = (params: Props) => {
-  const { value, valueSetter } = params
-  const { admin } = useFirebaseContext()
+  const FixImagePath = (fullPath: string) => {
+    const path = fullPath.split('/')
+    return path[path.length - 1]
+  }
 
-  if (!value || !admin) return null
-  console.log(value)
+  const FixFileName = (fullPath: string) => {
+    // name examples: 'colton.png', 'colton', 'colton.webp'
 
-  const handleFileChange = async () => {
-    const file = (document.querySelector('input[type=file]') as any).files[0]
-    const storageRef = getStorage()
+    const path = fullPath.split('/')
+    const name = path[path.length - 1]
+    const nameParts = name.split('.')
+    const fileName = nameParts[0]
+    const fileExtension = 'webp'
 
-    const folderRef = ref(storageRef, 'menu')
+    return `${fileName}.${fileExtension}`
+  }
+  const base64ToBlob = (base64Data: string, contentType: string) => {
+    const byteCharacters = base64Data.replace(
+      /^data:image\/(png|jpeg|jpg|webp);base64,/,
+      ''
+    )
+    const byteArrays = []
 
-    const fileRef = ref(folderRef, file.name)
-    const fileName = file.name
-    const uploadTask = uploadBytesResumable(fileRef, file)
-    uploadTask.on(
-      'state_changed',
-      (snapshot) => {
-        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-        console.log('Upload is ' + progress + '% done')
-        switch (snapshot.state) {
-          case 'paused':
-            console.log('Upload is paused')
-            break
-          case 'running':
-            console.log('Upload is running')
-            break
+    for (let offset = 0; offset < byteCharacters.length; offset += 1024) {
+      const slice = byteCharacters.slice(offset, offset + 1024)
+
+      const byteNumbers = Array.from(atob(slice)).map((char) => char.charCodeAt(0))
+
+      const byteArray = new Uint8Array(byteNumbers)
+
+      byteArrays.push(byteArray)
+    }
+    const blob = new Blob(byteArrays)
+    return blob
+  }
+
+  const convertToWebP = async (file: File) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.onload = async (event) => {
+        if (event.target && event.target.result) {
+          const base64Data = event.target.result
+          if (base64Data.slice(0, 4) !== 'data') {
+            reject('Not a valid image')
+          }
+          if (base64Data.slice(5, 10) === 'image') {
+            reject('Not a valid image')
+          }
+
+          try {
+            const response = await fetch('/api/convertToWebP', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ file: base64Data }),
+            })
+            const data = await response.json()
+            const blob = base64ToBlob(data.webpBase64, 'image/webp')
+            const ret = new File([blob], FixFileName(file.name), {
+              type: 'image/webp',
+            })
+            resolve(ret)
+          } catch (error) {
+            reject('Error converting image to WebP:')
+          }
         }
-      },
-      (error) => {
-        console.log(error)
-      },
-      () => {
-        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-          console.log('File available at', downloadURL)
-          valueSetter({ newValue: fileName })
-        })
       }
-    )
+
+      reader.readAsDataURL(file)
+    })
   }
 
-  if (admin) {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <input
+        type="file"
+        accept="image/*"
+        onChange={(e) => {
+          if (!e.target.files) return
+          const file = e.target.files[0]
+          if (file.type === 'image/webp') return handleInput(file, params?.data.name)
+          convertToWebP(file)
+            .then((webpFile: any) => {
+              handleInput(webpFile, params?.data.name)
+            })
+            .catch((error) => {
+              console.error('Error converting image to WebP:', error)
+            })
         }}
-      >
-        <input
-          type="file"
-          accept="image/*"
-          onInput={handleFileChange}
-          style={{
-            width: '100%',
-            height: '100%',
-          }}
+      />
+      {params.data[params.colDef.field] && (
+        <CloudImage
+          imageName={FixImagePath(params.data[params.colDef.field])}
+          width={100}
+          height={100}
         />
-        <CloudImage key={value} imageName={'food1.webp'} width={100} height={100} />
-      </div>
-    )
-  } else {
-    return null
-  }
+      )}
+    </div>
+  )
 }
 
 export default GridImageCellRenderer

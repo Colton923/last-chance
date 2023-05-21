@@ -14,8 +14,8 @@ export type MenuItem = {
   price: string
   image?: StaticImageData
   group?: string
+  storagePath?: string
 }
-
 
 export const thisMenu: MenuGroup[] = [
   {

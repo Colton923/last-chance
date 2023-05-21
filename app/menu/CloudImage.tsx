@@ -23,6 +23,8 @@ const CloudImage = (props: CloudImageProps) => {
 
   useEffect(() => {
     try {
+      if (!imageName) return
+
       fetch('api/firebaseImage', {
         cache: 'no-cache',
         method: 'POST',
@@ -41,10 +43,9 @@ const CloudImage = (props: CloudImageProps) => {
     } catch (error) {
       console.log(error)
     }
-  }, [])
+  }, [imageName])
 
   if (!image) return null
-  console.log(className)
   return (
     <img
       src={image}

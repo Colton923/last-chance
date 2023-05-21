@@ -1,9 +1,14 @@
+'use client'
+
 import styles from 'styles/App.module.scss'
 import { useFirebaseContext } from 'components/context/FirebaseContext'
 
 const Login = () => {
   const { handleSignIn, setPhoneNumber, admin } = useFirebaseContext()
 
+  if (admin) {
+    return null
+  }
   return (
     <div className={styles.main}>
       {!admin && (

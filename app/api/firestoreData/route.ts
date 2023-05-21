@@ -16,7 +16,6 @@ export async function GET() {
   const oldMenu: MenuGroup[] = thisMenu
 
   try {
-    // Get the most recent menu from menu collection
     const menu = await admin
       .firestore()
       .collection('menu')

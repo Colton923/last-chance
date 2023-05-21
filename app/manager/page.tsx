@@ -1,20 +1,18 @@
 'use client'
 
 import styles from './Manager.module.scss'
-import Login from 'components/login/Login'
-import { FirebaseContextProvider } from 'components/context/FirebaseContext'
-import { GridContextProvider } from 'components/grid/GridContext'
-import Admin from 'components/admin/Admin'
 
-export default async function Manager() {
-  return (
-    <div className={styles.wrapper}>
-      <FirebaseContextProvider>
-        <Login />
-        <GridContextProvider>
-          <Admin />
-        </GridContextProvider>
-      </FirebaseContextProvider>
-    </div>
-  )
+import Grid from 'components/grid/Grid'
+import { useFirebaseContext } from 'components/context/FirebaseContext'
+
+export default function Manager() {
+  const { admin } = useFirebaseContext()
+  if (admin) {
+    return (
+      <div className={styles.wrapper}>
+        <Grid />
+      </div>
+    )
+  }
+  return null
 }
