@@ -19,7 +19,7 @@ const GridImageCellRenderer = (params: any) => {
 
     return `${fileName}.${fileExtension}`
   }
-  const base64ToBlob = (base64Data: string, contentType: string) => {
+  const base64ToBlob = (base64Data: string) => {
     const byteCharacters = base64Data.replace(
       /^data:image\/(png|jpeg|jpg|webp);base64,/,
       ''
@@ -61,7 +61,7 @@ const GridImageCellRenderer = (params: any) => {
               body: JSON.stringify({ file: base64Data }),
             })
             const data = await response.json()
-            const blob = base64ToBlob(data.webpBase64, 'image/webp')
+            const blob = base64ToBlob(data.webpBase64)
             const ret = new File([blob], FixFileName(file.name), {
               type: 'image/webp',
             })

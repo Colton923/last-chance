@@ -1,6 +1,6 @@
 import styles from './Drinks.module.scss'
 import DrinkMenu from './drinks'
-import type { Beverage, BeverageMenu, Beverages } from './drinks'
+import type { Beverage, BeverageMenu } from './drinks'
 import Image from 'next/image'
 import bar from 'public/images/bar.jpeg'
 

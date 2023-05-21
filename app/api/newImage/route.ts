@@ -1,21 +1,19 @@
 import { NextResponse } from 'next/server'
 import * as admin from 'firebase-admin'
 
-const serviceAccount = JSON.parse(
-  process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-    ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-    : ''
-)
-if (!admin.apps.length) {
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
-  })
-}
-
 export async function POST(request: Request) {
   const { imageName } = await request.json()
-
+  const serviceAccount = JSON.parse(
+    process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+      ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+      : ''
+  )
+  if (!admin.apps.length) {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    })
+  }
   const today = new Date()
   const expirationDate = new Date(today.getTime() + 60 * 1000)
 

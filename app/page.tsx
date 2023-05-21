@@ -3,7 +3,6 @@ import Image from 'next/image'
 import beer from 'public/images/beer.jpg'
 import bloody from 'public/images/bloody.jpg'
 import beerGarden3 from 'public/images/beerGarden3.jpg'
-import food14 from 'public/images/food14.jpg'
 import sunday2 from 'public/images/sunday2.jpg'
 import taps from 'public/images/taps.jpg'
 
