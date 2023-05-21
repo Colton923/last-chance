@@ -1,4 +1,3 @@
-import { thisMenu } from 'app/menu/menu'
 import type { MenuGroup } from 'app/menu/menu'
 import { NextResponse } from 'next/server'
 import * as admin from 'firebase-admin'
@@ -16,41 +15,17 @@ export async function GET() {
     })
   }
 
-  const oldMenu: MenuGroup[] = thisMenu
-
   try {
     const menu = await admin
       .firestore()
       .collection('menu')
       .get()
       .then(async (snapshot) => {
-        if (snapshot.empty || snapshot.docs.length === 0) {
-          const menuGroups = oldMenu.map(async (group) => {
-            const thisGroup = Object.keys(group)[0]
-            return await admin
-              .firestore()
-              .collection('menu')
-              .doc(thisGroup)
-              .set(group)
-              .then(() => {
-                return group
-              })
-              .catch((err) => {
-                console.log('err', err)
-                return null
-              })
-          })
-          return await Promise.all(menuGroups).then((groups) => {
-            return groups
-          })
-        } else {
-          const menuGroups: MenuGroup[] = snapshot.docs.map((doc) => {
-            const groupKey = doc.id
-            const groupObj = { [groupKey]: doc.data()[groupKey] }
-            return groupObj
-          })
-          return menuGroups
-        }
+        const menuGroups: MenuGroup[] = []
+        snapshot.forEach((doc) => {
+          menuGroups.push(doc.data() as MenuGroup)
+        })
+        return menuGroups
       })
       .catch((err) => {
         console.log('err', err)
@@ -59,23 +34,25 @@ export async function GET() {
 
     if (menu === null || menu === undefined) {
       return NextResponse.json({
-        status: 500,
+        status: 400,
         body: {
-          message: 'Something went wrong',
+          message: 'No menu found',
         },
       })
-    } else {
-      return NextResponse.json({
-        status: 200,
-        body: menu,
-      })
     }
+
+    return NextResponse.json({
+      status: 200,
+      body: {
+        menu: menu,
+      },
+    })
   } catch (err) {
     console.log('err', err)
     return NextResponse.json({
       status: 500,
       body: {
-        message: 'Something went wrong',
+        message: 'Server error',
       },
     })
   }

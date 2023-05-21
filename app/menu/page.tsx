@@ -21,8 +21,7 @@ export default function Menu() {
       )
       if (!menu.ok) return null
       const menuData = await menu.json()
-      const menuGroups = menuData.body as MenuGroup[]
-
+      const menuGroups = menuData.body.menu as MenuGroup[]
       return menuGroups
     }
 

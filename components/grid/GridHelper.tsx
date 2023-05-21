@@ -140,33 +140,33 @@ const GridHelper = ({ choice }: { choice: string }) => {
     })
   }
 
-  const DeleteMenuItem = (name: string) => {
-    if (!localRowData) return
-    const dat = localRowData as MenuGroup[]
-    const MenuGroupKey = choice
-    const group: MenuGroup = dat.filter((item) => {
-      return Object.keys(item)[0] === MenuGroupKey
-    })[0]
-    if (!group) return
-    group[MenuGroupKey] = group[MenuGroupKey].filter((item) => {
-      return item.name !== name
-    })
-    const newMenu: MenuGroup = {
-      [MenuGroupKey]: group[MenuGroupKey],
-    }
-    UpdateDB_MenuGroup(newMenu).then((res: any) => {
-      if (!res) return
+  // const DeleteMenuItem = (name: string) => {
+  //   if (!localRowData) return
+  //   const dat = localRowData as MenuGroup[]
+  //   const MenuGroupKey = choice
+  //   const group: MenuGroup = dat.filter((item) => {
+  //     return Object.keys(item)[0] === MenuGroupKey
+  //   })[0]
+  //   if (!group) return
+  //   group[MenuGroupKey] = group[MenuGroupKey].filter((item) => {
+  //     return item.name !== name
+  //   })
+  //   const newMenu: MenuGroup = {
+  //     [MenuGroupKey]: group[MenuGroupKey],
+  //   }
+  //   UpdateDB_MenuGroup(newMenu).then((res: any) => {
+  //     if (!res) return
 
-      const newLocalRowData = localRowData.map((item: any) => {
-        if (Object.keys(item)[0] !== MenuGroupKey) return item
-        const newGroup = item[MenuGroupKey].filter((item: any) => {
-          return item.name !== name
-        })
-        return { [MenuGroupKey]: newGroup }
-      })
-      setLocalRowData(newLocalRowData)
-    })
-  }
+  //     const newLocalRowData = localRowData.map((item: any) => {
+  //       if (Object.keys(item)[0] !== MenuGroupKey) return item
+  //       const newGroup = item[MenuGroupKey].filter((item: any) => {
+  //         return item.name !== name
+  //       })
+  //       return { [MenuGroupKey]: newGroup }
+  //     })
+  //     setLocalRowData(newLocalRowData)
+  //   })
+  // }
 
   const thisGroup = localRowData.filter((item) => {
     return Object.keys(item)[0] === choice
