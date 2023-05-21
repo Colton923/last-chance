@@ -20,7 +20,7 @@ const GridHelper = ({ choice }: { choice: string }) => {
   const { screenWidth } = useSiteContext()
   const { gridRef, onGridReady, AGTheme, localRowData, setLocalRowData, gridApi } =
     useGridContext()
-  const { UpdateDB, UpdateDB_MenuGroup } = useFirebaseContext()
+  const { UpdateDB } = useFirebaseContext()
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [progress, setProgress] = useState<number>(0)
   const [text, setText] = useState<string>('')

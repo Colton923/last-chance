@@ -13,7 +13,7 @@ export default function Grid() {
 
   const getMenu = async () => {
     const res = await fetch('/api/firestoreData', {
-      method: 'GET',
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
