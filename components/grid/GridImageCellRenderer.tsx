@@ -45,13 +45,6 @@ const GridImageCellRenderer = (params: any) => {
       reader.onload = async (event) => {
         if (event.target && event.target.result) {
           const base64Data = event.target.result
-          if (base64Data.slice(0, 4) !== 'data') {
-            reject('Not a valid image')
-          }
-          if (base64Data.slice(5, 10) === 'image') {
-            reject('Not a valid image')
-          }
-
           try {
             const response = await fetch('/api/convertToWebP', {
               method: 'POST',
