@@ -85,7 +85,7 @@ export const FirebaseContextProvider = (props: Props) => {
     if (!newMenu) return
     try {
       const returnData = await fetch('/api/firestoreUpdate', {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
