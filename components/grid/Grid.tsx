@@ -30,7 +30,8 @@ export default function Grid() {
     if (localRowData.length === 0) {
       getMenu()
         .then((res: { body: MenuGroup[] }) => {
-          setLocalRowData(res.body)
+          //@ts-ignore
+          setLocalRowData(res.body.menu)
         })
         .catch((err) => {
           console.log(err)
@@ -45,6 +46,7 @@ export default function Grid() {
     setChoice(item)
   }
 
+  if (!localRowData) return null
   return (
     <div className={styles.wrapper}>
       {localRowData.map((group: any) => {

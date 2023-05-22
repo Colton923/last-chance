@@ -7,12 +7,6 @@ import { useFirebaseContext } from 'components/context/FirebaseContext'
 
 export default function Manager() {
   const { admin } = useFirebaseContext()
-  if (admin) {
-    return (
-      <div className={styles.wrapper}>
-        <Grid />
-      </div>
-    )
-  }
-  return null
+
+  return <div className={styles.wrapper}>{admin && <Grid />}</div>
 }
