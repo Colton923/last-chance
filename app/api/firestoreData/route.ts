@@ -2,7 +2,7 @@ import type { MenuGroup } from 'app/menu/menu'
 import { NextResponse } from 'next/server'
 import * as admin from 'firebase-admin'
 
-export async function GET() {
+export async function POST() {
   const serviceAccount = JSON.parse(
     process.env.FIREBASE_SERVICE_ACCOUNT_KEY
       ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY

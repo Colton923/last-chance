@@ -59,7 +59,7 @@ export default function Donation() {
       contactState: data.contactState,
       contactZip: data.contactZip,
     }
-    await fetch('/api/sendgridDonation', {
+    await fetch('https://www.lastchancepeoria.com/api/sendgridDonation', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

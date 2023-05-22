@@ -84,15 +84,18 @@ export const FirebaseContextProvider = (props: Props) => {
     if (!admin) return
     if (!newMenu) return
     try {
-      const returnData = await fetch('/api/firestoreUpdate', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          menu: newMenu,
-        }),
-      }).then((res) => {
+      const returnData = await fetch(
+        'https://www.lastchancepeoria.com/api/firestoreUpdate',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            menu: newMenu,
+          }),
+        }
+      ).then((res) => {
         return res.json()
       })
       return returnData
@@ -106,16 +109,19 @@ export const FirebaseContextProvider = (props: Props) => {
     if (!admin) return
     if (!newMenu) return
     try {
-      const returnData = await fetch('/api/firestoreUpdate_MenuGroup', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+      const returnData = await fetch(
+        'https://www.lastchancepeoria.com/api/firestoreUpdate_MenuGroup',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
 
-        body: JSON.stringify({
-          menu: newMenu,
-        }),
-      }).then((res) => {
+          body: JSON.stringify({
+            menu: newMenu,
+          }),
+        }
+      ).then((res) => {
         return res.json()
       })
       return returnData

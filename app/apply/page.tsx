@@ -35,13 +35,16 @@ export default function Apply() {
       whyUs: data.whyUs,
     }
 
-    const res = await fetch('/api/sendgridApplication', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
+    const res = await fetch(
+      'https://www.lastchancepeoria.com/api/sendgridApplication',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      }
+    )
     const json = await res.json()
     alert(json.message)
   }
