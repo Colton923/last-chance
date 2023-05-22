@@ -1,7 +1,27 @@
 import type { MenuItem } from 'app/menu/menu'
 import { NextResponse } from 'next/server'
 import * as admin from 'firebase-admin'
-
+const serviceAccount = JSON.parse(
+  process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+    ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+    : ''
+)
+if (!admin.apps.length) {
+  try {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+    })
+  } catch (err) {
+    console.log('err', err)
+    NextResponse.json({
+      status: 500,
+      body: {
+        message: 'Server error',
+      },
+    })
+  }
+}
 // I cheated the type coming in
 
 type InboundType = MenuItem & { group: string }
@@ -10,17 +30,6 @@ type InboundType = MenuItem & { group: string }
 
 export async function POST(request: Request) {
   const body = await request.json()
-  const serviceAccount = JSON.parse(
-    process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-      ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-      : ''
-  )
-  if (!admin.apps.length) {
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
-    })
-  }
 
   const reqMenu: InboundType = body.menu
 

@@ -3,7 +3,27 @@ import { NextResponse } from 'next/server'
 import * as admin from 'firebase-admin'
 
 // I cheated the type coming in
-
+const serviceAccount = JSON.parse(
+  process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+    ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+    : ''
+)
+if (!admin.apps.length) {
+  try {
+    admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+    })
+  } catch (err) {
+    console.log('err', err)
+    NextResponse.json({
+      status: 500,
+      body: {
+        message: 'Server error',
+      },
+    })
+  }
+}
 type InboundType = MenuGroup
 
 // where id is the docID in that collection
@@ -11,17 +31,6 @@ type InboundType = MenuGroup
 export async function POST(request: Request) {
   const body = await request.json()
 
-  const serviceAccount = JSON.parse(
-    process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-      ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-      : ''
-  )
-  if (!admin.apps.length) {
-    admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
-    })
-  }
   const reqMenu: InboundType = body.menu
 
   const docId = Object.keys(reqMenu)[0]

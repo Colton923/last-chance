@@ -14,11 +14,12 @@ export default function Menu() {
   }
   useEffect(() => {
     const getMenu = async () => {
-      const menu = await fetch(
-        process.env.NEXT_PUBLIC_ENVIRONMENT === 'development'
-          ? 'http://localhost:3000/api/firestoreData'
-          : 'https://lastchancepeoria.com/api/firestoreData'
-      )
+      // const menu = await fetch(
+      //   process.env.NEXT_PUBLIC_ENVIRONMENT === 'development'
+      //     ? 'http://localhost:3000/api/firestoreData'
+      //     : '/api/firestoreData'
+      // )
+      const menu = await fetch('/api/firestoreData')
       if (!menu.ok) return null
       const menuData = await menu.json()
       const menuGroups = menuData.body.menu as MenuGroup[]

@@ -1,23 +1,39 @@
 import { NextResponse } from 'next/server'
 import * as admin from 'firebase-admin'
-
-export async function POST(request: Request) {
-  const { imageName } = await request.json()
-  const serviceAccount = JSON.parse(
-    process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-      ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-      : ''
-  )
-  if (!admin.apps.length) {
+const serviceAccount = JSON.parse(
+  process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+    ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+    : ''
+)
+if (!admin.apps.length) {
+  try {
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
-      storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+      databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+    })
+  } catch (err) {
+    console.log('err', err)
+    NextResponse.json({
+      status: 500,
+      body: {
+        message: 'Server error',
+      },
     })
   }
+}
+export async function POST(request: Request) {
+  const { imageName } = await request.json()
+
   const today = new Date()
   const expirationDate = new Date(today.getTime() + 60 * 1000)
 
-  if (!imageName) {
+  if (
+    !imageName ||
+    typeof imageName !== 'string' ||
+    imageName.length === 0 ||
+    imageName.length > 100 ||
+    imageName.includes('..')
+  ) {
     return NextResponse.json(
       {
         message: 'Bad Request',

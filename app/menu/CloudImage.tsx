@@ -25,7 +25,7 @@ const CloudImage = (props: CloudImageProps) => {
     try {
       if (!imageName) return
 
-      fetch('https://www.lastchancepeoria.comapi/firebaseImage', {
+      fetch('api/firebaseImage', {
         cache: 'no-cache',
         method: 'POST',
         headers: {

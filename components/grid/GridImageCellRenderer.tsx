@@ -53,16 +53,13 @@ const GridImageCellRenderer = (params: any) => {
           }
 
           try {
-            const response = await fetch(
-              'https://www.lastchancepeoria.com/api/convertToWebP',
-              {
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ file: base64Data }),
-              }
-            )
+            const response = await fetch('/api/convertToWebP', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ file: base64Data }),
+            })
             const data = await response.json()
             const blob = base64ToBlob(data.webpBase64)
             const ret = new File([blob], FixFileName(file.name), {

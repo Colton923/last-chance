@@ -12,7 +12,7 @@ export default function Grid() {
   const [choice, setChoice] = useState<string>()
 
   const getMenu = async () => {
-    const res = await fetch('https://www.lastchancepeoria.com/api/firestoreData', {
+    const res = await fetch('/api/firestoreData', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -2,19 +2,30 @@ import type { MenuGroup } from 'app/menu/menu'
 import { NextResponse } from 'next/server'
 import * as admin from 'firebase-admin'
 
-export async function POST() {
-  const serviceAccount = JSON.parse(
-    process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-      ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
-      : ''
-  )
-  if (!admin.apps.length) {
+const serviceAccount = JSON.parse(
+  process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+    ? process.env.FIREBASE_SERVICE_ACCOUNT_KEY
+    : ''
+)
+
+if (!admin.apps.length) {
+  try {
     admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
       databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
     })
+  } catch (err) {
+    console.log('err', err)
+    NextResponse.json({
+      status: 500,
+      body: {
+        message: 'Server error',
+      },
+    })
   }
+}
 
+export async function GET() {
   try {
     const menu = await admin
       .firestore()
