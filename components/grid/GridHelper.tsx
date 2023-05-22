@@ -63,14 +63,12 @@ const GridHelper = ({ choice }: { choice: string }) => {
     return true
   }
 
-  const handleFileChange = (file: File | unknown, name: string) => {
+  const handleFileChange = (file: File, name: string) => {
     const storageRef = getStorage()
-    if (file instanceof File === false) return
-    const typeFile = file as File
     const folderRef = ref(storageRef, 'menu')
-    const fileRef = ref(folderRef, typeFile.name)
-    const fileName = typeFile.name
-    const uploadTask = uploadBytesResumable(fileRef, typeFile)
+    const fileRef = ref(folderRef, file.name)
+    const fileName = file.name
+    const uploadTask = uploadBytesResumable(fileRef, file)
     setIsLoading(true)
     uploadTask.on(
       'state_changed',
