@@ -42,7 +42,7 @@ export default function Index() {
         <div className={styles.content}>
           <div className={styles.hero}>
             <h2 className={styles.contentHeader}>
-              The Weekend <br />
+              The Sunday <br />
               Bloody Mary Bar
             </h2>
             <div className={styles.imageWrapper}>

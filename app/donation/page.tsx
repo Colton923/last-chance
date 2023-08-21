@@ -107,7 +107,7 @@ export default function Donation() {
             <input
               type="text"
               {...register('organizationName')}
-              defaultValue={'Organization/Event Name'}
+              placeholder={'Organization/Event Name'}
               className={styles.textInput}
             />
           </label>
@@ -162,7 +162,7 @@ export default function Donation() {
               className={styles.numberInput}
               type="number"
               {...register('participants')}
-              defaultValue={0}
+              placeholder={'0'}
             />
           </label>
           <label className={styles.label}>
@@ -170,7 +170,7 @@ export default function Donation() {
             <input
               type="text"
               {...register('eventPurpose')}
-              defaultValue={'Purpose of Event'}
+              placeholder={'Purpose of Event'}
               className={styles.textInput}
             />
           </label>
@@ -179,7 +179,7 @@ export default function Donation() {
             <input
               type="text"
               {...register('typeOfDonation')}
-              defaultValue={'Type of Donation Requested'}
+              placeholder={'Type of Donation Requested'}
               className={styles.textInput}
             />
           </label>
@@ -188,7 +188,7 @@ export default function Donation() {
             <input
               type="number"
               {...register('donationValue')}
-              defaultValue={0}
+              placeholder={'0'}
               className={styles.numberInput}
             />
           </label>
@@ -197,7 +197,7 @@ export default function Donation() {
             <input
               type="text"
               {...register('whyUs')}
-              defaultValue={'Why Last Chance?'}
+              placeholder={'Why Last Chance?'}
               className={styles.textInput}
             />
           </label>
@@ -206,7 +206,7 @@ export default function Donation() {
             <input
               type="text"
               {...register('contactName')}
-              defaultValue={'Contact Name'}
+              placeholder={'Contact Name'}
               className={styles.textInput}
             />
           </label>
@@ -215,7 +215,7 @@ export default function Donation() {
             <input
               type="email"
               {...register('contactEmail')}
-              defaultValue={'Contact Email'}
+              placeholder={'Contact Email'}
               className={styles.textInput}
             />
           </label>
@@ -224,7 +224,7 @@ export default function Donation() {
             <input
               type="tel"
               {...register('contactPhone')}
-              defaultValue={'Contact Phone'}
+              placeholder={'Contact Phone'}
               className={styles.telInput}
             />
           </label>
@@ -233,7 +233,7 @@ export default function Donation() {
             <input
               type="text"
               {...register('contactAddress')}
-              defaultValue={'Contact Address'}
+              placeholder={'Contact Address'}
               className={styles.textInput}
             />
           </label>
@@ -242,7 +242,7 @@ export default function Donation() {
             <input
               type="text"
               {...register('contactCity')}
-              defaultValue={'Contact City'}
+              placeholder={'Contact City'}
               className={styles.textInput}
             />
           </label>
@@ -251,7 +251,7 @@ export default function Donation() {
             <input
               type="text"
               {...register('contactState')}
-              defaultValue={'Contact State'}
+              placeholder={'Contact State'}
               className={styles.textInput}
             />
           </label>
@@ -260,7 +260,7 @@ export default function Donation() {
             <input
               type="text"
               {...register('contactZip')}
-              defaultValue={'Contact Zip'}
+              placeholder={'Contact Zip'}
               className={styles.textInput}
             />
           </label>
