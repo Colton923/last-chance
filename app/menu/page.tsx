@@ -42,7 +42,8 @@ export default function Menu() {
         <div>
           <Link
             href={'/public/pdfs/menu.pdf'}
-            target="blank"
+            target="_blank"
+            rel="noopener noreferrer"
             style={{
               display: 'flex',
               flexDirection: 'row',
