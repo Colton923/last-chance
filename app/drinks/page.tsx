@@ -1,21 +1,13 @@
+'use client'
+
 import styles from './Drinks.module.scss'
-import DrinkMenu from './drinks'
-import type { Beverage, BeverageMenu } from './drinks'
 import Image from 'next/image'
 import bar from 'public/images/bar.jpeg'
+import { FixTitle } from '../../lib/fns/FixTitle'
+import { useSiteContext } from 'components/context/SiteContext'
 
 export default function Drinks() {
-  const date = Object.keys(DrinkMenu)[0]
-  const menu = DrinkMenu[date]
-
-  const FixTitle = (title: string) => {
-    const words = title.split(/(?=[A-Z])/)
-    for (let i = 0; i < words.length; i++) {
-      words[i] = words[i][0].toUpperCase() + words[i].slice(1)
-    }
-
-    return words.join(' ')
-  }
+  const { drinkItems } = useSiteContext()
   return (
     <div className={styles.wrapper}>
       <div className={styles.backgroundImageWrapper}>
@@ -28,23 +20,20 @@ export default function Drinks() {
         />
       </div>
       <div className={styles.menu}>
-        {menu.map((group: BeverageMenu, index) => {
-          const groupName = Object.keys(group)[0]
-          const items = group[groupName]
+        {drinkItems.map((drinkGroups: any, index: any) => {
+          const groupName = drinkGroups.title
           return (
             <div className={styles.group} key={'group' + index}>
               <h3 className={styles.groupName}>{FixTitle(groupName)}</h3>
               <ul className={styles.items}>
-                {items.map((item: Beverage, index) => {
-                  return (
-                    <li className={styles.item} key={'item' + index}>
-                      <div className={styles.itemHeader}>
-                        <div className={styles.itemName}>{FixTitle(item.name)}</div>
-                        <div className={styles.itemPrice}>{item.price}</div>
-                      </div>
-                    </li>
-                  )
-                })}
+                {drinkGroups.drinkItems.map((item: any, index: any) => (
+                  <li className={styles.item} key={'item' + index}>
+                    <div className={styles.itemHeader}>
+                      <div className={styles.itemName}>{FixTitle(item.title)}</div>
+                      <div className={styles.itemPrice}>${item.price}</div>
+                    </div>
+                  </li>
+                ))}
               </ul>
             </div>
           )

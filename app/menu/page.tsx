@@ -1,40 +1,13 @@
 'use client'
 
 import styles from './Menu.module.scss'
-import type { MenuGroup, MenuItem } from './menu'
-import { useEffect, useState } from 'react'
-import { FixTitle } from './FixTitle'
-import CloudImage from './CloudImage'
+import { FixTitle } from '../../lib/fns/FixTitle'
 import Link from 'next/link'
-
+import { useSiteContext } from 'components/context/SiteContext'
+import type * as sanityTypes from 'types/sanity'
+import urlFor from 'lib/sanity/urlFor'
 export default function Menu() {
-  const [menuGroups, setMenuGroups] = useState<MenuGroup[]>([])
-  const FixImagePath = (fullPath: string) => {
-    const path = fullPath.split('/')
-    return path[path.length - 1]
-  }
-  useEffect(() => {
-    const getMenu = async () => {
-      // const menu = await fetch(
-      //   process.env.NEXT_PUBLIC_ENVIRONMENT === 'development'
-      //     ? 'http://localhost:3000/api/firestoreData'
-      //     : '/api/firestoreData'
-      // )
-      const menu = await fetch('/api/firestoreData')
-      if (!menu.ok) return null
-      const menuData = await menu.json()
-      const menuGroups = menuData.body.menu as MenuGroup[]
-      return menuGroups
-    }
-
-    getMenu().then((menuGroups) => {
-      if (!menuGroups) return null
-      setMenuGroups(menuGroups)
-    })
-  }, [])
-
-  if (!menuGroups) return null
-  if (menuGroups.length === 0) return null
+  const { menuItems } = useSiteContext()
 
   return (
     <div className={styles.wrapper}>
@@ -75,45 +48,31 @@ export default function Menu() {
             </svg>
           </Link>
         </div>
-        {menuGroups.map((part: MenuGroup, index: any) => {
-          const groupName = Object.keys(part)[0]
-          const items = part[groupName]
-          return (
-            <div className={styles.group} key={'group' + index}>
-              <h3 className={styles.groupName}>{FixTitle(groupName)}</h3>
-              <ul className={styles.items}>
-                {items.map((item: MenuItem, index) => {
-                  return (
-                    <li
-                      className={styles.item}
-                      key={'item' + index}
-                      style={
-                        item.image
-                          ? { textShadow: `1px 1px 1px var(--black)` }
-                          : { color: `var(--black)` }
-                      }
-                    >
-                      <div className={styles.itemHeader}>
-                        <div className={styles.itemName}>{FixTitle(item.name)}</div>
-                        <div className={styles.itemPrice}>{item.price}</div>
-                      </div>
-                      {item.storagePath && (
-                        <CloudImage
-                          imageName={FixImagePath(item.storagePath)}
-                          alt={item.name}
-                          className={styles.itemImage}
-                        />
-                      )}
-                      <div className={styles.itemDescription}>
-                        {item.description}
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-          )
-        })}
+        {menuItems.map((item: any, index: any) => (
+          <div className={styles.group} key={'group' + index}>
+            <h3 className={styles.groupName}>{FixTitle(item.title)}</h3>
+            <ul className={styles.items}>
+              {item.menuItems.map((item: any, index: any) => (
+                <li className={styles.item} key={'item' + index}>
+                  <div className={styles.itemHeader}>
+                    <div className={styles.itemName}>{FixTitle(item.title)}</div>
+                    <div className={styles.itemPrice}>${item.price}</div>
+                  </div>
+                  {item.description && (
+                    <div className={styles.itemDescription}>{item.description}</div>
+                  )}
+                  {item.image && (
+                    <img
+                      src={urlFor(item.image).url()}
+                      alt={item.title}
+                      className={styles.image}
+                    />
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   )
