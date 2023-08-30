@@ -6,7 +6,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import close from '/public/images/close-icon.svg'
 import hamburger from '/public/images/menu-icon.svg'
-import logo from '/public/images/logo.png'
+import logo from '/public/images/logo.webp'
 import { useState } from 'react'
 
 const MobileNavigation = () => {
@@ -45,6 +45,7 @@ const MobileNavigation = () => {
             width={230}
             height={159}
             className={styles.brandImage}
+            typeof="image/webp"
           />
         </Link>
         {open ? closeIcon : hamburgerIcon}

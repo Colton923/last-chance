@@ -1,24 +1,10 @@
-'use client'
-
 import styles from './Footer.module.scss'
 
 import Link from 'next/link'
 
-import { useSiteContext } from 'components/context/SiteContext'
-
-const Footer = () => {
-  const { hours } = useSiteContext()
-
-  if (!hours) {
-    return null
-  }
-
-  const kitchenHours = hours.filter((hour) => hour.kitchen === true)[0]
-  const barHours = hours.filter((hour) => hour.bar === true)[0]
-
-  if (!kitchenHours || !barHours) {
-    return null
-  }
+const Footer = (hours: any) => {
+  const kitchenHours = hours.hours.filter((hour: any) => hour.kitchen === true)[0]
+  const barHours = hours.hours.filter((hour: any) => hour.bar === true)[0]
 
   return (
     <div className={styles.wrapper}>
@@ -66,57 +52,62 @@ const Footer = () => {
         </div>
         <div className={styles.footerItem}>
           <div className={styles.footerHours}>
-            <div className={styles.hours}>
-              <h3 className={styles.footerTitle}>Kitchen</h3>
-              <span>
-                Monday: {kitchenHours.monday?.open} - {kitchenHours.monday?.close}
-              </span>
-              <span>
-                Tuesday: {kitchenHours.tuesday?.open} - {kitchenHours.tuesday?.close}
-              </span>
-              <span>
-                Wednesday: {kitchenHours.wednesday?.open} -{' '}
-                {kitchenHours.wednesday?.close}
-              </span>
-              <span>
-                Thursday: {kitchenHours.thursday?.open} -{' '}
-                {kitchenHours.thursday?.close}
-              </span>
-              <span>
-                Friday: {kitchenHours.friday?.open} - {kitchenHours.friday?.close}
-              </span>
-              <span>
-                Saturday: {kitchenHours.saturday?.open} -{' '}
-                {kitchenHours.saturday?.close}
-              </span>
-              <span>
-                Sunday: {kitchenHours.sunday?.open} - {kitchenHours.sunday?.close}
-              </span>
-            </div>
-            <div className={styles.hours}>
-              <h3 className={styles.footerTitle}>Bar</h3>
-              <span>
-                Monday: {barHours.monday?.open} - {barHours.monday?.close}
-              </span>
-              <span>
-                Tuesday: {barHours.tuesday?.open} - {barHours.tuesday?.close}
-              </span>
-              <span>
-                Wednesday: {barHours.wednesday?.open} - {barHours.wednesday?.close}
-              </span>
-              <span>
-                Thursday: {barHours.thursday?.open} - {barHours.thursday?.close}
-              </span>
-              <span>
-                Friday: {barHours.friday?.open} - {barHours.friday?.close}
-              </span>
-              <span>
-                Saturday: {barHours.saturday?.open} - {barHours.saturday?.close}
-              </span>
-              <span>
-                Sunday: {barHours.sunday?.open} - {barHours.sunday?.close}
-              </span>
-            </div>
+            {kitchenHours && (
+              <div className={styles.hours}>
+                <h3 className={styles.footerTitle}>Kitchen</h3>
+                <span>
+                  Monday: {kitchenHours.monday?.open} - {kitchenHours.monday?.close}
+                </span>
+                <span>
+                  Tuesday: {kitchenHours.tuesday?.open} -{' '}
+                  {kitchenHours.tuesday?.close}
+                </span>
+                <span>
+                  Wednesday: {kitchenHours.wednesday?.open} -{' '}
+                  {kitchenHours.wednesday?.close}
+                </span>
+                <span>
+                  Thursday: {kitchenHours.thursday?.open} -{' '}
+                  {kitchenHours.thursday?.close}
+                </span>
+                <span>
+                  Friday: {kitchenHours.friday?.open} - {kitchenHours.friday?.close}
+                </span>
+                <span>
+                  Saturday: {kitchenHours.saturday?.open} -{' '}
+                  {kitchenHours.saturday?.close}
+                </span>
+                <span>
+                  Sunday: {kitchenHours.sunday?.open} - {kitchenHours.sunday?.close}
+                </span>
+              </div>
+            )}
+            {barHours && (
+              <div className={styles.hours}>
+                <h3 className={styles.footerTitle}>Bar</h3>
+                <span>
+                  Monday: {barHours.monday?.open} - {barHours.monday?.close}
+                </span>
+                <span>
+                  Tuesday: {barHours.tuesday?.open} - {barHours.tuesday?.close}
+                </span>
+                <span>
+                  Wednesday: {barHours.wednesday?.open} - {barHours.wednesday?.close}
+                </span>
+                <span>
+                  Thursday: {barHours.thursday?.open} - {barHours.thursday?.close}
+                </span>
+                <span>
+                  Friday: {barHours.friday?.open} - {barHours.friday?.close}
+                </span>
+                <span>
+                  Saturday: {barHours.saturday?.open} - {barHours.saturday?.close}
+                </span>
+                <span>
+                  Sunday: {barHours.sunday?.open} - {barHours.sunday?.close}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

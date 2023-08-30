@@ -1,9 +1,8 @@
 import { MailService } from '@sendgrid/mail'
-import type { ApplyForm } from 'app/apply/page'
 import { NextResponse } from 'next/server'
 
 export async function POST(request: Request) {
-  const body: ApplyForm = await request.json()
+  const body = await request.json()
   if (!process.env.SENDGRID_API_KEY)
     throw new Error('SENDGRID_API_KEY is not defined.')
 

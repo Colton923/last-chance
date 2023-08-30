@@ -1,13 +1,25 @@
-'use client'
-
 import styles from './Drinks.module.scss'
 import Image from 'next/image'
-import bar from 'public/images/bar.jpeg'
+import bar from 'public/images/bar.webp'
 import { FixTitle } from '../../lib/fns/FixTitle'
-import { useSiteContext } from 'components/context/SiteContext'
+import client from 'lib/sanity/client'
 
-export default function Drinks() {
-  const { drinkItems } = useSiteContext()
+const drinkGroupsQuery = `*[_type == "drinkGroups"] {
+  title,
+  "drinkItems": *[_type == "drinkItems" && drinkGroup._ref == ^._id] {
+    title,
+    price
+  }
+}`
+
+async function getDrinks() {
+  const getDrinkItems = await client.fetch(drinkGroupsQuery)
+  return getDrinkItems
+}
+
+export default async function Drinks() {
+  const drinkItems = await getDrinks()
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.backgroundImageWrapper}>
@@ -17,6 +29,7 @@ export default function Drinks() {
           className={styles.backgroundImage}
           width={3840}
           height={2372}
+          typeof="image/webp"
         />
       </div>
       <div className={styles.menu}>
