@@ -13,7 +13,4 @@ module.exports = {
   experimental: {
     appDir: true,
   },
-  images: {
-    formats: ['image/webp'],
-  },
 }

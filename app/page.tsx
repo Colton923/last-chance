@@ -1,10 +1,10 @@
 import styles from 'styles/App.module.scss'
 import Image from 'next/image'
-import beer from 'public/images/beer.webp'
-import bloody from 'public/images/bloody.webp'
-import beerGarden3 from 'public/images/beerGarden.webp'
-import sunday2 from 'public/images/sunday.webp'
-import taps from 'public/images/taps.webp'
+import beer from 'public/images/beer.jpg'
+import bloody from 'public/images/bloody.jpg'
+import beerGarden3 from 'public/images/beerGarden.jpg'
+import sunday2 from 'public/images/sunday.jpg'
+import taps from 'public/images/taps.jpg'
 
 export default function Index() {
   return (
@@ -15,7 +15,6 @@ export default function Index() {
         className={styles.backgroundPhotoOne}
         width={1420}
         height={1920}
-        typeof="image/webp"
       />
       <div className={styles.wrapper}>
         <div className={styles.hOneWrapper}>
@@ -66,7 +65,6 @@ export default function Index() {
                 src={beerGarden3}
                 alt="Beer Garden"
                 className={styles.centerImage}
-                typeof="image/webp"
               />
             </div>
           </div>
@@ -99,7 +97,6 @@ export default function Index() {
                 src={taps}
                 alt="Delectable Drafts"
                 className={styles.centerImage}
-                typeof="image/webp"
               />
             </div>
           </div>

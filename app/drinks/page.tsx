@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import bar from 'public/images/bar.webp'
+import bar from 'public/images/bar.jpeg'
 import client from 'lib/sanity/client'
 import styles from './Drinks.module.scss'
 import { FixTitle } from '../../lib/fns/FixTitle'
@@ -29,7 +29,6 @@ export default async function Drinks() {
           className={styles.backgroundImage}
           width={3840}
           height={2372}
-          typeof="image/webp"
         />
       </div>
       <div className={styles.menu}>
