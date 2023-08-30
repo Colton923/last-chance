@@ -1,8 +1,8 @@
-import styles from './Drinks.module.scss'
 import Image from 'next/image'
 import bar from 'public/images/bar.webp'
-import { FixTitle } from '../../lib/fns/FixTitle'
 import client from 'lib/sanity/client'
+import styles from './Drinks.module.scss'
+import { FixTitle } from '../../lib/fns/FixTitle'
 
 const drinkGroupsQuery = `*[_type == "drinkGroups"] {
   title,
