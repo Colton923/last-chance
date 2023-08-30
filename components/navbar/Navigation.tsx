@@ -1,7 +1,7 @@
 import React from 'react'
 import NavLinks from './NavLinks'
 import styles from './Navbar.module.scss'
-import logo from '/public/images/logo.jpg'
+import logo from '/public/images/logo.png'
 import Image from 'next/image'
 import Link from 'next/link'
 
