@@ -1,9 +1,7 @@
 const MenuPdf = (url: any) => {
   return (
     <a
-      href={url.pdf}
-      target="_blank"
-      rel="noopener noreferrer"
+      href={`${url.pdf}?dl=`}
       download
       style={{
         display: 'flex',
