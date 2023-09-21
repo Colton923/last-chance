@@ -31,6 +31,7 @@ async function getMenuPdf() {
 export default async function Menu() {
   const menuItems = await getMenu()
   const menudownload = await getMenuPdf()
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.menu}>

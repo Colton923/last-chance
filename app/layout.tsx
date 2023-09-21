@@ -30,7 +30,6 @@ async function getHours() {
 
 export default async function RootLayout({ children }: Props) {
   const hours = await getHours()
-
   return (
     <html lang="en">
       <head>
