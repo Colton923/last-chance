@@ -7,7 +7,9 @@ const specialsQuery = `*[_type == "specials"] {
 }`
 
 async function getSpecials() {
-  const getSpecials = await client.fetch(specialsQuery)
+  const getSpecials = await client.fetch(specialsQuery, undefined, {
+    cache: 'no-store',
+  })
   return getSpecials[0]
 }
 

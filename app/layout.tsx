@@ -24,7 +24,7 @@ const catamaran = Catamaran({
 })
 
 async function getHours() {
-  const getHours = await client.fetch(hoursQuery)
+  const getHours = await client.fetch(hoursQuery, undefined, { cache: 'no-store' })
   return getHours
 }
 

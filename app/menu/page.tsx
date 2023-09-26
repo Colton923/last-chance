@@ -19,12 +19,16 @@ const menuPdfQuery = `*[_type == "misc"] {
 }`
 
 async function getMenu() {
-  const getMenuItems = await client.fetch(menuGroupsQuery)
+  const getMenuItems = await client.fetch(menuGroupsQuery, undefined, {
+    cache: 'no-store',
+  })
   return getMenuItems
 }
 
 async function getMenuPdf() {
-  const getMenuPdf = await client.fetch(menuPdfQuery)
+  const getMenuPdf = await client.fetch(menuPdfQuery, undefined, {
+    cache: 'no-store',
+  })
   return getMenuPdf
 }
 

@@ -13,7 +13,9 @@ const drinkGroupsQuery = `*[_type == "drinkGroups"] {
 }`
 
 async function getDrinks() {
-  const getDrinkItems = await client.fetch(drinkGroupsQuery)
+  const getDrinkItems = await client.fetch(drinkGroupsQuery, undefined, {
+    cache: 'no-store',
+  })
   return getDrinkItems
 }
 
