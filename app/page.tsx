@@ -42,21 +42,6 @@ export default function Index() {
         <div className={styles.content}>
           <div className={styles.hero}>
             <h2 className={styles.contentHeader}>
-              The Sunday <br />
-              Bloody Mary Bar
-            </h2>
-            <div className={styles.imageWrapper}>
-              <Image
-                src={bloody}
-                alt="Bloody Mary Bar"
-                className={styles.centerImage}
-              />
-            </div>
-          </div>
-        </div>
-        <div className={styles.content}>
-          <div className={styles.hero}>
-            <h2 className={styles.contentHeader}>
               Year Round <br />
               Beer Garden
             </h2>

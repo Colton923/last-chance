@@ -64,13 +64,11 @@
   padding: 0;
 
   @media (min-width: 768px) {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-auto-rows: 1fr;
-    grid-gap: 1rem;
-    align-items: baseline;
-    justify-content: center;
+    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
+    margin: 0;
+    padding: 0;
   }
 }
 
@@ -79,7 +77,6 @@
   position: relative;
   flex-direction: column;
   align-items: left;
-  padding: 1rem;
   margin: .5rem;
   background-color: transparent;
   border: 1px solid var(--black);
@@ -91,9 +88,9 @@
   z-index: 0;
 
   @media (min-width: 768px) {
-    min-height: 230px;
+    min-height: 180px;
     max-width: 400px;
-    margin: 0;
+    margin: 1rem;
   }
 }
 
@@ -113,6 +110,7 @@
   text-transform: capitalize;
   z-index: 1;
   max-width: 70%;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .itemPrice{
@@ -121,6 +119,7 @@
   text-align: left;
   align-self: baseline;
   z-index: 1;
+  padding: 1rem 1rem 0 0;
 
   @media (min-width: 768px) {
     font-size: 1.7rem;
@@ -132,7 +131,7 @@
   font-size: 1rem;
   text-align: left;
   z-index: 1;
-
+  padding: 0 1rem 1rem 1rem;
   @media (min-width: 768px) {
     line-height: 1.4rem;
   }
@@ -140,17 +139,12 @@
 
 .image {
   display: flex;
-  position: absolute;
   justify-content: center;
   align-items: center;
   width: 100%;
-  min-height: 160px;
-  border-radius: 1rem;
+  border-radius: 0 0 1rem 1rem;
   overflow: hidden;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  filter: contrast(0.5) saturate(120%);
+  aspect-ratio: 1/1;
 
   @media (min-width: 768px) {
     width: 100%;

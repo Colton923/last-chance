@@ -57,6 +57,7 @@ export default async function Menu() {
                   )}
                   {item.image && (
                     <img
+                      loading="lazy"
                       src={urlFor(item.image).url()}
                       alt={item.title}
                       className={styles.image}
