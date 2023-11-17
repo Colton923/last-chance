@@ -42,10 +42,8 @@ export default async function Drinks() {
               <ul className={styles.items}>
                 {drinkGroups.drinkItems.map((item: any, index: any) => (
                   <li className={styles.item} key={'item' + index}>
-                    <div className={styles.itemHeader}>
-                      <div className={styles.itemName}>{FixTitle(item.title)}</div>
-                      <div className={styles.itemPrice}>${item.price}</div>
-                    </div>
+                    <div className={styles.itemName}>{FixTitle(item.title)}</div>
+                    <div className={styles.itemPrice}>${item.price}</div>
                   </li>
                 ))}
               </ul>
