@@ -10,15 +10,36 @@ async function getSpecials() {
   const getSpecials = await client.fetch(specialsQuery, undefined, {
     cache: 'no-store',
   })
-  return getSpecials[0]
+  return getSpecials
 }
+
+const days = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+]
 
 export default async function Specials() {
   const specials = await getSpecials()
+  const specialsInOrder = specials.sort((a: any, b: any) => {
+    if (!days.includes(a.title)) {
+      return 1
+    }
+    return days.indexOf(a.title) - days.indexOf(b.title)
+  })
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.header}>{specials.title}</h2>
-      <p>{specials.description}</p>
+      <h2 className={styles.header}>Specials</h2>
+      {specialsInOrder.map((item: any, index: any) => (
+        <div className={styles.itemWrapper} key={'specials' + index}>
+          <p>{item.title}</p>
+          <p>{item.description}</p>
+        </div>
+      ))}
     </div>
   )
 }

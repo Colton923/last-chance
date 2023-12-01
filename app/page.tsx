@@ -1,7 +1,6 @@
 import styles from 'styles/App.module.scss'
 import Image from 'next/image'
 import beer from 'public/images/beer.jpg'
-import bloody from 'public/images/bloody.jpg'
 import beerGarden3 from 'public/images/beerGarden.jpg'
 import sunday2 from 'public/images/sunday.jpg'
 import taps from 'public/images/taps.jpg'
@@ -13,8 +12,9 @@ export default function Index() {
         src={beer}
         alt="Beer"
         className={styles.backgroundPhotoOne}
-        width={1420}
-        height={1920}
+        width={710}
+        height={960}
+        quality={100}
       />
       <div className={styles.wrapper}>
         <div className={styles.hOneWrapper}>
