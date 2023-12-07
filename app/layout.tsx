@@ -46,6 +46,11 @@ export default async function RootLayout({ children }: Props) {
         <meta name="author" content="Colton McClintock - Webdev Solutions LLC" />
         <meta name="keywords" content="Last Chance" />
         <meta name="theme-color" content="#000000" />
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7507197443167447"
+          crossOrigin="anonymous"
+        ></script>
         <link rel="icon" href="/favicon.ico" />
         <title>The Last Chance Bar & Grill, Peoria IL</title>
       </head>

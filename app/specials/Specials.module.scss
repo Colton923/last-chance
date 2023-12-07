@@ -1,9 +1,23 @@
-.wrapper{
+.wrapper {
   display: flex;
-  flex-direction: column;
   justify-content: center;
+  flex-direction: column;
+}
+
+.specialsWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  margin: 20px;
+  margin: 0 auto;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  width: 90%;
+
+  @media (min-width: 768px) {
+    max-width: 850px;
+  }
 }
 .itemWrapper {
   display: flex;

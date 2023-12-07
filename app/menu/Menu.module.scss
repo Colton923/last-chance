@@ -2,7 +2,6 @@
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: var(--grey);
 }
 
 .menu {
@@ -25,9 +24,9 @@
   align-items: center;
   margin: 1rem;
   padding: 1rem;
-  background-color: white;
+  background-color: rgba(0,0,0,0.2);
+  backdrop-filter: blur(20px);
   border-radius: 1rem;
-  border: 1px solid white;
   width: 350px;
   margin-bottom: 2rem;
 
@@ -45,7 +44,7 @@
   font-weight: 900;
   text-align: center;
   text-transform: uppercase;
-  color: var(--black);
+  color: var(--white);
   margin: 1rem .5rem;
   width: 100%;
 
@@ -79,7 +78,7 @@
   align-items: left;
   margin: .5rem;
   background-color: transparent;
-  border: 1px solid var(--black);
+  background-color: white;
   border-radius: 1rem;
   color: black;
   width: 100%;

@@ -40,6 +40,9 @@
     }
 
     .mobileNavigationWrapper {
+      max-height: 200px;
+      transition: max-height 0.5s ease-out;
+        overflow: hidden;
 
       .mobileNavigation {
             display: flex;
@@ -69,6 +72,9 @@
         }
     }
 
+    .open {
+      max-height: 700px;
+    }
     .navItem {
         padding: 10px;
         font-size: 1.2rem;

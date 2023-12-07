@@ -75,7 +75,13 @@ const ApplicationForm = () => {
         </label>
         <label className={styles.label}>
           Zip
-          <input className={styles.textInput} type="text" {...register('zip')} />
+          <input
+            minLength={6}
+            maxLength={6}
+            className={styles.textInput}
+            type="text"
+            {...register('zip')}
+          />
         </label>
       </div>
       <div className={styles.formGroup}>
@@ -100,7 +106,9 @@ const ApplicationForm = () => {
           <textarea className={styles.textInput} {...register('whyUs')} />
         </label>
       </div>
-      <input className={styles.submitInput} type="submit" value="Submit" />
+      <div className={styles.submitWrapper}>
+        <input className={styles.submitInput} type="submit" value="Submit" />
+      </div>
     </form>
   )
 }

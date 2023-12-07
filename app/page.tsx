@@ -17,7 +17,7 @@ export default function Index() {
         quality={100}
       />
       <div className={styles.wrapper}>
-        <div className={styles.hOneWrapper}>
+        <div className={styles.homeWrapper}>
           <div className={styles.lineSVGWrapper}>
             <div className={styles.lineLeft} />
             <svg

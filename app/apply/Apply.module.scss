@@ -36,6 +36,7 @@
 }
 .textInput {
   display: flex;
+  text-indent: 3px;
   width: 10rem;
   height: 2rem;
   width: 100%;
@@ -43,6 +44,7 @@
 }
 .emailInput {
   display: flex;
+  text-indent: 3px;
   width: 10rem;
   height: 2rem;
   width: 100%;
@@ -50,6 +52,7 @@
 }
 .telInput {
   display: flex;
+  text-indent: 3px;
   width: 10rem;
   height: 2rem;
   width: 100%;
@@ -94,4 +97,11 @@
     font-size: 1rem;
     grid-column: 1 ;
   }
+}
+
+.submitWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: right;
+
 }

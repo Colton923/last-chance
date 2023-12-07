@@ -151,6 +151,8 @@ const DonationForm = () => {
           type="number"
           {...register('participants')}
           placeholder={'0'}
+          min={0}
+          max={500}
         />
       </label>
       <label className={styles.label}>
@@ -177,6 +179,8 @@ const DonationForm = () => {
           type="number"
           {...register('donationValue')}
           placeholder={'0'}
+          min={0}
+          max={10000}
           className={styles.numberInput}
         />
       </label>
@@ -252,7 +256,9 @@ const DonationForm = () => {
           className={styles.textInput}
         />
       </label>
-      <input type="submit" className={styles.submitInput} value={'Submit'} />
+      <div className={styles.submitWrapper}>
+        <input type="submit" className={styles.submitInput} value={'Submit'} />
+      </div>
     </form>
   )
 }

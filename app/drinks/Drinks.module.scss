@@ -39,12 +39,12 @@
   flex-direction: column;
   align-items: center;
   border-radius: 1rem;
-  border: 1px solid var(--white);
   width: 80%;
   max-width: 400px;
   margin: 2rem;
   padding: 2rem 1rem;
-  background-color: rgba(0,0,0,0.9);
+  background-color: rgba(0,0,0,0.2);
+  backdrop-filter: blur(20px);
 
   @media (min-width: 768px) {
     max-width: 500px;
@@ -88,7 +88,6 @@
 .itemName{
   font-size: 1.5rem;
   text-shadow: 1px 1px 1px var(--black);
-  border-bottom: 1px solid var(--black);
   text-transform: capitalize;
   z-index: 1;
 }

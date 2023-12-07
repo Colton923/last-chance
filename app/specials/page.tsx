@@ -33,13 +33,15 @@ export default async function Specials() {
   })
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.header}>Specials</h2>
-      {specialsInOrder.map((item: any, index: any) => (
-        <div className={styles.itemWrapper} key={'specials' + index}>
-          <p>{item.title}</p>
-          <p>{item.description}</p>
-        </div>
-      ))}
+      <div className={styles.specialsWrapper}>
+        <h2 className={styles.header}>Specials</h2>
+        {specialsInOrder.map((item: any, index: any) => (
+          <div className={styles.itemWrapper} key={'specials' + index}>
+            <p>{item.title}</p>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

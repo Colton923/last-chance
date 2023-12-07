@@ -36,7 +36,7 @@ const MobileNavigation = () => {
   const closeMobileMenu = () => setOpen(false)
 
   return (
-    <div className={styles.mobileNavigationWrapper}>
+    <div className={`${styles.mobileNavigationWrapper} ${open && styles.open} `}>
       <div className={styles.mobileNavigation}>
         <Link href="/">
           <Image
