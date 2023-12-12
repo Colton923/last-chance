@@ -1,5 +1,7 @@
 import client from 'lib/sanity/client'
 import styles from './Specials.module.scss'
+import Image from 'next/image'
+import bar from 'public/images/bar.jpeg'
 
 const specialsQuery = `*[_type == "specials"] {
   title,
@@ -33,12 +35,21 @@ export default async function Specials() {
   })
   return (
     <div className={styles.wrapper}>
+      <div className={styles.backgroundImageWrapper}>
+        <Image
+          src={bar}
+          alt="bar"
+          className={styles.backgroundImage}
+          width={3840}
+          height={2372}
+        />
+      </div>
       <div className={styles.specialsWrapper}>
         <h2 className={styles.header}>Specials</h2>
         {specialsInOrder.map((item: any, index: any) => (
           <div className={styles.itemWrapper} key={'specials' + index}>
-            <p>{item.title}</p>
-            <p>{item.description}</p>
+            <p className={styles.itemName}>{item.title}</p>
+            <p className={styles.itemDescription}>{item.description}</p>
           </div>
         ))}
       </div>

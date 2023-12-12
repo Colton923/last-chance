@@ -3,6 +3,8 @@ import { FixTitle } from '../../lib/fns/FixTitle'
 import urlFor from 'lib/sanity/urlFor'
 import client from 'lib/sanity/client'
 import MenuPdf from 'components/menuPdf/MenuPdf'
+import Image from 'next/image'
+import bar from 'public/images/bar.jpeg'
 
 const menuGroupsQuery = `*[_type == "menuGroups"] {
   title,
@@ -38,6 +40,15 @@ export default async function Menu() {
 
   return (
     <div className={styles.wrapper}>
+      <div className={styles.backgroundImageWrapper}>
+        <Image
+          src={bar}
+          alt="bar"
+          className={styles.backgroundImage}
+          width={3840}
+          height={2372}
+        />
+      </div>
       <div className={styles.menu}>
         <div>
           <MenuPdf pdf={menudownload[0].menuPDF} />
