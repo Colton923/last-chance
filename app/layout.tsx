@@ -3,6 +3,8 @@ import Navbar from 'components/navbar/Navbar'
 import Footer from 'components/footer/Footer'
 import client from 'lib/sanity/client'
 import { Catamaran } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
+
 interface Props {
   children: React.ReactNode
 }
@@ -60,6 +62,7 @@ export default async function RootLayout({ children }: Props) {
           <Navbar />
           {children}
           <Footer hours={hours} />
+          <Analytics />
         </main>
       </body>
     </html>
