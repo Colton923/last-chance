@@ -10,7 +10,4 @@ module.exports = {
     return config
   },
   reactStrictMode: true,
-  experimental: {
-    appDir: true,
-  },
 }

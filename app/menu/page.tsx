@@ -1,10 +1,12 @@
 import styles from './Menu.module.scss'
-import { FixTitle } from '../../lib/fns/FixTitle'
-import urlFor from 'lib/sanity/urlFor'
 import client from 'lib/sanity/client'
 import MenuPdf from 'components/menuPdf/MenuPdf'
 import Image from 'next/image'
 import bar from 'public/images/bar.jpeg'
+import MenuGroup, { Group } from './_components/MenuGroup'
+import ScrollToTop from './_components/ScrollToTop'
+import firestoreDB from 'lib/firestore/firestoreDB'
+import { LikesDoc } from './actions'
 
 const menuGroupsQuery = `*[_type == "menuGroups"] {
   title,
@@ -20,10 +22,19 @@ const menuPdfQuery = `*[_type == "misc"] {
   "menuPDF": menuPDF.asset->url
 }`
 
+async function getAllLikes() {
+  const likesRef = await firestoreDB.collection('likes').limit(1)
+  const likes = await likesRef.get()
+  if (likes.empty) {
+    return null
+  }
+  return likes.docs[0].data().menu as LikesDoc['menu']
+}
+
 async function getMenu() {
-  const getMenuItems = await client.fetch(menuGroupsQuery, undefined, {
+  const getMenuItems = (await client.fetch(menuGroupsQuery, undefined, {
     cache: 'no-store',
-  })
+  })) as Group[]
   return getMenuItems
 }
 
@@ -37,6 +48,32 @@ async function getMenuPdf() {
 export default async function Menu() {
   const menuItems = await getMenu()
   const menudownload = await getMenuPdf()
+  const likes = new Map<string, number>()
+  const likesDoc = await getAllLikes()
+  if (likesDoc) {
+    for (const [key, value] of Object.entries(likesDoc)) {
+      likes.set(key, value)
+    }
+  }
+  const menuItemsWithLikes = menuItems.map((group) => {
+    const menuItemsWithLikes = group.menuItems.map((item) => {
+      if (!likes) {
+        return {
+          ...item,
+          likes: 1,
+        }
+      }
+      const itemLikes = likes.get(item.title) || 0
+      return {
+        ...item,
+        likes: itemLikes,
+      }
+    })
+    return {
+      ...group,
+      menuItems: menuItemsWithLikes,
+    }
+  })
 
   return (
     <div className={styles.wrapper}>
@@ -53,33 +90,15 @@ export default async function Menu() {
         <div>
           <MenuPdf pdf={menudownload[0].menuPDF} />
         </div>
-        {menuItems.map((item: any, index: any) => (
-          <div className={styles.group} key={'group' + index}>
-            <h3 className={styles.groupName}>{FixTitle(item.title)}</h3>
-            <ul className={styles.items}>
-              {item.menuItems.map((item: any, index: any) => (
-                <li className={styles.item} key={'item' + index}>
-                  <div className={styles.itemHeader}>
-                    <div className={styles.itemName}>{FixTitle(item.title)}</div>
-                    <div className={styles.itemPrice}>${item.price}</div>
-                  </div>
-                  {item.description && (
-                    <div className={styles.itemDescription}>{item.description}</div>
-                  )}
-                  {item.image && (
-                    <img
-                      loading="lazy"
-                      src={urlFor(item.image).url()}
-                      alt={item.title}
-                      className={styles.image}
-                    />
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
+        {menuItemsWithLikes.map((item: Group, index: any) => (
+          <MenuGroup
+            key={'group' + index}
+            title={item.title}
+            menuItems={item.menuItems}
+          />
         ))}
       </div>
+      <ScrollToTop />
     </div>
   )
 }
