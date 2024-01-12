@@ -26,12 +26,18 @@ export async function generateMetadata({
         itemTitle: itemTitle,
       },
     })) as ImageResponse
+    const generatedImage = await Buffer.from(await image.arrayBuffer()).toString(
+      'base64'
+    )
     return {
-      title: `${itemTitle} | The Last Chance Bar & Grill`,
+      title: `${RevertLink(itemTitle)} | The Last Chance Bar & Grill`,
       openGraph: {
+        title: `${RevertLink(itemTitle)} | The Last Chance Bar & Grill`,
+        description: `${RevertLink(groupTitle)}`,
         images: [
           {
-            url: image.url,
+            url: `data:image/png;base64,${generatedImage}`,
+            alt: `${RevertLink(itemTitle)} | The Last Chance Bar & Grill`,
           },
         ],
       },
@@ -39,7 +45,7 @@ export async function generateMetadata({
   } catch (e) {
     console.log(e)
     return {
-      title: `${itemTitle} | The Last Chance Bar & Grill`,
+      title: `${RevertLink(itemTitle)} | The Last Chance Bar & Grill`,
     }
   }
 }
