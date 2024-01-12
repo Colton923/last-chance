@@ -1,20 +1,18 @@
 'use server'
 
 import firestoreDB from 'lib/firestore/firestoreDB'
-export type LikesDoc = {
-  [mapName: string]: Map<string, number>
-}
+import type { LikesDoc } from 'actions/firestore'
 
-export async function likeItem(item: string) {
+export async function likeItem(item: string): Promise<void> {
   const likesRef = await firestoreDB.collection('likes').limit(1)
   const likes = await likesRef.get()
   if (likes) {
     const data = likes.docs[0].data() as LikesDoc
     const menu = new Map<string, number>()
     if (data && data.menu) {
-      for (const [key, value] of Object.entries(data.menu)) {
+      Object.entries(data.menu).map(([key, value]: [key: string, value: number]) => {
         menu.set(key, value)
-      }
+      })
     }
     if (menu) {
       const count = menu.get(item)

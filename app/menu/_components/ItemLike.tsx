@@ -1,7 +1,7 @@
 'use client'
 import styles from '../Menu.module.scss'
 import { useState } from 'react'
-import { likeItem } from '../actions'
+import { likeItem } from 'actions/firestore'
 
 const LikesNumber = (likes: number | undefined) => {
   let likesString

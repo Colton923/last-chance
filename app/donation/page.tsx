@@ -1,9 +1,9 @@
 import styles from './Donation.module.scss'
-import DonationForm from 'components/donationForm/DonationForm'
+import DonationForm from 'components/Forms/donationForm/DonationForm'
 import Image from 'next/image'
 import bar from 'public/images/bar.jpeg'
 
-export default function Donation() {
+export default function Page() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.backgroundImageWrapper}>

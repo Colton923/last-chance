@@ -1,26 +1,11 @@
 import Image from 'next/image'
 import bar from 'public/images/bar.jpeg'
-import client from 'lib/sanity/client'
 import styles from './Drinks.module.scss'
-import { FixTitle } from '../../lib/fns/FixTitle'
-
-const drinkGroupsQuery = `*[_type == "drinkGroups"] {
-  title,
-  "drinkItems": *[_type == "drinkItems" && drinkGroup._ref == ^._id] {
-    title,
-    price
-  }
-}`
-
-async function getDrinks() {
-  const getDrinkItems = await client.fetch(drinkGroupsQuery, undefined, {
-    cache: 'no-store',
-  })
-  return getDrinkItems
-}
+import { FixTitle } from 'utils/FixTitle'
+import { drinks } from 'actions/sanity'
 
 export default async function Drinks() {
-  const drinkItems = await getDrinks()
+  const drinkItems = await drinks()
 
   return (
     <div className={styles.wrapper}>

@@ -1,10 +1,18 @@
-import type { Item } from './MenuGroup'
+import type { Item } from 'actions/sanity'
 import styles from '../Menu.module.scss'
 import urlFor from 'lib/sanity/urlFor'
 import ItemLike from './ItemLike'
-import { FixTitle } from '../../../lib/fns/FixTitle'
+import Link from 'next/link'
 
-const MenuItem = ({ title, description, image, price, index, likes }: Item) => {
+const MenuItem = ({
+  title,
+  description,
+  image,
+  price,
+  index,
+  likes,
+  link,
+}: Item) => {
   return (
     <li
       className={styles.item}
@@ -12,10 +20,25 @@ const MenuItem = ({ title, description, image, price, index, likes }: Item) => {
         animationDelay: `${index * 0.4}s`,
       }}
     >
-      <div className={styles.itemHeader}>
-        <div className={styles.itemName}>{FixTitle(title)}</div>
-        <div className={styles.itemPrice}>${price}</div>
-      </div>
+      {link ? (
+        <Link
+          href={link}
+          style={{
+            textDecoration: 'none',
+            color: 'inherit',
+          }}
+        >
+          <div className={styles.itemHeader}>
+            <div className={styles.itemName}>{title}</div>
+            <div className={styles.itemPrice}>${price}</div>
+          </div>
+        </Link>
+      ) : (
+        <div className={styles.itemHeader}>
+          <div className={styles.itemName}>{title}</div>
+          <div className={styles.itemPrice}>${price}</div>
+        </div>
+      )}
       {description && (
         <>
           <div className={styles.itemDescription}>{description}</div>

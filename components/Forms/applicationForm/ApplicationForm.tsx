@@ -1,6 +1,6 @@
 'use client'
 
-import styles from '../../app/apply/Apply.module.scss'
+import styles from 'app/apply/Apply.module.scss'
 import { useForm } from 'react-hook-form'
 
 type ApplyForm = {

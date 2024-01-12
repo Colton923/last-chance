@@ -4,6 +4,8 @@ import Footer from 'components/footer/Footer'
 import client from 'lib/sanity/client'
 import { Catamaran } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
+import { Metadata } from 'next'
+import { openGraphImage } from './shared-metadata'
 
 interface Props {
   children: React.ReactNode
@@ -30,6 +32,38 @@ async function getHours() {
   return getHours
 }
 
+export const metadata: Metadata = {
+  metadataBase: new URL('https://lastchancepeoria.com'),
+  title: 'The Last Chance Bar & Grill, Peoria IL',
+  description: 'Coldest beer in town, cheapest all around',
+  openGraph: {
+    ...openGraphImage,
+    title: 'The Last Chance Bar & Grill, Peoria IL',
+    description: 'Coldest beer in town, cheapest all around',
+    url: 'https://lastchancepeoria.com',
+    siteName: 'The Last Chance Bar & Grill',
+    locale: 'en_US',
+    type: 'website',
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180' }],
+    other: [
+      {
+        rel: 'favicon-32x32',
+        url: '/favicon-32x32.png',
+        sizes: '32x32',
+      },
+      {
+        rel: 'favicon-16x16',
+        url: '/favicon-16x16.png',
+        sizes: '16x16',
+      },
+    ],
+  },
+}
+
 export default async function RootLayout({ children }: Props) {
   const hours = await getHours()
   return (
@@ -40,22 +74,17 @@ export default async function RootLayout({ children }: Props) {
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
         />
-        <meta
-          name="description"
-          content="The Last Chance Bar & Grill located in Alta Illinois is the Peoria and surrounding areas favorite restaurant. Come visit us for the best breakfast, the coldest drinks, and a fun night life. Try out our award winning dinner menu, and have cold cocktail. "
-        />
-        <meta name="robots" content="index, follow" />
         <meta name="author" content="Colton McClintock - Webdev Solutions LLC" />
         <meta name="keywords" content="Last Chance" />
         <meta name="theme-color" content="#000000" />
         <meta name="google-adsense-account" content="ca-pub-7507197443167447" />
+        <meta property="og:image" content="/api/og" />
+        <link rel="manifest" href="/site.webmanifest" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7507197443167447"
           crossOrigin="anonymous"
         ></script>
-        <link rel="icon" href="/favicon.ico" />
-        <title>The Last Chance Bar & Grill, Peoria IL</title>
       </head>
       <body>
         <main className={catamaran.className}>

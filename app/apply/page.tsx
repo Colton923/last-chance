@@ -1,9 +1,9 @@
 import styles from './Apply.module.scss'
-import ApplicationForm from 'components/applicationForm/ApplicationForm'
+import ApplicationForm from 'components/Forms/applicationForm/ApplicationForm'
 import Image from 'next/image'
 import bar from 'public/images/bar.jpeg'
 
-export default function Apply() {
+export default function Page() {
   return (
     <div className={styles.wrapper}>
       <div className={styles.backgroundImageWrapper}>

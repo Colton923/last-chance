@@ -30,7 +30,7 @@ type DonationFormType = {
   contactZip: string
 }
 import { useForm } from 'react-hook-form'
-import styles from '../../app/donation/Donation.module.scss'
+import styles from 'app/donation/Donation.module.scss'
 
 const DonationForm = () => {
   const { register, handleSubmit } = useForm<DonationFormType>()

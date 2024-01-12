@@ -1,4 +1,4 @@
-const MenuPdf = (url: any) => {
+export const MenuPDFButton = (url: { pdf: string }) => {
   return (
     <a
       href={`${url.pdf}?dl=`}
@@ -35,5 +35,3 @@ const MenuPdf = (url: any) => {
     </a>
   )
 }
-
-export default MenuPdf
