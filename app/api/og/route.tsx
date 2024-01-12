@@ -5,6 +5,8 @@ import urlFor from 'lib/sanity/urlFor'
 import { menuItem } from 'lib/sanity/queries'
 import { RevertLink } from 'utils'
 
+export const runtime = 'edge'
+
 export async function GET() {
   const itemTitle = headers().get('itemTitle')
   if (!itemTitle) {
