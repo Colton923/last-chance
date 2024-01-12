@@ -60,7 +60,7 @@ const MenuGroup = ({ title, menuItems, link, initialState }: Group) => {
           <div
             className={styles.back}
             onClick={() => {
-              router.back()
+              router.push('/menu')
             }}
           >
             BACK
