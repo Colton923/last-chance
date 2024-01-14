@@ -5,7 +5,6 @@ import styles from 'app/menu/Menu.module.scss'
 import { like } from 'actions/firestore'
 import { RevertLink } from 'utils'
 import { Metadata } from 'next'
-import { ImageResponse } from 'next/og'
 
 export type Params = {
   groupTitle: string
@@ -19,16 +18,18 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { groupTitle, itemTitle } = params
   try {
-    const image = (await fetch('http://localhost:3000/api/og', {
+    const tryUrl = `http://lastchancepeoria.com/api/og?id=${itemTitle}`
+    const image = await fetch(tryUrl, {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        itemTitle: itemTitle,
-      },
-    })) as ImageResponse
-    const generatedImage = await Buffer.from(await image.arrayBuffer()).toString(
-      'base64'
+    }).then((res) => res.blob())
+    const generatedImage = new File(
+      [image],
+      `metadata_image.${image.type.split('/')[1]}`,
+      {
+        type: image.type,
+      }
     )
+    const blobURL = URL.createObjectURL(generatedImage)
     return {
       title: `${RevertLink(itemTitle)} | The Last Chance`,
       openGraph: {
@@ -36,8 +37,7 @@ export async function generateMetadata({
         description: `${RevertLink(groupTitle)}`,
         images: [
           {
-            url: `data:image/png;base64,${generatedImage}`,
-            alt: `${RevertLink(itemTitle)} | The Last Chance`,
+            url: blobURL,
           },
         ],
       },
