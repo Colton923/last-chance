@@ -51,7 +51,7 @@ const MenuGroup = ({ title, menuItems, link, initialState }: Group) => {
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
+                strokeWidth="4"
                 d="M19 9l-7 7-7-7"
               />
             </svg>

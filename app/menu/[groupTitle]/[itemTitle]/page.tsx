@@ -30,14 +30,14 @@ export async function generateMetadata({
       'base64'
     )
     return {
-      title: `${RevertLink(itemTitle)} | The Last Chance Bar & Grill`,
+      title: `${RevertLink(itemTitle)} | The Last Chance`,
       openGraph: {
-        title: `${RevertLink(itemTitle)} | The Last Chance Bar & Grill`,
+        title: `${RevertLink(itemTitle)} | The Last Chance`,
         description: `${RevertLink(groupTitle)}`,
         images: [
           {
             url: `data:image/png;base64,${generatedImage}`,
-            alt: `${RevertLink(itemTitle)} | The Last Chance Bar & Grill`,
+            alt: `${RevertLink(itemTitle)} | The Last Chance`,
           },
         ],
       },

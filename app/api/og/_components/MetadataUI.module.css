@@ -1,0 +1,56 @@
+.flexRoot {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.imageFlexbox {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  background-color: #000;
+  padding: 10px;
+}
+
+.description {
+  display: flex;
+  text-align: center;
+  padding: 0 0 10px 0;
+  font-size: 1rem;
+  font-weight: bolder;
+  color: #b62025;
+  max-width: 180px;
+  max-height: 100%;
+  padding: 0 10px;
+}
+
+.price {
+  display: flex;
+  position: absolute;
+  bottom: 25px;
+  right: 20px;
+  color: #b62025;
+  text-shadow: 0 0 1px rgb(182, 32, 37, 0.3);
+  font-size: 1.2rem;
+  border: 1px solid #ffffff;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #000;
+  padding: 0 5px;
+  box-shadow: 0 0 5px #000;
+}
+
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 2px #fff;
+}
