@@ -34,7 +34,7 @@ const Footer = (hours: any) => {
             </span>
             <span>
               Call us at
-              <Link className={styles.link} href="tel:410-326-6586">
+              <Link className={styles.link} href="tel:309-243-5036">
                 309-243-5036
               </Link>{' '}
             </span>
