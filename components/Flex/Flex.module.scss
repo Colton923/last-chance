@@ -1,0 +1,81 @@
+.flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+// width styles
+.full {
+  width: 100%;
+}
+
+.half {
+  width: 50%;
+}
+
+.auto {
+  width: auto;
+}
+.x {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  width: 90%; /* Ensure it's not taking up the full width */
+  padding: 0 1rem; /* Add margin on both sides */
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--white) var(--black); /* Custom colors */
+  scroll-behavior: smooth;
+}
+
+/* Style for the scrollbar for Webkit browsers (Chrome, Safari) */
+.x::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.x::-webkit-scrollbar-thumb {
+  background-color: var(--red);
+  border-radius: 4px;
+}
+
+.x::-webkit-scrollbar-track {
+  background-color: var(--white);
+}
+
+.y {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 1rem;
+  overflow-x: auto; /* Enable horizontal scrolling */
+  width: height; /* Ensure it's not taking up the full width */
+  padding: 1rem 0; /* Add margin on both sides */
+
+  scrollbar-width: thin;
+  scrollbar-color: var(--white) var(--black); /* Custom colors */
+  scroll-behavior: smooth;
+}
+
+.y::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.y::-webkit-scrollbar-thumb {
+  background-color: var(--white);
+  border-radius: 4px;
+}
+.y::-webkit-scrollbar-track {
+  width: 8px;
+  height: 8px;
+}

@@ -1,107 +1,106 @@
 .navbarWrapper {
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  width: 100%;
+  z-index: 3;
+  .navigation {
+    display: none;
 
-    .navigation {
-        display: none;
+    .navLinksWrapper {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-right: 1rem;
 
-        .navLinksWrapper {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            margin-right: 1rem;
+      .navItem {
+        display: flex;
+        gap: 0.8rem;
+        align-items: center;
 
-            .navItem {
-                display: flex;
-                gap: 0.8rem;
-                align-items: center;
-
-                .svg {
-                    display: none;
-                }
-            }
-            .navHeader {
-                margin: 0;
-            }
+        .svg {
+          display: none;
         }
-        .brandImage {
-            height: 80px;
-            width: auto;
-        }
-
-        @media (min-width: 768px) {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem 1rem;
-            width: 100%;
-
-        }
+      }
+      .navHeader {
+        margin: 0;
+      }
+    }
+    .brandImage {
+      height: 80px;
+      width: auto;
     }
 
-    .mobileNavigationWrapper {
-      max-height: 200px;
-      transition: max-height 0.5s ease-out;
-        overflow: hidden;
-
-      .mobileNavigation {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem;
-
-            .brandImage {
-                width: 100px;
-                height: auto;
-            }
-        }
-        .navLinksWrapper {
-            padding: 1.5rem 0;
-        }
-        .navItem {
-            display: flex;
-            flex-direction: column-reverse;
-            justify-content: center;
-            align-items: center;
-            z-index: 10;
-            margin-bottom: 1rem;
-        }
-
-        @media (min-width: 768px) {
-            display: none;
-        }
+    @media (min-width: 768px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.5rem 1rem;
+      width: 100%;
     }
+  }
 
-    .open {
-      max-height: 700px;
+  .mobileNavigationWrapper {
+    max-height: 200px;
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
+
+    .mobileNavigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 3px 16px 3px 3px;
+
+      .brandImage {
+        width: 100px;
+        height: auto;
+      }
+    }
+    .navLinksWrapper {
+      padding: 1.5rem 0;
     }
     .navItem {
-        padding: 10px;
-        font-size: 1.2rem;
-        font-weight: 700;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        text-decoration: none;
-        transition: all 0.3s ease-in-out;
-        color: white;
+      display: flex;
+      flex-direction: column-reverse;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
+      margin-bottom: 1rem;
+    }
 
-        &:hover {
-          color: var(--red);
-        }
-        &:hover {
-          color: var(--red);
-        }
-      }
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
 
-    .navHeader {
-        font-size: 10px;
-        @media (min-width: 768px) {
-          font-size: 1rem;
-        }
-      }
+  .open {
+    max-height: 700px;
+  }
+  .navItem {
+    padding: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    color: white;
 
-    .svg {
-        width: 35px;
-        height: 35px;
-      }
+    &:hover {
+      color: var(--red);
+    }
+    &:hover {
+      color: var(--red);
+    }
+  }
+
+  .navHeader {
+    font-size: 10px;
+    @media (min-width: 768px) {
+      font-size: 1rem;
+    }
+  }
+
+  .svg {
+    width: 35px;
+    height: 35px;
+  }
 }

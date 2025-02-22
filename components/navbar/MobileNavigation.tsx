@@ -20,6 +20,11 @@ const MobileNavigation = () => {
       height={40}
       className=""
       onClick={() => setOpen(!open)}
+      style={{
+        transition: 'all',
+        transitionTimingFunction: 'ease-in-out',
+        transitionDuration: '.6s',
+      }}
     />
   )
 
@@ -30,6 +35,11 @@ const MobileNavigation = () => {
       width={50}
       height={50}
       onClick={() => setOpen(!open)}
+      style={{
+        transition: 'all',
+        transitionTimingFunction: 'ease-in-out',
+        transitionDuration: '.6s',
+      }}
     />
   )
 
@@ -38,7 +48,14 @@ const MobileNavigation = () => {
   return (
     <div className={`${styles.mobileNavigationWrapper} ${open && styles.open} `}>
       <div className={styles.mobileNavigation}>
-        <Link href="/">
+        <Link
+          href="/"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
           <Image
             src={logo}
             alt="logo"

@@ -1,0 +1,35 @@
+.pad {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.xxs {
+  padding: 0.25rem;
+}
+
+.xs {
+  padding: 0.5rem;
+}
+
+.sm {
+  padding: 1rem;
+}
+
+.md {
+  padding: 2rem;
+}
+
+.lg {
+  padding: 3rem;
+}
+
+.xl {
+  padding: 4rem;
+}
+
+.xxl {
+  padding: 5rem;
+}
