@@ -1,6 +1,6 @@
 import styles from './Specials.module.scss'
 import Image from 'next/image'
-import bar from 'public/images/bar.jpeg'
+import bar from 'public/images/bar.webp'
 import { specials } from 'actions/sanity'
 
 export default async function Specials() {

@@ -1,7 +1,7 @@
 import styles from './Menu.module.scss'
 import { MenuPDFButton } from 'components/Buttons'
 import Image from 'next/image'
-import bar from 'public/images/bar.jpeg'
+import bar from 'public/images/bar.webp'
 import MenuGroup from './_components/MenuGroup'
 import ScrollToTop from './_components/ScrollToTop'
 import { getMenuItemsWithLikes } from 'actions'

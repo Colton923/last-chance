@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import bar from 'public/images/bar.jpeg'
+import bar from 'public/images/bar.webp'
 import styles from './Drinks.module.scss'
 import { FixTitle } from 'utils/FixTitle'
 import { drinks } from 'actions/sanity'

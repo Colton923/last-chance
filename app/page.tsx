@@ -1,11 +1,10 @@
 import styles from 'styles/App.module.scss'
-import Image, { StaticImageData } from 'next/image'
-import beer from 'public/images/beer.jpg'
-import beerGarden3 from 'public/images/beerGarden.jpg'
-import sunday2 from 'public/images/sunday.jpg'
-import taps from 'public/images/taps.jpg'
+import Image from 'next/image'
+import beer from 'public/images/beer.webp'
+import sunday2 from 'public/images/sunday.webp'
+import taps from 'public/images/taps.webp'
 import niceOutsidePhoto from 'public/images/outside_photo.webp'
-import slots from 'public/images/slots.jpg'
+import slots from 'public/images/slots.webp'
 import { ReactNode } from 'react'
 import Text from 'components/Text/Text'
 import Flex from 'components/Flex/Flex'
@@ -71,7 +70,7 @@ export default function Index() {
     innerImage:
       | {
           alt: string
-          src: StaticImageData
+          src: any
         }[]
       | undefined
   }
@@ -119,7 +118,7 @@ export default function Index() {
                   {innerImage?.map((image, index) => (
                     <Image
                       key={index}
-                      src={image.src.src}
+                      src={image.src}
                       alt={image.alt}
                       height={400}
                       width={300}

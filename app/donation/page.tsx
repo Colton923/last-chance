@@ -1,7 +1,7 @@
 import styles from './Donation.module.scss'
 import DonationForm from 'components/Forms/donationForm/DonationForm'
 import Image from 'next/image'
-import bar from 'public/images/bar.jpeg'
+import bar from 'public/images/bar.webp'
 
 export default function Page() {
   return (

@@ -1,7 +1,7 @@
 import styles from './Apply.module.scss'
 import ApplicationForm from 'components/Forms/applicationForm/ApplicationForm'
 import Image from 'next/image'
-import bar from 'public/images/bar.jpeg'
+import bar from 'public/images/bar.webp'
 
 export default function Page() {
   return (
