@@ -9,10 +9,10 @@ import { Text } from '../components/Text'
 import { Container } from '../components/Container'
 
 // Assets
-import niceOutsidePhoto from '../public/images/outside_photo.webp'
-import taps from '../public/images/taps.webp'
-import sunday2 from '../public/images/sunday.webp'
-import slots from '../public/images/slots.webp'
+import niceOutsidePhoto from '../public/images/outside_photo.jpg'
+import taps from '../public/images/taps.jpg'
+import sunday2 from '../public/images/sunday.jpg'
+import slots from '../public/images/slots.jpg'
 
 // Hero Section Component
 const Hero = memo(() => (

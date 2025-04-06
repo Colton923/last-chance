@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import styles from './styles.module.scss'
-import barImage from '../../public/images/bar.webp'
+import barImage from '../../public/images/bar.jpg'
 
 export const Background = () => {
   return (
