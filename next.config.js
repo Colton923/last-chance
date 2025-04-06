@@ -12,6 +12,9 @@ module.exports = {
   reactStrictMode: true,
   images: {
     formats: ['image/webp'],
+    images: {
+      unoptimized: true,
+    },
     remotePatterns: [
       {
         protocol: 'https',
