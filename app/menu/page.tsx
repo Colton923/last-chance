@@ -1,43 +1,63 @@
-import styles from './Menu.module.scss'
-import { MenuPDFButton } from 'components/Buttons'
-import Image from 'next/image'
-import bar from 'public/images/bar.webp'
-import MenuGroup from './_components/MenuGroup'
-import ScrollToTop from './_components/ScrollToTop'
-import { getMenuItemsWithLikes } from 'actions'
-import { menuPDF } from 'actions/sanity'
-import { MakeLink } from 'utils'
+import { FixTitle } from '../../utils/FixTitle'
+import { menu, menuPDF } from '../../actions/sanity'
+import { Text } from '../../components/Text'
+import { PageLayout } from '../../components/PageLayout'
+import { MenuPDFButton } from '../../components/Buttons'
+import MenuItem from '../../components/Menu/MenuItem'
+import styles from '../main.module.scss'
+import Link from 'next/link'
+
+interface MenuItem {
+  _id: string
+  title: string
+  price: string
+  description?: string
+  image?: any
+  order?: number
+}
+
+interface MenuGroup {
+  _id: string
+  title: string
+  menuItems: MenuItem[] | null
+  order?: number
+}
 
 export default async function Menu() {
-  const menuItemsWithLikes = await getMenuItemsWithLikes()
+  const menuItems = await menu()
   const menuDownload = await menuPDF()
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.backgroundImageWrapper}>
-        <Image
-          src={bar}
-          alt="bar"
-          className={styles.backgroundImage}
-          width={3840}
-          height={2372}
-        />
-      </div>
-      <div className={styles.menu}>
-        <div>
-          <MenuPDFButton pdf={menuDownload[0].menuPDF} />
-        </div>
-        {menuItemsWithLikes.map((item, index: number) => (
-          <MenuGroup
-            key={'group' + index}
-            title={item.title}
-            menuItems={item.menuItems}
-            link={`/menu/${MakeLink(item.title)}`}
-            initialState={true}
-          />
+    <PageLayout
+      title="Our Menu"
+      description="From appetizers to desserts, explore our carefully crafted dishes."
+      containerSize="lg"
+    >
+      <div className={styles.menuContent}>
+        <MenuPDFButton pdf={menuDownload[0].menuPDF} />
+        {menuItems.map((menuGroup: MenuGroup, groupIndex: number) => (
+          <div className={styles.group} key={`menu-group-${groupIndex}`}>
+            <Text as="h2" className={styles.groupName}>
+              {FixTitle(menuGroup.title)}
+            </Text>
+            <div className={styles.items}>
+              {menuGroup.menuItems?.map((item: MenuItem, itemIndex: number) => (
+                <Link
+                  key={`menu-item-${groupIndex}-${itemIndex}`}
+                  href={`/menu/${item._id}`}
+                >
+                  <MenuItem
+                    title={item.title}
+                    price={item.price}
+                    description={item.description}
+                    image={item.image}
+                  />
+                </Link>
+              ))}
+            </div>
+          </div>
         ))}
       </div>
-      <ScrollToTop />
-    </div>
+    </PageLayout>
   )
 }

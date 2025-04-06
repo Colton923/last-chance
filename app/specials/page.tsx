@@ -1,31 +1,34 @@
-import styles from './Specials.module.scss'
-import Image from 'next/image'
-import bar from 'public/images/bar.webp'
-import { specials } from 'actions/sanity'
+import { PageLayout } from '../../components/PageLayout'
+import { Text } from '../../components/Text'
+import { specials } from '../../lib/sanity/queries/specials'
+import client from '../../lib/sanity/client'
+import styles from '../main.module.scss'
+
+interface Special {
+  _id: string
+  title: string
+  description: string
+}
 
 export default async function Specials() {
-  const sanitySpecials = await specials()
+  const specialsList = (await client.fetch(specials)) as Special[]
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.backgroundImageWrapper}>
-        <Image
-          src={bar}
-          alt="bar"
-          className={styles.backgroundImage}
-          width={3840}
-          height={2372}
-        />
-      </div>
-      <div className={styles.specialsWrapper}>
-        <h2 className={styles.header}>Specials</h2>
-        {sanitySpecials.map((item: any, index: any) => (
-          <div className={styles.itemWrapper} key={'specials' + index}>
-            <p className={styles.itemName}>{item.title}</p>
-            <p className={styles.itemDescription}>{item.description}</p>
-          </div>
-        ))}
-      </div>
-    </div>
+    <PageLayout
+      title="Daily Specials"
+      containerSize="lg"
+      contentClassName={styles.specialsWrapper}
+    >
+      {specialsList.map((special) => (
+        <div key={special._id} className={styles.itemWrapper}>
+          <Text as="h3" className={styles.itemName}>
+            {special.title}
+          </Text>
+          <Text as="p" className={styles.itemDescription}>
+            {special.description}
+          </Text>
+        </div>
+      ))}
+    </PageLayout>
   )
 }

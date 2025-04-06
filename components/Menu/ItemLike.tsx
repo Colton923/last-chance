@@ -1,7 +1,7 @@
 'use client'
-import styles from '../Menu.module.scss'
+import styles from '../../app/main.module.scss'
 import { useState } from 'react'
-import { likeItem } from 'actions/firestore'
+import { likeItem } from '../../actions/firestore'
 
 const LikesNumber = (likes: number | undefined) => {
   let likesString
@@ -23,9 +23,9 @@ const LikesNumber = (likes: number | undefined) => {
   return likesString
 }
 
-const ItemLike = ({ likes, itemName }: { likes: number; itemName: string }) => {
+const ItemLike = ({ likes, itemName }: { likes?: number; itemName: string }) => {
   const [liked, setLiked] = useState(false)
-  const [currLikes, setCurrLikes] = useState(likes)
+  const [currLikes, setCurrLikes] = useState(likes || 0)
   const likeHandler = async () => {
     if (liked === false) {
       setLiked(true)
@@ -44,37 +44,32 @@ const ItemLike = ({ likes, itemName }: { likes: number; itemName: string }) => {
 
   return (
     <div
-      className={styles.likes}
+      id={`${itemName}Likes`}
+      className={styles.likesWrapper}
       onClick={() => {
         likeHandler()
       }}
-      id={`${itemName}Likes`}
     >
-      <svg
-        width="50"
-        height="50"
-        viewBox="0 0 100 100"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <path
-          id="heart"
-          d="M 10,30
+      <div className={styles.likes}>
+        <svg
+          width="50"
+          height="50"
+          viewBox="0 0 100 100"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            id="heart"
+            d="M 10,30
                A 20,20 0,0,1 50,30
                A 20,20 0,0,1 90,30
                Q 90,60 50,90
                Q 10,60 10,30 z"
-          fill={liked ? '#E2007B' : 'none'}
-          stroke="#E2007B"
-          strokeWidth="5"
-        />
-      </svg>
-      <div
-        className={styles.likesNumber}
-        style={{
-          color: liked ? '#000000' : '#E2007B',
-        }}
-      >
-        {LikesNumber(currLikes)}
+            fill={liked ? '#E2007B96' : '#E2007B80'}
+            stroke="#E2007B"
+            strokeWidth="5"
+          />
+        </svg>
+        <div className={styles.likesNumber}>{LikesNumber(currLikes)}</div>
       </div>
     </div>
   )

@@ -1,5 +1,11 @@
 'use client'
 
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { Text } from 'components/Text'
+import FormInput from 'components/FormInput'
+import styles from './styles.module.scss'
+
 type DonationFormType = {
   requestDate: string
   donationNeededBy: string
@@ -29,238 +35,286 @@ type DonationFormType = {
   contactState: string
   contactZip: string
 }
-import { useForm } from 'react-hook-form'
-import styles from 'app/donation/Donation.module.scss'
 
-const DonationForm = () => {
-  const { register, handleSubmit } = useForm<DonationFormType>()
+export function DonationForm() {
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState<string | null>(null)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset,
+  } = useForm<DonationFormType>()
 
   const onSubmit = async (data: DonationFormType) => {
-    const body: DonationFormType = {
-      requestDate: data.requestDate,
-      donationNeededBy: data.donationNeededBy,
-      organizationName: data.organizationName,
-      eventDate: {
-        start: data.eventDate.start,
-        end: data.eventDate.end,
-      },
-      eventType: data.eventType,
-      participants: data.participants,
-      eventPurpose: data.eventPurpose,
-      typeOfDonation: data.typeOfDonation,
-      donationValue: data.donationValue,
-      whyUs: data.whyUs,
-      contactName: data.contactName,
-      contactEmail: data.contactEmail,
-      contactPhone: data.contactPhone,
-      contactAddress: data.contactAddress,
-      contactCity: data.contactCity,
-      contactState: data.contactState,
-      contactZip: data.contactZip,
+    try {
+      setIsSubmitting(true)
+      setSubmitError(null)
+
+      const response = await fetch('/api/sendgridDonation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Failed to submit donation request')
+      }
+
+      setSubmitSuccess(true)
+      reset()
+    } catch (error) {
+      setSubmitError(
+        error instanceof Error ? error.message : 'An unexpected error occurred'
+      )
+    } finally {
+      setIsSubmitting(false)
     }
-    await fetch('/api/sendgridDonation', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body),
-    })
-      .then((res) => {
-        return res.json()
-      })
-      .then((data) => {
-        alert(data.message)
-      })
+  }
+
+  if (submitSuccess) {
+    return (
+      <div className={styles.successMessage}>
+        <Text as="h2" size="xl" weight="bold" style={{ marginBottom: '1rem' }}>
+          Donation Request Submitted!
+        </Text>
+        <Text as="p" size="lg">
+          Thank you for your donation request. We&apos;ll review it and get back to
+          you soon.
+        </Text>
+      </div>
+    )
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
-      <label className={styles.label}>
-        Request Date:
-        <input
+      <div className={styles.formGroup}>
+        <FormInput
           type="date"
+          label="Request Date"
           defaultValue={new Date().toISOString().substring(0, 10)}
-          {...register('requestDate')}
-          className={styles.dateInput}
+          {...register('requestDate', { required: 'Request date is required' })}
+          error={errors.requestDate?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Donation Needed By:
-        <input
+
+        <FormInput
           type="date"
+          label="Donation Needed By"
           defaultValue={new Date().toISOString().substring(0, 10)}
-          {...register('donationNeededBy')}
-          className={styles.dateInput}
+          {...register('donationNeededBy', { required: 'This field is required' })}
+          error={errors.donationNeededBy?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Organization/Event Name:
-        <input
-          type="text"
-          {...register('organizationName')}
-          placeholder={'Organization/Event Name'}
-          className={styles.textInput}
+
+        <FormInput
+          label="Organization/Event Name"
+          placeholder="Organization/Event Name"
+          {...register('organizationName', {
+            required: 'Organization name is required',
+          })}
+          error={errors.organizationName?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Date(s) of Event:
-        <input
-          type="date"
-          defaultValue={new Date().toISOString().substring(0, 10)}
-          {...register('eventDate.start')}
-          className={styles.dateInput}
-        />
-        <p> to </p>
-        <input
-          type="date"
-          defaultValue={new Date().toISOString().substring(0, 10)}
-          {...register('eventDate.end')}
-          className={styles.dateInput}
-        />
-      </label>
-      <label className={styles.label}>
-        Type of Event:
-        <select {...register('eventType')} className={styles.selectInput}>
-          <option className={styles.optionInput} value="School Support">
-            School Support
-          </option>
-          <option className={styles.optionInput} value="Non-Profit Support">
-            Non-Profit Support
-          </option>
-          <option className={styles.optionInput} value="Athletic Boosters">
-            Athletic Boosters
-          </option>
-          <option className={styles.optionInput} value="Military">
-            Military
-          </option>
-          <option className={styles.optionInput} value="Benefit">
-            Benefit
-          </option>
-          <option className={styles.optionInput} value="Sporting Event/Tournament">
-            Sporting Event/Tournament
-          </option>
-          <option className={styles.optionInput} value="Other">
-            Other
-          </option>
-        </select>
-      </label>
-      <label className={styles.label}>
-        Number of Participants:
-        <input
-          className={styles.numberInput}
+
+        <div className={styles.dateRangeWrapper}>
+          <Text size="sm" weight="medium" className={styles.labelText}>
+            Date(s) of Event
+          </Text>
+          <div className={styles.dateRange}>
+            <FormInput
+              type="date"
+              label="Start Date"
+              {...register('eventDate.start', {
+                required: 'Start date is required',
+              })}
+              error={errors.eventDate?.start?.message}
+            />
+            <FormInput
+              type="date"
+              label="End Date"
+              {...register('eventDate.end', { required: 'End date is required' })}
+              error={errors.eventDate?.end?.message}
+            />
+          </div>
+        </div>
+
+        <div className={styles.selectWrapper}>
+          <Text size="sm" weight="medium" className={styles.labelText}>
+            Type of Event
+          </Text>
+          <select
+            {...register('eventType', { required: 'Event type is required' })}
+            className={styles.select}
+          >
+            <option value="">Select event type</option>
+            <option value="School Support">School Support</option>
+            <option value="Non-Profit Support">Non-Profit Support</option>
+            <option value="Athletic Boosters">Athletic Boosters</option>
+            <option value="Military">Military</option>
+            <option value="Benefit">Benefit</option>
+            <option value="Sporting Event/Tournament">
+              Sporting Event/Tournament
+            </option>
+            <option value="Other">Other</option>
+          </select>
+          {errors.eventType && (
+            <Text
+              size="sm"
+              style={{ color: 'var(--color-error)' }}
+              className={styles.errorText}
+            >
+              {errors.eventType.message}
+            </Text>
+          )}
+        </div>
+
+        <FormInput
           type="number"
-          {...register('participants')}
-          placeholder={'0'}
-          min={0}
-          max={500}
+          label="Number of Participants"
+          placeholder="0"
+          {...register('participants', {
+            required: 'Number of participants is required',
+            min: { value: 1, message: 'Must be at least 1' },
+            max: { value: 500, message: 'Must not exceed 500' },
+          })}
+          error={errors.participants?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Purpose of Event:
-        <input
-          type="text"
-          {...register('eventPurpose')}
-          placeholder={'Purpose of Event'}
-          className={styles.textInput}
+      </div>
+
+      <div className={styles.formGroup}>
+        <FormInput
+          label="Purpose of Event"
+          type="textarea"
+          placeholder="Describe the purpose of your event"
+          {...register('eventPurpose', { required: 'Purpose is required' })}
+          error={errors.eventPurpose?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Type of Donation Requested:
-        <input
-          type="text"
-          {...register('typeOfDonation')}
-          placeholder={'Type of Donation Requested'}
-          className={styles.textInput}
+
+        <FormInput
+          label="Type of Donation Requested"
+          type="textarea"
+          placeholder="What type of donation are you requesting?"
+          {...register('typeOfDonation', { required: 'This field is required' })}
+          error={errors.typeOfDonation?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Value of Donation Requested:
-        <input
+
+        <FormInput
           type="number"
-          {...register('donationValue')}
-          placeholder={'0'}
-          min={0}
-          max={10000}
-          className={styles.numberInput}
+          label="Estimated Value of Donation"
+          placeholder="0"
+          {...register('donationValue', {
+            required: 'Donation value is required',
+            min: { value: 0, message: 'Must be 0 or greater' },
+          })}
+          error={errors.donationValue?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Why Last Chance?
-        <input
-          type="text"
-          {...register('whyUs')}
-          placeholder={'Why Last Chance?'}
-          className={styles.textInput}
+
+        <FormInput
+          label="Why Last Chance?"
+          type="textarea"
+          placeholder="Why did you choose Last Chance for your donation request?"
+          {...register('whyUs', { required: 'This field is required' })}
+          error={errors.whyUs?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Contact Name:
-        <input
-          type="text"
-          {...register('contactName')}
-          placeholder={'Contact Name'}
-          className={styles.textInput}
+      </div>
+
+      <div className={styles.formGroup}>
+        <Text as="h3" size="lg" weight="bold" className={styles.sectionTitle}>
+          Contact Information
+        </Text>
+
+        <FormInput
+          label="Contact Name"
+          placeholder="Full name"
+          {...register('contactName', { required: 'Contact name is required' })}
+          error={errors.contactName?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Contact Email:
-        <input
+
+        <FormInput
           type="email"
-          {...register('contactEmail')}
-          placeholder={'Contact Email'}
-          className={styles.textInput}
+          label="Contact Email"
+          placeholder="Email address"
+          {...register('contactEmail', {
+            required: 'Email is required',
+            pattern: {
+              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+              message: 'Invalid email address',
+            },
+          })}
+          error={errors.contactEmail?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Contact Phone:
-        <input
+
+        <FormInput
           type="tel"
-          {...register('contactPhone')}
-          placeholder={'Contact Phone'}
-          className={styles.telInput}
+          label="Contact Phone"
+          placeholder="Phone number"
+          {...register('contactPhone', { required: 'Phone number is required' })}
+          error={errors.contactPhone?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Contact Address:
-        <input
-          type="text"
-          {...register('contactAddress')}
-          placeholder={'Contact Address'}
-          className={styles.textInput}
+
+        <FormInput
+          label="Street Address"
+          placeholder="Street address"
+          {...register('contactAddress', { required: 'Address is required' })}
+          error={errors.contactAddress?.message}
         />
-      </label>
-      <label className={styles.label}>
-        Contact City:
-        <input
-          type="text"
-          {...register('contactCity')}
-          placeholder={'Contact City'}
-          className={styles.textInput}
-        />
-      </label>
-      <label className={styles.label}>
-        Contact State:
-        <input
-          type="text"
-          {...register('contactState')}
-          placeholder={'Contact State'}
-          className={styles.textInput}
-        />
-      </label>
-      <label className={styles.label}>
-        Contact Zip:
-        <input
-          type="text"
-          {...register('contactZip')}
-          placeholder={'Contact Zip'}
-          className={styles.textInput}
-        />
-      </label>
+
+        <div className={styles.addressGroup}>
+          <FormInput
+            label="City"
+            placeholder="City"
+            {...register('contactCity', { required: 'City is required' })}
+            error={errors.contactCity?.message}
+          />
+
+          <FormInput
+            label="State"
+            placeholder="State"
+            {...register('contactState', { required: 'State is required' })}
+            error={errors.contactState?.message}
+          />
+
+          <FormInput
+            label="ZIP Code"
+            placeholder="ZIP code"
+            {...register('contactZip', {
+              required: 'ZIP code is required',
+              pattern: {
+                value: /^\d{5}(-\d{4})?$/,
+                message: 'Invalid ZIP code',
+              },
+            })}
+            error={errors.contactZip?.message}
+          />
+        </div>
+      </div>
+
+      {submitError && (
+        <Text
+          size="sm"
+          style={{
+            color: 'var(--color-error)',
+            textAlign: 'center',
+            marginBottom: '1rem',
+          }}
+        >
+          {submitError}
+        </Text>
+      )}
+
       <div className={styles.submitWrapper}>
-        <input type="submit" className={styles.submitInput} value={'Submit'} />
+        <button
+          type="submit"
+          className={styles.submitButton}
+          disabled={isSubmitting}
+        >
+          {isSubmitting ? 'Submitting...' : 'Submit Donation Request'}
+        </button>
       </div>
     </form>
   )
 }
-
-export default DonationForm

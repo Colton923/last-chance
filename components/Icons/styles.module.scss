@@ -1,0 +1,24 @@
+@use 'styles/variables' as *;
+
+.icon {
+  transition: transform $transition-duration ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+
+  &--sm {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  &--md {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &--lg {
+    width: 4rem;
+    height: 4rem;
+  }
+}

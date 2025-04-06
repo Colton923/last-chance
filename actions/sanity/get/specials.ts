@@ -1,6 +1,6 @@
 'use server'
 
-import type { SanitySpecials } from 'actions/sanity'
+import type { SanitySpecials } from '../sanity.types'
 import client from 'lib/sanity/client'
 import { specials as SpecialsQuery } from 'lib/sanity/queries'
 
@@ -17,7 +17,9 @@ const days = [
 export async function specials(): Promise<SanitySpecials> {
   return await client
     .fetch(SpecialsQuery, undefined, {
-      cache: 'no-store',
+      next: {
+        revalidate: 60,
+      },
     })
     .then((specials) => {
       return specials.sort((a: any, b: any) => {

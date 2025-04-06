@@ -1,9 +1,16 @@
 import { MetadataRoute } from 'next'
 import { getMenuItemsWithoutLikes } from 'actions'
 import { MakeLink } from 'utils'
+import type { MenuItemsWithLikes } from 'actions/sanity'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const items = await getMenuItemsWithoutLikes()
+  let items: MenuItemsWithLikes = []
+  try {
+    items = await getMenuItemsWithoutLikes()
+  } catch (error) {
+    console.error('Error fetching menu items for sitemap:', error)
+    // Continue with empty items array if fetch fails
+  }
 
   const baseURL = 'https://lastchancepeoria.com'
   const baseSiteMap: MetadataRoute.Sitemap = [
@@ -50,19 +57,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     },
   ]
-  const siteMapItems: MetadataRoute.Sitemap = items
-    .map((group) => {
-      const link = `${baseURL}/menu/${MakeLink(group.title)}`
-      return group.menuItems.map((item) => {
-        return {
-          url: `${link}/${MakeLink(item.title)}`,
-          lastModified: new Date(),
-          changeFrequency: 'weekly',
-          priority: 0.8,
-        }
-      })
-    })
-    .flat() as MetadataRoute.Sitemap
+
+  // Only add menu items to sitemap if we successfully fetched them
+  const siteMapItems: MetadataRoute.Sitemap =
+    items.length > 0
+      ? (items
+          .map((group) => {
+            const link = `${baseURL}/menu/${MakeLink(group.title)}`
+            return group.menuItems.map((item) => {
+              return {
+                url: `${link}/${MakeLink(item.title)}`,
+                lastModified: new Date(),
+                changeFrequency: 'weekly',
+                priority: 0.8,
+              }
+            })
+          })
+          .flat() as MetadataRoute.Sitemap)
+      : []
 
   return [...baseSiteMap, ...siteMapItems]
 }

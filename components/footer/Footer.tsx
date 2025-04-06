@@ -1,11 +1,28 @@
 import styles from './Footer.module.scss'
-
 import Link from 'next/link'
 
-const Footer = (hours: any) => {
-  const kitchenHours = hours.hours.filter((hour: any) => hour.kitchen === true)[0]
-  const barHours = hours.hours.filter((hour: any) => hour.bar === true)[0]
+interface TimeRange {
+  open: string
+  close: string
+}
 
+interface Hours {
+  kitchen?: boolean
+  bar?: boolean
+  monday: TimeRange
+  tuesday: TimeRange
+  wednesday: TimeRange
+  thursday: TimeRange
+  friday: TimeRange
+  saturday: TimeRange
+  sunday: TimeRange
+}
+
+interface FooterProps {
+  hours: Hours
+}
+
+const Footer = ({ hours }: FooterProps) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.footer}>
@@ -13,7 +30,7 @@ const Footer = (hours: any) => {
           <h3 className={styles.footerTitle}>Contact</h3>
           <div className={styles.inline}>
             <span>
-              Visit us at:
+              <strong>Address:</strong>{' '}
               <Link
                 className={styles.link}
                 href="https://www.google.com/maps/place/Last+Chance+Bar+%26+Grill/@40.8111097,-89.6370073,17z/data=!4m14!1m7!3m6!1s0x880a4344ac8ed925:0x9c0856e3f18ba23f!2sLast+Chance+Bar+%26+Grill!8m2!3d40.8111097!4d-89.6348186!16s%2Fg%2F1w6r8w1y!3m5!1s0x880a4344ac8ed925:0x9c0856e3f18ba23f!8m2!3d40.8111097!4d-89.6348186!16s%2Fg%2F1w6r8w1y"
@@ -22,98 +39,113 @@ const Footer = (hours: any) => {
               </Link>
             </span>
             <span>
-              Email us at
+              <strong>Email:</strong>{' '}
               <Link
                 className={styles.link}
-                href="mailto:
-          lastchancebarandgrill@yahoo.com
-          "
+                href="mailto:lastchancebarandgrill@yahoo.com"
               >
                 lastchancebarandgrill@yahoo.com
               </Link>
             </span>
             <span>
-              Call us at
+              <strong>Phone:</strong>{' '}
               <Link className={styles.link} href="tel:309-243-5036">
                 309-243-5036
-              </Link>{' '}
+              </Link>
             </span>
             <span>
-              Follow us on our
+              <strong>Social:</strong>{' '}
               <Link
                 className={styles.link}
                 href="https://www.facebook.com/lastchance17"
               >
-                facebook
-              </Link>{' '}
-              page.
+                Facebook
+              </Link>
             </span>
           </div>
         </div>
         <div className={styles.footerItem}>
           <div className={styles.footerHours}>
-            {kitchenHours && (
+            {hours.kitchen && (
               <div className={styles.hours}>
-                <h3 className={styles.footerTitle}>Kitchen</h3>
+                <h3 className={styles.footerTitle}>Kitchen Hours</h3>
                 <span>
-                  Monday: {kitchenHours.monday?.open} - {kitchenHours.monday?.close}
+                  <strong>Mon-Tue:</strong> 11:00am - 9:00pm
                 </span>
                 <span>
-                  Tuesday: {kitchenHours.tuesday?.open} -{' '}
-                  {kitchenHours.tuesday?.close}
+                  <strong>Wed-Fri:</strong> 8:00am - 9:00pm
                 </span>
                 <span>
-                  Wednesday: {kitchenHours.wednesday?.open} -{' '}
-                  {kitchenHours.wednesday?.close}
-                </span>
-                <span>
-                  Thursday: {kitchenHours.thursday?.open} -{' '}
-                  {kitchenHours.thursday?.close}
-                </span>
-                <span>
-                  Friday: {kitchenHours.friday?.open} - {kitchenHours.friday?.close}
-                </span>
-                <span>
-                  Saturday: {kitchenHours.saturday?.open} -{' '}
-                  {kitchenHours.saturday?.close}
-                </span>
-                <span>
-                  Sunday: {kitchenHours.sunday?.open} - {kitchenHours.sunday?.close}
+                  <strong>Sat-Sun:</strong> 7:00am -{' '}
+                  {hours.sunday.close === '8:00pm' ? '8:00pm' : '9:00pm'}
                 </span>
               </div>
             )}
-            {barHours && (
+            {hours.bar && (
               <div className={styles.hours}>
-                <h3 className={styles.footerTitle}>Bar</h3>
+                <h3 className={styles.footerTitle}>Bar Hours</h3>
                 <span>
-                  Monday: {barHours.monday?.open} - {barHours.monday?.close}
+                  <strong>Mon-Tue:</strong> 11:00am - 9:00pm
                 </span>
                 <span>
-                  Tuesday: {barHours.tuesday?.open} - {barHours.tuesday?.close}
+                  <strong>Wed-Fri:</strong> 8:00am - 2:00am
                 </span>
                 <span>
-                  Wednesday: {barHours.wednesday?.open} - {barHours.wednesday?.close}
+                  <strong>Saturday:</strong> 7:00am - 2:00am
                 </span>
                 <span>
-                  Thursday: {barHours.thursday?.open} - {barHours.thursday?.close}
-                </span>
-                <span>
-                  Friday: {barHours.friday?.open} - {barHours.friday?.close}
-                </span>
-                <span>
-                  Saturday: {barHours.saturday?.open} - {barHours.saturday?.close}
-                </span>
-                <span>
-                  Sunday: {barHours.sunday?.open} - {barHours.sunday?.close}
+                  <strong>Sunday:</strong> 7:00am - 10:00pm
                 </span>
               </div>
             )}
+            <div className={styles.hours}>
+              <h3 className={styles.footerTitle}>Daily Hours</h3>
+              <div className={styles.hoursGrid}>
+                <div className={styles.hoursColumn}>
+                  <span>
+                    <strong>Monday:</strong> {hours.monday.open} -{' '}
+                    {hours.monday.close}
+                  </span>
+                  <span>
+                    <strong>Tuesday:</strong> {hours.tuesday.open} -{' '}
+                    {hours.tuesday.close}
+                  </span>
+                  <span>
+                    <strong>Wednesday:</strong> {hours.wednesday.open} -{' '}
+                    {hours.wednesday.close}
+                  </span>
+                  <span>
+                    <strong>Thursday:</strong> {hours.thursday.open} -{' '}
+                    {hours.thursday.close}
+                  </span>
+                </div>
+                <div className={styles.hoursColumn}>
+                  <span>
+                    <strong>Friday:</strong> {hours.friday.open} -{' '}
+                    {hours.friday.close}
+                  </span>
+                  <span>
+                    <strong>Saturday:</strong> {hours.saturday.open} -{' '}
+                    {hours.saturday.close}
+                  </span>
+                  <span>
+                    <strong>Sunday:</strong> {hours.sunday.open} -{' '}
+                    {hours.sunday.close}
+                  </span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <Link href={'/privacyPolicy'} className={styles.link}>
-        Privacy Policy
-      </Link>
+      <div className={styles.footerBottom}>
+        <Link href={'/privacyPolicy'} className={styles.link}>
+          Privacy Policy
+        </Link>
+        <span className={styles.copyright}>
+          © {new Date().getFullYear()} Last Chance Bar & Grill. All rights reserved.
+        </span>
+      </div>
     </div>
   )
 }

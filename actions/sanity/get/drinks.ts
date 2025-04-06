@@ -2,10 +2,12 @@
 
 import client from 'lib/sanity/client'
 import { drinks as DrinksQuery } from 'lib/sanity/queries'
-import type { Drinks } from 'actions/sanity'
+import type { Drinks } from '../sanity.types'
 
 export async function drinks(): Promise<Drinks> {
   return await client.fetch(DrinksQuery, undefined, {
-    cache: 'no-store',
+    next: {
+      revalidate: 60,
+    },
   })
 }

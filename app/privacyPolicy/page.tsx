@@ -1,52 +1,71 @@
 import Link from 'next/link'
-import styles from 'styles/App.module.scss'
+import styles from '../main.module.scss'
+import { Text } from 'components/Text'
+import { PageLayout } from 'components/PageLayout'
 
 export default function PrivacyPolicy() {
   return (
-    <div className={styles.wrapper}>
-      <h2 className={styles.header}>Privacy Policy</h2>
-      <p>
-        Your privacy is important to us. It is Last Chances policy to respect your
-        privacy regarding any information we may collect from you across our website,{' '}
-        <Link href="https://lastchancepoeria.com" target="_blank">
-          https://lastchancepoeria.com
-        </Link>
-        , and other sites we own and operate.
-      </p>
-      <p>
-        We only ask for personal information when we truly need it to provide a
-        service to you. We collect it by fair and lawful means, with your knowledge
-        and consent. We also let you know why we’re collecting it and how it will be
-        used.
-      </p>
-      <p>
-        We only retain collected information for as long as necessary to provide you
-        with your requested service. What data we store, we’ll protect within
-        commercially acceptable means to prevent loss and theft, as well as
-        unauthorised access, disclosure, copying, use or modification.
-      </p>
-      <p>
-        We dont share any personally identifying information publicly or with
-        third-parties, except when required to by law.
-      </p>
-      <p>
-        Our website may link to external sites that are not operated by us. Please be
-        aware that we have no control over the content and practices of these sites,
-        and cannot accept responsibility or liability for their respective privacy
-        policies.
-      </p>
-      <p>
-        You are free to refuse our request for your personal information, with the
-        understanding that we may be unable to provide you with some of your desired
-        services.
-      </p>
-      <p>
-        Your continued use of our website will be regarded as acceptance of our
-        practices around privacy and personal information. If you have any questions
-        about how we handle user data and personal information, feel free to contact
-        us.
-      </p>
-      <p>This policy is effective as of 19 April 2023.</p>
-    </div>
+    <PageLayout title="Privacy Policy" containerSize="lg">
+      <div className={styles.privacyPolicy}>
+        <Text as="p">
+          We take your privacy seriously. This policy outlines how we collect and use
+          data across our website.{' '}
+          <Link href="mailto:privacy@lastchancepeoria.com">
+            privacy@lastchancepeoria.com
+          </Link>
+        </Text>
+
+        <Text as="h2">Information We Collect</Text>
+        <Text as="p">
+          We collect information that you voluntarily provide to us when you:
+        </Text>
+        <ul>
+          <li>Submit a job application</li>
+          <li>Make a donation request</li>
+          <li>Interact with our menu items</li>
+          <li>Contact us through our website</li>
+        </ul>
+
+        <Text as="h2">How We Use Your Information</Text>
+        <Text as="p">We use the information we collect to:</Text>
+        <ul>
+          <li>Process and respond to your requests</li>
+          <li>Improve our website and services</li>
+          <li>Communicate with you about your interactions</li>
+          <li>Analyze how our website is used</li>
+        </ul>
+
+        <Text as="h2">Information Security</Text>
+        <Text as="p">
+          We implement appropriate security measures to protect your personal
+          information. However, no internet transmission is 100% secure.
+        </Text>
+
+        <Text as="h2">Third-Party Services</Text>
+        <Text as="p">We use third-party services for:</Text>
+        <ul>
+          <li>Email communication (SendGrid)</li>
+          <li>Content management (Sanity)</li>
+          <li>Analytics (Google Analytics)</li>
+        </ul>
+
+        <Text as="h2">Your Rights</Text>
+        <Text as="p">You have the right to:</Text>
+        <ul>
+          <li>Access your personal information</li>
+          <li>Request correction of your data</li>
+          <li>Request deletion of your data</li>
+          <li>Opt-out of communications</li>
+        </ul>
+
+        <Text as="h2">Contact Us</Text>
+        <Text as="p">
+          If you have questions about this privacy policy, please contact us at{' '}
+          <Link href="mailto:privacy@lastchancepeoria.com">
+            privacy@lastchancepeoria.com
+          </Link>
+        </Text>
+      </div>
+    </PageLayout>
   )
 }

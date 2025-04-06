@@ -1,0 +1,53 @@
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.labelText {
+  color: var(--color-text);
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: var(--color-text);
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  &.error {
+    border-color: var(--color-error);
+    background-color: rgba(var(--color-error-rgb), 0.1);
+
+    &:focus {
+      border-color: var(--color-error);
+    }
+  }
+}
+
+textarea.input {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.errorText {
+  margin-top: -0.25rem;
+}

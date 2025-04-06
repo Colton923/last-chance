@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import styles from '../Menu.module.scss'
+import styles from '../../app/main.module.scss'
 
 const ScrollToTop = () => {
   const [isVisible, setIsVisible] = useState(false)

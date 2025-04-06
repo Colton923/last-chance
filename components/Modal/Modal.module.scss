@@ -1,0 +1,86 @@
+@import '../../styles/variables';
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: $z-index-modal;
+  overflow: hidden;
+  width: 100vw;
+  height: 100vh;
+  padding: $spacing-sm;
+
+  @media (min-width: $breakpoint-sm) {
+    padding: $spacing-md;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  max-width: $breakpoint-xl;
+  max-height: 90vh;
+  overflow: hidden;
+  background-color: transparent;
+  border-radius: $border-radius-md;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+
+  @media (min-width: $breakpoint-sm) {
+    width: 95%;
+    border-radius: $border-radius-lg;
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+}
+
+.closeButton {
+  position: fixed;
+  top: $spacing-md;
+  right: $spacing-md;
+  width: 2rem;
+  height: 2rem;
+  border-radius: $border-radius-full;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-duration $transition-timing;
+  z-index: calc($z-index-modal + 10);
+
+  @media (min-width: $breakpoint-sm) {
+    top: $spacing-lg;
+    right: $spacing-lg;
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    color: $text-color;
+
+    @media (min-width: $breakpoint-sm) {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+}

@@ -1,31 +1,13 @@
-import styles from './Donation.module.scss'
-import DonationForm from 'components/Forms/donationForm/DonationForm'
-import Image from 'next/image'
-import bar from 'public/images/bar.webp'
+import { FormPage } from '../../components/FormPage'
+import { DonationForm } from '../../components/Forms/donationForm/DonationForm'
 
-export default function Page() {
+export default function Donation() {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.backgroundImageWrapper}>
-        <Image
-          src={bar}
-          alt="bar"
-          className={styles.backgroundImage}
-          width={3840}
-          height={2372}
-        />
-      </div>
-      <div className={styles.donationWrapper}>
-        <h2 className={styles.header}>Donation Request Form</h2>
-        <h3 className={styles.formInstructions}>
-          Please print neatly. Submission of this form does not guarantee a donation.
-          Last Chance management will review your request and contact you with their
-          decision. All requests must be submitted at least 2 weeks in advance.
-        </h3>
-        <div className={styles.formWrapper}>
-          <DonationForm />
-        </div>
-      </div>
-    </div>
+    <FormPage
+      title="Donation Request Form"
+      description="Please fill out the form below to submit a donation request. We will review your request and get back to you within 5-7 business days."
+    >
+      <DonationForm />
+    </FormPage>
   )
 }

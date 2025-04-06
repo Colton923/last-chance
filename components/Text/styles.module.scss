@@ -1,0 +1,85 @@
+@use 'styles/variables' as *;
+
+.text {
+  margin: 0;
+  font-family: $font-family-base;
+
+  // Sizes
+  &--xs {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+
+  &--sm {
+    font-size: $font-size-sm;
+    line-height: 1.25rem;
+  }
+
+  &--base {
+    font-size: $font-size-base;
+    line-height: 1.5rem;
+  }
+
+  &--lg {
+    font-size: $font-size-lg;
+    line-height: 1.75rem;
+  }
+
+  &--xl {
+    font-size: $font-size-xl;
+    line-height: 2rem;
+  }
+
+  &--2xl {
+    font-size: $font-size-2xl;
+    line-height: 2.5rem;
+  }
+
+  &--3xl {
+    font-size: $font-size-3xl;
+    line-height: 3rem;
+  }
+
+  // Weights
+  &--normal {
+    font-weight: 400;
+  }
+
+  &--medium {
+    font-weight: 500;
+  }
+
+  &--semibold {
+    font-weight: 600;
+  }
+
+  &--bold {
+    font-weight: 700;
+  }
+
+  // Colors
+  &--default {
+    color: $text-color;
+  }
+
+  &--muted {
+    color: $text-color-muted;
+  }
+
+  &--accent {
+    color: $accent-color;
+  }
+
+  // Alignment
+  &--left {
+    text-align: left;
+  }
+
+  &--center {
+    text-align: center;
+  }
+
+  &--right {
+    text-align: right;
+  }
+}

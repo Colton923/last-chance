@@ -1,6 +1,5 @@
-export const menuItem = (
-  title: string
-) => `*[_type == "menuItems" && title == "${title}"] {
+export const menuItem = (id: string) => `*[_type == "menuItems" && _id == "${id}"] {
+  _id,
   title,
   description,
   price,

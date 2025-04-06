@@ -1,24 +1,13 @@
-import styles from './Apply.module.scss'
-import ApplicationForm from 'components/Forms/applicationForm/ApplicationForm'
-import Image from 'next/image'
-import bar from 'public/images/bar.webp'
+import { FormPage } from '../../components/FormPage'
+import ApplicationForm from '../../components/Forms/applicationForm/ApplicationForm'
 
-export default function Page() {
+export default function Apply() {
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.backgroundImageWrapper}>
-        <Image
-          src={bar}
-          alt="bar"
-          className={styles.backgroundImage}
-          width={3840}
-          height={2372}
-        />
-      </div>
-      <div className={styles.applicationFormWrapper}>
-        <h2 className={styles.header}>Application</h2>
-        <ApplicationForm />
-      </div>
-    </div>
+    <FormPage
+      title="Join Our Team"
+      description="We're always looking for talented individuals to join our team. Fill out the application below and we'll get back to you soon!"
+    >
+      <ApplicationForm />
+    </FormPage>
   )
 }

@@ -2,10 +2,12 @@
 
 import client from 'lib/sanity/client'
 import { menuPDF as MenuPDFQuery } from 'lib/sanity/queries/menuPDF'
-import type { PDF } from 'actions/sanity'
+import type { PDF } from '../sanity.types'
 
 export async function menuPDF(): Promise<PDF> {
   return await client.fetch(MenuPDFQuery, undefined, {
-    cache: 'no-store',
+    next: {
+      revalidate: 60,
+    },
   })
 }

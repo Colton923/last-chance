@@ -1,9 +1,13 @@
-export const menuGroups = `*[_type == "menuGroups"] {
+export const menuGroups = `*[_type == "menuGroups"] | order(order asc) {
+  _id,
   title,
-  "menuItems": *[_type == "menuItems" && menuGroup._ref == ^._id] {
+  order,
+  "menuItems": *[_type == "menuItems" && references(^._id)] | order(order asc) {
+    _id,
     title,
     description,
     price,
     image,
+    order
   }
 }`

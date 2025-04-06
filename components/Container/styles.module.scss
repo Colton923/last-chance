@@ -1,0 +1,30 @@
+@use 'styles/variables' as *;
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $spacing-md;
+  padding-right: $spacing-md;
+
+  &--sm {
+    max-width: $breakpoint-sm;
+  }
+
+  &--md {
+    max-width: $breakpoint-md;
+  }
+
+  &--lg {
+    max-width: $breakpoint-lg;
+  }
+
+  &--xl {
+    max-width: $breakpoint-xl;
+  }
+
+  &--no-padding {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}

@@ -1,0 +1,61 @@
+@use 'styles/variables' as *;
+
+.card {
+  border-radius: $border-radius-lg;
+  background-color: $secondary-color;
+  transition: all $transition-duration $transition-timing;
+
+  // Variants
+  &--default {
+    border: none;
+  }
+
+  &--outlined {
+    border: 2px solid rgba($text-color, 0.1);
+  }
+
+  &--elevated {
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    &:hover {
+      box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  // Padding
+  &--padding-none {
+    padding: 0;
+  }
+
+  &--padding-sm {
+    padding: $spacing-sm;
+  }
+
+  &--padding-md {
+    padding: $spacing-md;
+  }
+
+  &--padding-lg {
+    padding: $spacing-lg;
+  }
+
+  // Interactive
+  &--interactive {
+    cursor: pointer;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    &--padding-lg {
+      padding: $spacing-md;
+    }
+  }
+}

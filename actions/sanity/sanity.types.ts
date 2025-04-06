@@ -48,24 +48,23 @@ export type SanityReference = {
   _type: string
 }
 
-export type Group = {
+export type Item = {
+  _id: string
   title: string
-  menuItems: Item[]
-  link?: string
-  initialState: boolean
+  description?: string
+  price: string
+  image?: any
+  likes?: number
 }
 
-export type Item = {
+export type Group = {
+  _id: string
   title: string
-  description: string
-  image: string
-  price: string
-  index: number
-  likes: number
-  link?: string
+  menuItems: Item[]
 }
 
 export type MenuItemsWithLikes = {
+  _id: string
   menuItems: Item[]
   title: string
 }[]
