@@ -18,7 +18,7 @@ import slots from 'public/images/slots.webp'
 const Hero = memo(() => (
   <div className={styles.hero}>
     <Image
-      src={niceOutsidePhoto}
+      src={niceOutsidePhoto.src}
       alt="Last Chance Bar & Grill"
       fill
       priority
