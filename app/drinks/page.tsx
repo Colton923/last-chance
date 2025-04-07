@@ -21,7 +21,6 @@ interface DrinkGroup {
 
 export default async function Drinks() {
   const drinkGroups = await drinks()
-
   return (
     <PageLayout
       title="Drinks Menu"
@@ -37,7 +36,7 @@ export default async function Drinks() {
             <div className={styles.items}>
               {drinkGroup.drinkItems.map((item: DrinkItem, itemIndex: number) => (
                 <div
-                  className={styles.menuItem}
+                  className={`${styles.menuItem} ${styles.visible}`}
                   key={`drink-item-${groupIndex}-${itemIndex}`}
                 >
                   {item.image && (

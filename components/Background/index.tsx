@@ -8,7 +8,7 @@ export const Background = () => {
   return (
     <div className={styles.backgroundWrapper}>
       <Image
-        src={barImage.src}
+        src={barImage}
         alt=""
         className={styles.backgroundImage}
         placeholder="blur"

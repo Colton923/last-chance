@@ -12,13 +12,13 @@ import { Container } from '../components/Container'
 import niceOutsidePhoto from '../public/images/outside_photo.jpg'
 import taps from '../public/images/taps.jpg'
 import sunday2 from '../public/images/sunday.jpg'
-import slots from '../public/images/slots.jpg'
+import slots from '../public/images/slots.jpeg'
 
 // Hero Section Component
 const Hero = memo(() => (
   <div className={styles.hero}>
     <Image
-      src={niceOutsidePhoto.src}
+      src={niceOutsidePhoto}
       alt="Last Chance Bar & Grill"
       fill
       priority

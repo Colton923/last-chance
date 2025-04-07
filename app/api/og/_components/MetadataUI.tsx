@@ -17,7 +17,6 @@ const MetadataUI = ({
   description,
 }: Props) => {
   const basePath = 'http://lastchancepeoria.com'
-  console.log('imageURL', imageURL)
   return (
     <div className={styles.flexRoot} style={{ display: 'flex' }}>
       <div className={styles.imageFlexbox} style={{ display: 'flex' }}>
