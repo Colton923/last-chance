@@ -5,6 +5,7 @@ import { PageLayout } from '../../components/PageLayout'
 import styles from '../main.module.scss'
 import urlFor from '../../lib/sanity/urlFor'
 import Image from 'next/image'
+import { Metadata } from 'next'
 
 interface DrinkItem {
   title: string
@@ -17,6 +18,36 @@ interface DrinkItem {
 interface DrinkGroup {
   title: string
   drinkItems: DrinkItem[]
+}
+
+export const metadata: Metadata = {
+  title: 'Drinks Menu | Last Chance Bar & Grill',
+  description:
+    "Explore our extensive drinks menu featuring craft beers, cocktails, and spirits. From ice-cold drafts to perfectly mixed cocktails, we've got your thirst covered.",
+  openGraph: {
+    title: 'Drinks Menu | Last Chance Bar & Grill',
+    description:
+      "Explore our extensive drinks menu featuring craft beers, cocktails, and spirits. From ice-cold drafts to perfectly mixed cocktails, we've got your thirst covered.",
+    url: 'https://lastchancepeoria.com/drinks',
+    siteName: 'Last Chance Bar & Grill',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: '/images/taps.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Last Chance Bar & Grill Drinks Menu',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Drinks Menu | Last Chance Bar & Grill',
+    description:
+      "Explore our extensive drinks menu featuring craft beers, cocktails, and spirits. From ice-cold drafts to perfectly mixed cocktails, we've got your thirst covered.",
+    images: ['/images/taps.jpg'],
+  },
 }
 
 export default async function Drinks() {

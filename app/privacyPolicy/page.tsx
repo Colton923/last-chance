@@ -2,6 +2,28 @@ import Link from 'next/link'
 import styles from '../main.module.scss'
 import { Text } from 'components/Text'
 import { PageLayout } from 'components/PageLayout'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | Last Chance Bar & Grill',
+  description:
+    'Learn about how Last Chance Bar & Grill collects, uses, and protects your personal information. Read our privacy policy for full details.',
+  openGraph: {
+    title: 'Privacy Policy | Last Chance Bar & Grill',
+    description:
+      'Learn about how Last Chance Bar & Grill collects, uses, and protects your personal information. Read our privacy policy for full details.',
+    url: 'https://lastchancepeoria.com/privacyPolicy',
+    siteName: 'Last Chance Bar & Grill',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Privacy Policy | Last Chance Bar & Grill',
+    description:
+      'Learn about how Last Chance Bar & Grill collects, uses, and protects your personal information. Read our privacy policy for full details.',
+  },
+}
 
 export default function PrivacyPolicy() {
   return (

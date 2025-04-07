@@ -6,6 +6,7 @@ import { MenuPDFButton } from '../../components/Buttons'
 import MenuItem from '../../components/Menu/MenuItem'
 import styles from '../main.module.scss'
 import Link from 'next/link'
+import { Metadata } from 'next'
 
 interface MenuItem {
   _id: string
@@ -21,6 +22,36 @@ interface MenuGroup {
   title: string
   menuItems: MenuItem[] | null
   order?: number
+}
+
+export const metadata: Metadata = {
+  title: 'Menu | Last Chance Bar & Grill',
+  description:
+    'Explore our delicious menu featuring breakfast all day, homestyle cooking, burgers, sandwiches, and more. From appetizers to desserts, we have something for everyone.',
+  openGraph: {
+    title: 'Menu | Last Chance Bar & Grill',
+    description:
+      'Explore our delicious menu featuring breakfast all day, homestyle cooking, burgers, sandwiches, and more. From appetizers to desserts, we have something for everyone.',
+    url: 'https://lastchancepeoria.com/menu',
+    siteName: 'Last Chance Bar & Grill',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: '/images/sunday.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Last Chance Bar & Grill Food Menu',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Menu | Last Chance Bar & Grill',
+    description:
+      'Explore our delicious menu featuring breakfast all day, homestyle cooking, burgers, sandwiches, and more. From appetizers to desserts, we have something for everyone.',
+    images: ['/images/sunday.jpg'],
+  },
 }
 
 export default async function Menu() {

@@ -13,17 +13,13 @@ import Image from 'next/image'
 
 async function fetchMenuItem(id: string): Promise<Item> {
   try {
-    
-
     const url = `/api/menu/item?id=${encodeURIComponent(id)}`
-    
 
     const response = await fetch(url)
-    
 
     if (!response.ok) {
       const errorText = await response.text()
-      
+      console.error('Error response:', {
         status: response.status,
         statusText: response.statusText,
         body: errorText,
@@ -34,10 +30,10 @@ async function fetchMenuItem(id: string): Promise<Item> {
     }
 
     const data = await response.json()
-    
+
     return data
   } catch (error) {
-    
+    console.error('fetchMenuItem error details:', {
       error,
       errorMessage: error instanceof Error ? error.message : 'Unknown error',
       errorStack: error instanceof Error ? error.stack : undefined,
@@ -48,17 +44,13 @@ async function fetchMenuItem(id: string): Promise<Item> {
 
 async function fetchLikes(title: string): Promise<number> {
   try {
-    
-
     const url = `/api/menu/likes?title=${encodeURIComponent(title)}`
-    
 
     const response = await fetch(url)
-    
 
     if (!response.ok) {
       const errorText = await response.text()
-      
+      console.error('Error response for likes:', {
         status: response.status,
         statusText: response.statusText,
         body: errorText,
@@ -69,10 +61,10 @@ async function fetchLikes(title: string): Promise<number> {
     }
 
     const data = await response.json()
-    
+
     return data.likes || 0
   } catch (error) {
-    
+    console.error('fetchLikes error details:', {
       error,
       errorMessage: error instanceof Error ? error.message : 'Unknown error',
       errorStack: error instanceof Error ? error.stack : undefined,
@@ -101,11 +93,9 @@ export default function MenuItemModal({
 
       // First fetch the menu item to get its title
       const menuItem = await fetchMenuItem(params.itemTitle)
-      
 
       // Then fetch likes using the title
       const menuLikes = await fetchLikes(menuItem.title)
-      
 
       setMenuData({
         menuItem,
@@ -120,7 +110,7 @@ export default function MenuItemModal({
           itemTitle: params.itemTitle,
         },
       }
-      
+      console.error('Error in fetchData:', errorDetails)
       setError(error instanceof Error ? error.message : 'Failed to load menu item')
       setTimeout(() => router.back(), 2000)
     } finally {

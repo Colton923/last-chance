@@ -1,5 +1,3 @@
-'use client'
-
 import { memo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -7,12 +5,43 @@ import styles from './main.module.scss'
 import { PageLayout } from '../components/PageLayout'
 import { Text } from '../components/Text'
 import { Container } from '../components/Container'
+import { Metadata } from 'next'
 
 // Assets
 import niceOutsidePhoto from '../public/images/outside_photo.jpg'
 import taps from '../public/images/taps.jpg'
 import sunday2 from '../public/images/sunday.jpg'
 import slots from '../public/images/slots.jpeg'
+
+export const metadata: Metadata = {
+  title: 'Last Chance Bar & Grill | Peoria, IL',
+  description:
+    'Welcome to Last Chance Bar & Grill in Peoria, IL. Enjoy great food, cold drinks, and good times in a welcoming atmosphere. Join us for breakfast, lunch, dinner, or just drinks!',
+  openGraph: {
+    title: 'Last Chance Bar & Grill | Peoria, IL',
+    description:
+      'Welcome to Last Chance Bar & Grill in Peoria, IL. Enjoy great food, cold drinks, and good times in a welcoming atmosphere. Join us for breakfast, lunch, dinner, or just drinks!',
+    url: 'https://lastchancepeoria.com',
+    siteName: 'Last Chance Bar & Grill',
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: '/images/outside_photo.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Last Chance Bar & Grill Exterior',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Last Chance Bar & Grill | Peoria, IL',
+    description:
+      'Welcome to Last Chance Bar & Grill in Peoria, IL. Enjoy great food, cold drinks, and good times in a welcoming atmosphere. Join us for breakfast, lunch, dinner, or just drinks!',
+    images: ['/images/outside_photo.jpg'],
+  },
+}
 
 // Hero Section Component
 const Hero = memo(() => (
