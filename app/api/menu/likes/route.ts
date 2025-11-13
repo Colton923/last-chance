@@ -18,7 +18,9 @@ export async function GET(request: Request) {
     // likesMap is a Map, so we use get() to retrieve values
     return NextResponse.json({ likes: likesMap.get(title) || 0 })
   } catch (error) {
-    console.error('Error fetching likes:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching likes:', error)
+    }
     return NextResponse.json({ error: 'Failed to fetch likes' }, { status: 500 })
   }
 }

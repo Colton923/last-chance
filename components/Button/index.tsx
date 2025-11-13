@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react'
+import clsx from 'clsx'
 import styles from './styles.module.scss'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -28,14 +29,14 @@ export const Button = ({
 }: ButtonProps) => {
   return (
     <button
-      className={`
-        ${styles.button}
-        ${styles[`button--${variant}`]}
-        ${styles[`button--${size}`]}
-        ${fullWidth ? styles['button--full-width'] : ''}
-        ${isLoading ? styles['button--loading'] : ''}
-        ${className || ''}
-      `}
+      className={clsx(
+        styles.button,
+        styles[`button--${variant}`],
+        styles[`button--${size}`],
+        fullWidth && styles['button--full-width'],
+        isLoading && styles['button--loading'],
+        className
+      )}
       disabled={disabled || isLoading}
       {...props}
     >

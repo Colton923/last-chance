@@ -1,4 +1,5 @@
 import { HTMLAttributes, ReactNode } from 'react'
+import clsx from 'clsx'
 import styles from './styles.module.scss'
 
 interface TextProps extends HTMLAttributes<HTMLElement> {
@@ -30,14 +31,14 @@ export const Text = ({
 }: TextProps) => {
   return (
     <Component
-      className={`
-        ${styles.text}
-        ${styles[`text--${size}`]}
-        ${styles[`text--${weight}`]}
-        ${styles[`text--${color}`]}
-        ${styles[`text--${align}`]}
-        ${className || ''}
-      `}
+      className={clsx(
+        styles.text,
+        styles[`text--${size}`],
+        styles[`text--${weight}`],
+        styles[`text--${color}`],
+        styles[`text--${align}`],
+        className
+      )}
       {...props}
     >
       {children}

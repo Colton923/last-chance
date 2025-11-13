@@ -16,7 +16,9 @@ export async function GET(request: Request) {
     }
     return NextResponse.json(menuItem)
   } catch (error) {
-    console.error('Error fetching menu item:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching menu item:', error)
+    }
     return NextResponse.json({ error: 'Failed to fetch menu item' }, { status: 500 })
   }
 }

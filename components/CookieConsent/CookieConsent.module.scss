@@ -1,0 +1,93 @@
+@use 'styles/variables' as *;
+
+.cookieConsent {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  background: rgba(26, 27, 33, 0.98);
+  backdrop-filter: blur(10px);
+  border-top: 2px solid rgba($accent-color, 0.3);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  animation: slideUp 0.4s ease-out;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $spacing-md;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.content {
+  max-width: $breakpoint-xl;
+  margin: 0 auto;
+  padding: $spacing-lg $spacing-xl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $spacing-lg;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: $spacing-md;
+  }
+}
+
+.message {
+  flex: 1;
+  margin: 0;
+  color: $text-color;
+  line-height: $line-height-relaxed;
+}
+
+.link {
+  color: $accent-color;
+  text-decoration: underline;
+  transition: color $transition-duration $transition-timing;
+
+  &:hover {
+    color: lighten($accent-color, 10%);
+  }
+}
+
+.actions {
+  display: flex;
+  gap: $spacing-md;
+  flex-shrink: 0;
+
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+    flex-direction: column;
+  }
+}
+
+.acceptButton,
+.declineButton {
+  min-width: 120px;
+
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+  }
+}
+
+.declineButton {
+  border-color: $text-color-muted;
+  color: $text-color-muted;
+
+  &:hover {
+    border-color: $text-color;
+    color: $text-color;
+  }
+}
+

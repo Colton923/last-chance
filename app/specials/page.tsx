@@ -47,19 +47,21 @@ export default async function Specials() {
   return (
     <PageLayout
       title="Daily Specials"
+      description="Check out our current food and drink specials"
       containerSize="lg"
-      contentClassName={styles.specialsWrapper}
     >
-      {specialsList.map((special) => (
-        <div key={special._id} className={styles.itemWrapper}>
-          <Text as="h3" className={styles.itemName}>
-            {special.title}
-          </Text>
-          <Text as="p" className={styles.itemDescription}>
-            {special.description}
-          </Text>
-        </div>
-      ))}
+      <div className={styles.specialsGrid}>
+        {specialsList.map((special) => (
+          <div key={special._id} className={styles.specialCard}>
+            <Text as="h3" size="xl" weight="bold" className={styles.specialTitle}>
+              {special.title}
+            </Text>
+            <Text as="p" size="base" className={styles.specialDescription}>
+              {special.description}
+            </Text>
+          </div>
+        ))}
+      </div>
     </PageLayout>
   )
 }

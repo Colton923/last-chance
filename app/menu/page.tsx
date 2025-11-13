@@ -1,11 +1,8 @@
-import { FixTitle } from '../../utils/FixTitle'
 import { menu, menuPDF } from '../../actions/sanity'
-import { Text } from '../../components/Text'
 import { PageLayout } from '../../components/PageLayout'
 import { MenuPDFButton } from '../../components/Buttons'
-import MenuItem from '../../components/Menu/MenuItem'
+import MenuGroup from '../../components/Menu/MenuGroup'
 import styles from '../main.module.scss'
-import Link from 'next/link'
 import { Metadata } from 'next'
 
 interface MenuItem {
@@ -66,27 +63,13 @@ export default async function Menu() {
     >
       <div className={styles.menuContent}>
         <MenuPDFButton pdf={menuDownload[0].menuPDF} />
-        {menuItems.map((menuGroup: MenuGroup, groupIndex: number) => (
-          <div className={styles.group} key={`menu-group-${groupIndex}`}>
-            <Text as="h2" className={styles.groupName}>
-              {FixTitle(menuGroup.title)}
-            </Text>
-            <div className={styles.items}>
-              {menuGroup.menuItems?.map((item: MenuItem, itemIndex: number) => (
-                <Link
-                  key={`menu-item-${groupIndex}-${itemIndex}`}
-                  href={`/menu/${item._id}`}
-                >
-                  <MenuItem
-                    title={item.title}
-                    price={item.price}
-                    description={item.description}
-                    image={item.image}
-                  />
-                </Link>
-              ))}
-            </div>
-          </div>
+        {menuItems.map((menuGroup: any, groupIndex: number) => (
+          <MenuGroup
+            key={`menu-group-${groupIndex}`}
+            title={menuGroup.title}
+            menuItems={menuGroup.menuItems || []}
+            _id={menuGroup._id}
+          />
         ))}
       </div>
     </PageLayout>

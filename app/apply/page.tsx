@@ -1,4 +1,4 @@
-import { FormPage } from '../../components/FormPage'
+import { PageLayout } from '../../components/PageLayout'
 import ApplicationForm from '../../components/Forms/applicationForm/ApplicationForm'
 import { Metadata } from 'next'
 
@@ -34,11 +34,11 @@ export const metadata: Metadata = {
 
 export default function Apply() {
   return (
-    <FormPage
+    <PageLayout
       title="Join Our Team"
       description="We're always looking for talented individuals to join our team. Fill out the application below and we'll get back to you soon!"
     >
       <ApplicationForm />
-    </FormPage>
+    </PageLayout>
   )
 }

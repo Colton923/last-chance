@@ -8,7 +8,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   try {
     items = await getMenuItemsWithoutLikes()
   } catch (error) {
-    console.error('Error fetching menu items for sitemap:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching menu items for sitemap:', error)
+    }
     // Continue with empty items array if fetch fails
   }
 
@@ -19,6 +21,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'yearly',
       priority: 1,
+    },
+    {
+      url: `${baseURL}/about`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.9,
     },
     {
       url: `${baseURL}/menu`,
@@ -37,6 +45,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.6,
+    },
+    {
+      url: `${baseURL}/faq`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.7,
     },
     {
       url: `${baseURL}/privacyPolicy`,

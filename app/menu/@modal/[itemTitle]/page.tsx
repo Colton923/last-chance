@@ -102,15 +102,17 @@ export default function MenuItemModal({
         likes: menuLikes,
       })
     } catch (error) {
-      const errorDetails = {
-        error,
-        message: error instanceof Error ? error.message : 'Unknown error',
-        stack: error instanceof Error ? error.stack : undefined,
-        params: {
-          itemTitle: params.itemTitle,
-        },
+      if (process.env.NODE_ENV === 'development') {
+        const errorDetails = {
+          error,
+          message: error instanceof Error ? error.message : 'Unknown error',
+          stack: error instanceof Error ? error.stack : undefined,
+          params: {
+            itemTitle: params.itemTitle,
+          },
+        }
+        console.error('Error in fetchData:', errorDetails)
       }
-      console.error('Error in fetchData:', errorDetails)
       setError(error instanceof Error ? error.message : 'Failed to load menu item')
       setTimeout(() => router.back(), 2000)
     } finally {
@@ -134,19 +136,21 @@ export default function MenuItemModal({
           <div className={styles.error}>{error}</div>
         ) : menuData?.menuItem ? (
           <div className={styles.modalMenuItem}>
-            <div className={styles.imageWrapper}>
-              <Image
-                src={urlFor(menuData.menuItem.image).width(1920).height(1080).url()}
-                alt={menuData.menuItem.title}
-                priority
-                fill
-                sizes="100vw"
-                style={{
-                  objectFit: 'cover',
-                  objectPosition: 'center',
-                }}
-              />
-            </div>
+            {menuData.menuItem.image && (
+              <div className={styles.imageWrapper}>
+                <Image
+                  src={urlFor(menuData.menuItem.image).width(1920).height(1080).url()}
+                  alt={menuData.menuItem.title}
+                  priority
+                  fill
+                  sizes="100vw"
+                  style={{
+                    objectFit: 'cover',
+                    objectPosition: 'center',
+                  }}
+                />
+              </div>
+            )}
             <div className={styles.detailsWrapper}>
               <div className={styles.header}>
                 <Text as="h1" className={styles.title}>

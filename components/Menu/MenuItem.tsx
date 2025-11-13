@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { Text } from '../Text'
 import { FixTitle } from '../../utils/FixTitle'
+import { SanityImage } from '../../actions/sanity/sanity.types'
 import styles from '../../app/main.module.scss'
 import urlFor from '../../lib/sanity/urlFor'
 
@@ -11,7 +12,7 @@ interface MenuItemProps {
   title: string
   price: string
   description?: string
-  image?: any
+  image?: SanityImage
   likes?: number
 }
 

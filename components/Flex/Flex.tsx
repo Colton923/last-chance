@@ -1,6 +1,7 @@
+import clsx from 'clsx'
 import styles from './Flex.module.scss'
 
-type TFlex = {
+type FlexProps = {
   children?: React.ReactNode
   dir?: 'row' | 'column'
   justify?: 'start' | 'end' | 'center' | 'between' | 'around'
@@ -22,7 +23,7 @@ const Flex = ({
   bg,
   width,
   overflow,
-}: TFlex) => {
+}: FlexProps) => {
   const flexStyles = {
     flexDirection: dir,
     justifyContent: justify,
@@ -33,9 +34,12 @@ const Flex = ({
 
   return (
     <div
-      className={`${styles.flex} ${styles[width || 'auto']} ${
-        styles[overflow || 'none']
-      } ${className}`}
+      className={clsx(
+        styles.flex,
+        width && styles[width],
+        overflow && styles[overflow],
+        className
+      )}
       style={flexStyles}
     >
       {children}
@@ -45,4 +49,4 @@ const Flex = ({
 
 export default Flex
 
-export type { TFlex }
+export type { FlexProps }

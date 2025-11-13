@@ -1,6 +1,5 @@
 import { item } from 'actions/sanity'
 import { redirect } from 'next/navigation'
-import { RevertLink } from 'utils'
 import { Metadata } from 'next'
 import urlFor from '../../../lib/sanity/urlFor'
 

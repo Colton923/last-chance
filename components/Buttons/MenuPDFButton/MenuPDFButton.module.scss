@@ -1,0 +1,26 @@
+@import '../../../styles/variables';
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+  margin: $spacing-lg 0;
+  width: 100%;
+}
+
+.downloadLink {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: $spacing-sm;
+  font-family: $font-family-base;
+  font-weight: $font-weight-semibold;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+

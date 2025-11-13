@@ -68,8 +68,55 @@ export default function PrivacyPolicy() {
         <ul>
           <li>Email communication (SendGrid)</li>
           <li>Content management (Sanity)</li>
-          <li>Analytics (Google Analytics)</li>
+          <li>Analytics (Vercel Analytics)</li>
+          <li>Advertising (Google AdSense)</li>
         </ul>
+
+        <Text as="h2">Advertising and Cookies</Text>
+        <Text as="p">
+          We use Google AdSense to display advertisements on our website. Google AdSense
+          uses cookies and similar technologies to:
+        </Text>
+        <ul>
+          <li>Show personalized ads based on your interests</li>
+          <li>Measure ad performance and engagement</li>
+          <li>Prevent showing ads you&apos;ve already seen</li>
+        </ul>
+        <Text as="p">
+          You can control your ad personalization preferences by visiting{' '}
+          <a
+            href="https://www.google.com/settings/ads"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Google Ads Settings
+          </a>
+          . You can also opt out of personalized advertising by visiting{' '}
+          <a
+            href="https://www.aboutads.info/choices/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            AboutAds.info
+          </a>{' '}
+          or{' '}
+          <a
+            href="https://www.networkadvertising.org/choices/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Network Advertising Initiative
+          </a>
+          .
+        </Text>
+
+        <Text as="h2">Cookies</Text>
+        <Text as="p">
+          We use cookies to enhance your browsing experience and for advertising purposes.
+          Cookies are small text files stored on your device. You can control cookie
+          preferences through your browser settings. Note that disabling cookies may affect
+          website functionality.
+        </Text>
 
         <Text as="h2">Your Rights</Text>
         <Text as="p">You have the right to:</Text>

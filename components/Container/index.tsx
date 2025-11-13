@@ -1,4 +1,5 @@
 import { HTMLAttributes, ReactNode } from 'react'
+import clsx from 'clsx'
 import styles from './styles.module.scss'
 
 interface ContainerProps extends HTMLAttributes<HTMLDivElement> {
@@ -21,12 +22,12 @@ export const Container = ({
 }: ContainerProps) => {
   return (
     <div
-      className={`
-        ${styles.container}
-        ${styles[`container--${size}`]}
-        ${noPadding ? styles['container--no-padding'] : ''}
-        ${className || ''}
-      `}
+      className={clsx(
+        styles.container,
+        styles[`container--${size}`],
+        noPadding && styles['container--no-padding'],
+        className
+      )}
       {...props}
     >
       {children}

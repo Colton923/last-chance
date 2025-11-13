@@ -146,11 +146,12 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
 
   @media (min-width: $breakpoint-sm) {
     grid-template-columns: repeat(2, 1fr);
-    gap: $spacing-lg;
+    gap: $spacing-md;
   }
 
   @media (min-width: $breakpoint-lg) {
     grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-md;
   }
 }
 
@@ -686,24 +687,532 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
   width: 100%;
 }
 
-.heroLink {
-  display: inline-flex;
-  align-items: center;
+.heroButton {
+  font-size: $font-size-lg;
+  padding: $spacing-md $spacing-xl;
+  min-width: 200px;
+}
+
+// Specials Page
+.specialsGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+  width: 100%;
+
+  @media (min-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $spacing-xl;
+  }
+}
+
+.specialCard {
+  @include glass-panel;
+  padding: $spacing-xl;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+  min-height: 150px;
   justify-content: center;
-  padding: $spacing-md $spacing-lg;
-  background-color: $accent-color;
-  color: $text-color;
-  font-weight: $font-weight-semibold;
-  border-radius: $border-radius-md;
-  text-decoration: none;
-  transition: background-color $transition-duration $transition-timing;
 
   &:hover {
-    background-color: $accent-color-hover;
+    transform: translateY(-4px);
+  }
+}
+
+.specialTitle {
+  color: $accent-color;
+  margin: 0;
+}
+
+.specialDescription {
+  color: $text-color-muted;
+  line-height: $line-height-relaxed;
+  margin: 0;
+}
+
+// Drinks Page
+.drinksContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-2xl;
+}
+
+.drinkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-lg;
+}
+
+.drinkGroupHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-md;
+  flex-wrap: wrap;
+  margin-bottom: $spacing-xs;
+}
+
+.drinkGroupLogo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-xs;
+}
+
+.drinkGroupLogoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.drinkGroupName {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  text-align: center;
+  color: $accent-color;
+
+  @media (min-width: $breakpoint-md) {
+    font-size: $font-size-2xl;
+  }
+}
+
+.drinkGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: $spacing-md;
+
+  @media (min-width: $breakpoint-sm) {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: $spacing-lg;
   }
 
-  &:focus {
-    outline: 2px solid $accent-color;
-    outline-offset: 2px;
+  @media (min-width: $breakpoint-md) {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  }
+}
+
+.drinkCard {
+  @include glass-panel-base;
+  padding: $spacing-md;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
+  text-align: center;
+  min-height: 180px;
+  justify-content: space-between;
+  transition: all $transition-duration $transition-timing;
+
+  &:hover {
+    background: $glass-hover-bg;
+    border-color: $glass-hover-border;
+    transform: translateY(-4px);
+  }
+}
+
+.drinkLogoContainer {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm;
+}
+
+.drinkLogo {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(1.1);
+}
+
+.drinkNameFallback {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm;
+}
+
+.drinkInfo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: $spacing-xs;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drinkPrice {
+  color: $accent-color;
+}
+
+// Menu Page - Refined Restaurant Style
+.menuSection {
+  @include glass-panel;
+  margin-bottom: $spacing-2xl;
+  padding: 0;
+  overflow: hidden;
+}
+
+// Hero Image Section
+.menuHeroImage {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+
+  @media (min-width: $breakpoint-sm) {
+    height: 300px;
+  }
+
+  @media (min-width: $breakpoint-md) {
+    height: 350px;
+  }
+
+  img {
+    transition: transform 0.6s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.menuHeroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: $spacing-xl;
+}
+
+.menuSectionTitle {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  text-align: center;
+  color: $text-color;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+
+  @media (min-width: $breakpoint-md) {
+    font-size: $font-size-3xl;
+    letter-spacing: 3px;
+  }
+}
+
+// No image header fallback
+.menuSectionHeader {
+  padding: $spacing-xl;
+  border-bottom: 2px solid rgba($accent-color, 0.3);
+  background: linear-gradient(
+    to bottom,
+    rgba($accent-color, 0.1) 0%,
+    rgba($accent-color, 0.05) 100%
+  );
+}
+
+// Menu Items Grid
+.menuItemsGrid {
+  padding: $spacing-xl;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+
+  @media (min-width: $breakpoint-lg) {
+    padding: $spacing-2xl $spacing-3xl;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0 $spacing-3xl;
+  }
+}
+
+// Individual Menu Item Row
+.menuItemRow {
+  padding: $spacing-lg 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.2s ease;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  @media (min-width: $breakpoint-lg) {
+    &:nth-last-child(2):nth-child(odd) {
+      border-bottom: none;
+    }
+  }
+
+  &:hover {
+    transform: translateX(4px);
+    
+    .menuLeaderDots {
+      opacity: 1;
+    }
+  }
+}
+
+.menuItemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xs;
+}
+
+.menuItemHeader {
+  display: flex;
+  align-items: baseline;
+  gap: $spacing-xs;
+  width: 100%;
+}
+
+.menuItemTitle {
+  color: $text-color;
+  margin: 0;
+  line-height: 1.4;
+  flex-shrink: 0;
+}
+
+.menuLeaderDots {
+  flex: 1;
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 50%
+  );
+  background-size: 8px 1px;
+  background-repeat: repeat-x;
+  background-position: bottom;
+  margin: 0 $spacing-xs;
+  min-width: 20px;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+  align-self: center;
+  margin-bottom: 4px;
+}
+
+.menuItemPrice {
+  color: $accent-color;
+  white-space: nowrap;
+  flex-shrink: 0;
+  font-weight: $font-weight-bold;
+}
+
+.menuItemDesc {
+  color: $text-color-muted;
+  margin: 0;
+  line-height: $line-height-relaxed;
+  padding-left: 0;
+  font-style: italic;
+}
+
+// About Page Styles
+.aboutContent {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-3xl;
+}
+
+.aboutSection {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-xl;
+
+  @media (min-width: $breakpoint-md) {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: $spacing-2xl;
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+.aboutImageWrapper {
+  flex: 1;
+  min-width: 0;
+
+  img {
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+}
+
+.aboutText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.aboutHeading {
+  color: $accent-color;
+  margin-bottom: $spacing-md;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.aboutParagraph {
+  color: $text-color;
+  line-height: $line-height-relaxed;
+  margin-bottom: $spacing-md;
+
+  a {
+    color: $accent-color;
+    text-decoration: underline;
+    transition: color $transition-duration $transition-timing;
+
+    &:hover {
+      color: lighten($accent-color, 10%);
+    }
+  }
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+
+  @media (min-width: $breakpoint-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.featureCard {
+  @include glass-panel;
+  padding: $spacing-xl;
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-md;
+}
+
+.featureTitle {
+  color: $accent-color;
+  margin: 0;
+}
+
+.featureParagraph {
+  color: $text-color;
+  line-height: $line-height-relaxed;
+  margin: 0;
+}
+
+.hoursLocationGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-xl;
+
+  @media (min-width: $breakpoint-md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// FAQ Page Styles
+.faqIntro {
+  @include glass-panel;
+  padding: $spacing-xl;
+  margin-bottom: $spacing-2xl;
+}
+
+.faqIntroParagraph {
+  color: $text-color;
+  line-height: $line-height-relaxed;
+  margin: 0;
+
+  a {
+    color: $accent-color;
+    text-decoration: underline;
+
+    &:hover {
+      color: lighten($accent-color, 10%);
+    }
+  }
+}
+
+.faqCategory {
+  margin-bottom: $spacing-3xl;
+}
+
+.faqCategoryTitle {
+  color: $accent-color;
+  margin-bottom: $spacing-xl;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px solid rgba($accent-color, 0.3);
+  padding-bottom: $spacing-md;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-lg;
+}
+
+.faqCard {
+  padding: $spacing-lg;
+  transition: transform $transition-duration $transition-timing;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.faqQuestion {
+  color: $text-color;
+  margin: 0 0 $spacing-md 0;
+}
+
+.faqAnswer {
+  color: $text-color-muted;
+  line-height: $line-height-relaxed;
+  margin: 0;
+}
+
+.faqContact {
+  @include glass-panel;
+  padding: $spacing-2xl;
+  text-align: center;
+  margin-top: $spacing-3xl;
+}
+
+// Welcome Section
+.welcomeSection {
+  @include glass-panel;
+  padding: $spacing-2xl;
+  margin: $spacing-2xl 0;
+}
+
+.sectionTitle {
+  color: $accent-color;
+  text-align: center;
+  margin-bottom: $spacing-xl;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.welcomeParagraph {
+  color: $text-color;
+  line-height: $line-height-relaxed;
+  margin-bottom: $spacing-lg;
+  text-align: left;
+
+  &:last-child {
+    margin-bottom: 0;
   }
 }

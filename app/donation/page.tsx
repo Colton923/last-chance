@@ -1,4 +1,4 @@
-import { FormPage } from '../../components/FormPage'
+import { PageLayout } from '../../components/PageLayout'
 import { DonationForm } from '../../components/Forms/donationForm/DonationForm'
 import { Metadata } from 'next'
 
@@ -34,11 +34,11 @@ export const metadata: Metadata = {
 
 export default function Donation() {
   return (
-    <FormPage
+    <PageLayout
       title="Donation Request Form"
       description="Please fill out the form below to submit a donation request. We will review your request and get back to you within 5-7 business days."
     >
       <DonationForm />
-    </FormPage>
+    </PageLayout>
   )
 }

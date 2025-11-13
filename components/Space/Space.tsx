@@ -1,14 +1,15 @@
+import clsx from 'clsx'
 import styles from './Space.module.scss'
 
-type TSpace = {
+type SpaceProps = {
   size: 'xxxs' | 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl'
   dir: 'x' | 'y'
 }
 
-const Space = ({ size, dir }: TSpace) => {
-  return <div className={`${styles.space} ${styles[size]} ${styles[dir]}`} />
+const Space = ({ size, dir }: SpaceProps) => {
+  return <div className={clsx(styles.space, styles[size], styles[dir])} />
 }
 
 export default Space
 
-export type { TSpace }
+export type { SpaceProps }

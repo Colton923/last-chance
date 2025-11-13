@@ -1,11 +1,44 @@
+export type SanityImage = {
+  _type: 'image'
+  asset: {
+    _ref: string
+    _type: 'reference'
+  }
+  hotspot?: {
+    x: number
+    y: number
+    height: number
+    width: number
+  }
+  crop?: {
+    top: number
+    bottom: number
+    left: number
+    right: number
+  }
+}
+
 export type DrinkGroups = {
   title: string
+  logo?: SanityImage
+  description?: string
 }
 
 export type DrinkItem = {
   title: string
+  slug?: {
+    current: string
+  }
   price: number
   drinkGroup: SanityReference
+  description?: string
+  image?: SanityImage
+  logo?: SanityImage
+  abv?: number
+  volume?: string
+  featured?: boolean
+  available?: boolean
+  order?: number
 }
 
 export type DayHours = {
@@ -33,7 +66,7 @@ export type MenuItems = {
   title: string
   description?: string
   price: number
-  image?: any
+  image?: SanityImage
   menuGroup: SanityReference
 }
 
@@ -53,7 +86,7 @@ export type Item = {
   title: string
   description?: string
   price: string
-  image?: any
+  image?: SanityImage
   likes?: number
 }
 
@@ -75,6 +108,7 @@ export type PDF = {
 
 export type Drinks = {
   title: string
+  logo?: SanityImage
   drinkItems: DrinkItem[]
 }[]
 

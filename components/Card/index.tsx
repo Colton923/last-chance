@@ -1,4 +1,5 @@
 import { HTMLAttributes, ReactNode } from 'react'
+import clsx from 'clsx'
 import styles from './styles.module.scss'
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
@@ -24,13 +25,13 @@ export const Card = ({
 }: CardProps) => {
   return (
     <div
-      className={`
-        ${styles.card}
-        ${styles[`card--${variant}`]}
-        ${styles[`card--padding-${padding}`]}
-        ${interactive ? styles['card--interactive'] : ''}
-        ${className || ''}
-      `}
+      className={clsx(
+        styles.card,
+        styles[`card--${variant}`],
+        styles[`card--padding-${padding}`],
+        interactive && styles['card--interactive'],
+        className
+      )}
       {...props}
     >
       {children}

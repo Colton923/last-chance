@@ -1,14 +1,15 @@
+import clsx from 'clsx'
 import styles from './Pad.module.scss'
 
-type TPad = {
+type PadProps = {
   size: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl'
   children: React.ReactNode
 }
 
-const Pad = ({ size, children }: TPad) => {
-  return <div className={`${styles.pad} ${styles[size]}`}>{children}</div>
+const Pad = ({ size, children }: PadProps) => {
+  return <div className={clsx(styles.pad, styles[size])}>{children}</div>
 }
 
 export default Pad
 
-export type { TPad }
+export type { PadProps }

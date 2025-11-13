@@ -3,7 +3,9 @@
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { Text } from 'components/Text'
+import { Button } from 'components/Button'
 import FormInput from 'components/FormInput'
+import { VALIDATION_PATTERNS } from '../../../lib/validation'
 import styles from './styles.module.scss'
 
 type DonationFormType = {
@@ -240,10 +242,7 @@ export function DonationForm() {
           placeholder="Email address"
           {...register('contactEmail', {
             required: 'Email is required',
-            pattern: {
-              value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-              message: 'Invalid email address',
-            },
+            pattern: VALIDATION_PATTERNS.email,
           })}
           error={errors.contactEmail?.message}
         />
@@ -283,10 +282,7 @@ export function DonationForm() {
             placeholder="ZIP code"
             {...register('contactZip', {
               required: 'ZIP code is required',
-              pattern: {
-                value: /^\d{5}(-\d{4})?$/,
-                message: 'Invalid ZIP code',
-              },
+              pattern: VALIDATION_PATTERNS.zipCode,
             })}
             error={errors.contactZip?.message}
           />
@@ -307,13 +303,15 @@ export function DonationForm() {
       )}
 
       <div className={styles.submitWrapper}>
-        <button
+        <Button
           type="submit"
-          className={styles.submitButton}
-          disabled={isSubmitting}
+          variant="primary"
+          size="lg"
+          fullWidth
+          isLoading={isSubmitting}
         >
-          {isSubmitting ? 'Submitting...' : 'Submit Donation Request'}
-        </button>
+          Submit Donation Request
+        </Button>
       </div>
     </form>
   )

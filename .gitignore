@@ -42,3 +42,5 @@ yarn-error.log*
 # personal notes
 NOTES.md
 TODO.md
+
+.vercel

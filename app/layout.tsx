@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Navbar from '../components/navbar/Navbar'
 import Footer from '../components/footer/Footer'
 import { Background } from '../components/Background'
+import { CookieConsent } from '../components/CookieConsent'
 import { Analytics } from '@vercel/analytics/react'
 import { openGraphImage } from './shared-metadata'
 import '../styles/globals.scss'
@@ -77,7 +78,9 @@ async function getHours(): Promise<Hours> {
     })
     return hours
   } catch (error) {
-    console.error('Error fetching hours:', error)
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching hours:', error)
+    }
     // Return default hours instead of throwing
     return {
       kitchen: true,
@@ -171,7 +174,7 @@ export default async function RootLayout({ children }: LayoutProps) {
         <meta charSet="utf-8" />
         <meta
           name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+          content="width=device-width, initial-scale=1"
         />
         <meta name="author" content="Colton McClintock - Webdev Solutions LLC" />
         <meta name="keywords" content="Last Chance" />
@@ -189,13 +192,9 @@ export default async function RootLayout({ children }: LayoutProps) {
         <Background />
         <Navbar />
         <main className="main-content">{children}</main>
-        <Footer hours={hours as any} />
+        <Footer hours={hours} />
+        <CookieConsent />
         <Analytics />
-        <script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7507197443167447"
-          crossOrigin="anonymous"
-        />
       </body>
     </html>
   )
