@@ -1,8 +1,8 @@
-export const drinks = `*[_type == "drinkGroups" && visible == true] | order(order asc) {
+export const drinks = `*[_type == "drinkGroups" && (!defined(visible) || visible == true)] | order(order asc) {
   title,
   logo,
   description,
-  "drinkItems": *[_type == "drinkItems" && drinkGroup._ref == ^._id && available == true] | order(order asc) {
+  "drinkItems": *[_type == "drinkItems" && drinkGroup._ref == ^._id && (!defined(available) || available == true)] | order(order asc) {
     title,
     slug,
     price,

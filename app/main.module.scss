@@ -74,6 +74,10 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
   margin: 0 auto;
   padding: 0 $spacing-md;
 
+  @media (max-width: $breakpoint-md) {
+    padding: 0;
+  }
+
   @media (min-width: $breakpoint-sm) {
     gap: $spacing-xl;
     padding: 0 $spacing-lg;
@@ -564,6 +568,11 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
     z-index: 1;
     gap: $spacing-lg;
 
+    @media (max-width: $breakpoint-md) {
+      padding: $spacing-md;
+      gap: $spacing-md;
+    }
+
     .heroTitle {
       font-size: 4rem;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
@@ -579,7 +588,8 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
       margin-bottom: $spacing-lg;
 
       @media (max-width: $breakpoint-md) {
-        font-size: 1.25rem;
+        font-size: 1.125rem;
+        margin-bottom: $spacing-md;
       }
     }
   }
@@ -931,10 +941,14 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
 
 // Menu Items Grid
 .menuItemsGrid {
-  padding: $spacing-xl;
+  padding: $spacing-md;
   display: grid;
   grid-template-columns: 1fr;
   gap: 0;
+
+  @media (min-width: $breakpoint-sm) {
+    padding: $spacing-xl;
+  }
 
   @media (min-width: $breakpoint-lg) {
     padding: $spacing-2xl $spacing-3xl;
@@ -961,7 +975,7 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
 
   &:hover {
     transform: translateX(4px);
-    
+
     .menuLeaderDots {
       opacity: 1;
     }
@@ -1128,6 +1142,11 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
   @include glass-panel;
   padding: $spacing-xl;
   margin-bottom: $spacing-2xl;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-md;
+    margin-bottom: $spacing-xl;
+  }
 }
 
 .faqIntroParagraph {
@@ -1168,6 +1187,10 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
   padding: $spacing-lg;
   transition: transform $transition-duration $transition-timing;
 
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-md;
+  }
+
   &:hover {
     transform: translateY(-2px);
   }
@@ -1189,6 +1212,11 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
   padding: $spacing-2xl;
   text-align: center;
   margin-top: $spacing-3xl;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg;
+    margin-top: $spacing-xl;
+  }
 }
 
 // Welcome Section
@@ -1196,6 +1224,11 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
   @include glass-panel;
   padding: $spacing-2xl;
   margin: $spacing-2xl 0;
+
+  @media (max-width: $breakpoint-sm) {
+    padding: $spacing-lg;
+    margin: $spacing-xl 0;
+  }
 }
 
 .sectionTitle {

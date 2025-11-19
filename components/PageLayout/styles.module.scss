@@ -40,8 +40,8 @@ $spacing-unit: var(--spacing-md);
   animation: fadeIn $transition-duration $transition-timing;
 
   @media (max-width: $breakpoint-md) {
-    padding: $spacing-lg;
-    gap: $spacing-lg;
+    padding: $spacing-md;
+    gap: $spacing-md;
     border-radius: 0;
     border-left: none;
     border-right: none;

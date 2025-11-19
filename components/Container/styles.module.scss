@@ -7,6 +7,11 @@
   padding-left: $spacing-md;
   padding-right: $spacing-md;
 
+  @media (max-width: $breakpoint-sm) {
+    padding-left: $spacing-sm;
+    padding-right: $spacing-sm;
+  }
+
   &--sm {
     max-width: $breakpoint-sm;
   }
