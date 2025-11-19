@@ -5,7 +5,7 @@ import styles from '../main.module.scss'
 import { Metadata } from 'next'
 import outsidePhoto from '../../public/images/outside_photo.jpg'
 import barPhoto from '../../public/images/bar.jpg'
-import beerGardenPhoto from '../../public/images/beerGarden.webp'
+// import beerGardenPhoto from '../../public/images/beerGarden.webp'
 
 export const metadata: Metadata = {
   title: 'About Us | Last Chance Bar & Grill',
@@ -248,7 +248,7 @@ export default function About() {
         <section className={styles.aboutSection}>
           <div className={styles.aboutImageWrapper}>
             <Image
-              src={beerGardenPhoto}
+              src={outsidePhoto}
               alt="Last Chance beer garden"
               width={600}
               height={400}
