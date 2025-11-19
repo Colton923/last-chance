@@ -856,9 +856,20 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
 .drinkInfo {
   width: 100%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $spacing-sm;
   justify-content: center;
-  padding-top: $spacing-xs;
+  padding-top: $spacing-sm;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.drinkDetails {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-sm;
+  color: $text-color-muted;
+  font-size: $font-size-sm;
 }
 
 .drinkPrice {
