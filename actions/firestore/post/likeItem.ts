@@ -1,29 +1,30 @@
 'use server'
 
+import { FieldPath, FieldValue } from 'firebase-admin/firestore'
 import firestoreDB from 'lib/firestore/firestoreDB'
-import type { LikesDoc } from 'actions/firestore'
+import { menu } from 'actions/sanity'
 
 export async function likeItem(item: string): Promise<void> {
-  const likesRef = await firestoreDB.collection('likes').limit(1)
-  const likes = await likesRef.get()
-  if (likes) {
-    const data = likes.docs[0].data() as LikesDoc
-    const menu = new Map<string, number>()
-    if (data && data.menu) {
-      Object.entries(data.menu).map(([key, value]: [key: string, value: number]) => {
-        menu.set(key, value)
-      })
-    }
-    if (menu) {
-      const count = menu.get(item)
-      if (count) {
-        menu.set(item, count + 1)
-      } else {
-        menu.set(item, 1)
-      }
-      await likes.docs[0].ref.update({ menu: Object.fromEntries(menu) })
-    } else {
-      await likes.docs[0].ref.update({ menu: { [item]: 1 } })
-    }
+  // Only accept titles that exist on the menu so arbitrary keys can't be written
+  if (typeof item !== 'string' || !item || item.length > 200) return
+  const groups = await menu()
+  const exists = groups.some((group) =>
+    (group.menuItems || []).some((menuItem) => menuItem.title === item)
+  )
+  if (!exists) return
+
+  const likesRef = firestoreDB.collection('likes')
+  const snapshot = await likesRef.limit(1).get()
+
+  if (snapshot.empty) {
+    await likesRef.add({ menu: { [item]: 1 } })
+    return
   }
+
+  // Atomic increment avoids lost updates when two people like at once.
+  // FieldPath keeps titles containing dots from being parsed as nested paths.
+  await snapshot.docs[0].ref.update(
+    new FieldPath('menu', item),
+    FieldValue.increment(1)
+  )
 }

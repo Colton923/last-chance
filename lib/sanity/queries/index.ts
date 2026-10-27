@@ -5,4 +5,3 @@ export { menuPDF } from './menuPDF'
 
 export { menuGroup } from './menuGroup'
 export { menuItem } from './menuItem'
-export { itemImage } from './itemImage'

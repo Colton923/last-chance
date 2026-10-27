@@ -19,7 +19,7 @@
 # eslint cache
 .eslintcache
 
-# miscgit
+# misc
 .DS_Store
 *.pem
 
@@ -43,4 +43,4 @@ yarn-error.log*
 NOTES.md
 TODO.md
 
-.vercel
+.env*

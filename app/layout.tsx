@@ -1,6 +1,7 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import Navbar from '../components/navbar/Navbar'
 import Footer from '../components/footer/Footer'
+import type { HoursDoc } from '../components/footer/Footer'
 import { Background } from '../components/Background'
 import { CookieConsent } from '../components/CookieConsent'
 import { Analytics } from '@vercel/analytics/react'
@@ -13,107 +14,66 @@ interface LayoutProps {
   children: React.ReactNode
 }
 
-interface DayHours {
-  open: string
-  close: string
-}
-
-interface Hours {
-  kitchen?: boolean
-  bar?: boolean
-  monday: DayHours
-  tuesday: DayHours
-  wednesday: DayHours
-  thursday: DayHours
-  friday: DayHours
-  saturday: DayHours
-  sunday: DayHours
-}
-
 const catamaran = Catamaran({
   subsets: ['latin-ext'],
   display: 'swap',
   variable: '--font-catamaran',
 })
 
-const HOURS_QUERY = `*[_type == "hours"][0] {
+const DAY_FIELDS = `{ closed, open, close, note }`
+
+const HOURS_QUERY = `*[_type == "hours"] | order(_createdAt asc) {
+  name,
   kitchen,
   bar,
-  monday {
-    open,
-    close
-  },
-  tuesday {
-    open,
-    close
-  },
-  wednesday {
-    open,
-    close
-  },
-  thursday {
-    open,
-    close
-  },
-  friday {
-    open,
-    close
-  },
-  saturday {
-    open,
-    close
-  },
-  sunday {
-    open,
-    close
-  }
+  holidayNote,
+  monday ${DAY_FIELDS},
+  tuesday ${DAY_FIELDS},
+  wednesday ${DAY_FIELDS},
+  thursday ${DAY_FIELDS},
+  friday ${DAY_FIELDS},
+  saturday ${DAY_FIELDS},
+  sunday ${DAY_FIELDS}
 }`
 
-async function getHours(): Promise<Hours> {
+const DEFAULT_HOURS: HoursDoc[] = [
+  {
+    name: 'Kitchen Hours',
+    kitchen: true,
+    monday: { open: '11:00am', close: '9:00pm' },
+    tuesday: { open: '11:00am', close: '9:00pm' },
+    wednesday: { open: '8:00am', close: '9:00pm' },
+    thursday: { open: '8:00am', close: '9:00pm' },
+    friday: { open: '8:00am', close: '9:00pm' },
+    saturday: { open: '7:00am', close: '9:00pm' },
+    sunday: { open: '7:00am', close: '9:00pm' },
+  },
+  {
+    name: 'Bar Hours',
+    bar: true,
+    monday: { open: '11:00am', close: '9:00pm' },
+    tuesday: { open: '11:00am', close: '9:00pm' },
+    wednesday: { open: '8:00am', close: '2:00am' },
+    thursday: { open: '8:00am', close: '2:00am' },
+    friday: { open: '8:00am', close: '2:00am' },
+    saturday: { open: '7:00am', close: '2:00am' },
+    sunday: { open: '7:00am', close: '10:00pm' },
+  },
+]
+
+async function getHours(): Promise<HoursDoc[]> {
   try {
-    const hours = await client.fetch<Hours>(HOURS_QUERY, undefined, {
+    const hours = await client.fetch<HoursDoc[]>(HOURS_QUERY, undefined, {
       next: {
         revalidate: 60,
       },
     })
-    return hours
+    return hours && hours.length > 0 ? hours : DEFAULT_HOURS
   } catch (error) {
     if (process.env.NODE_ENV === 'development') {
       console.error('Error fetching hours:', error)
     }
-    // Return default hours instead of throwing
-    return {
-      kitchen: true,
-      bar: true,
-      monday: {
-        open: '11:00am',
-        close: '9:00pm',
-      },
-      tuesday: {
-        open: '11:00am',
-        close: '9:00pm',
-      },
-      wednesday: {
-        open: '8:00am',
-        close: '2:00am',
-      },
-      thursday: {
-        open: '8:00am',
-        close: '2:00am',
-      },
-      friday: {
-        open: '8:00am',
-        close: '2:00am',
-      },
-      saturday: {
-        open: '7:00am',
-        close: '2:00am',
-      },
-      sunday: {
-        open: '7:00am',
-        close: '10:00pm',
-      },
-    }
+    return DEFAULT_HOURS
   }
 }
 
@@ -125,6 +85,9 @@ export const metadata: Metadata = {
   },
   description: 'Coldest beer in town, cheapest all around',
   keywords: ['bar', 'grill', 'peoria', 'illinois', 'food', 'drinks', 'restaurant'],
+  other: {
+    'google-adsense-account': 'ca-pub-7507197443167447',
+  },
   authors: [{ name: 'Colton McClintock', url: 'https://webdevsolutions.llc' }],
   openGraph: {
     ...openGraphImage,
@@ -160,9 +123,12 @@ export const metadata: Metadata = {
     ],
   },
   manifest: '/site.webmanifest',
-  verification: {
-    google: 'ca-pub-7507197443167447',
-  },
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#1a1b21',
 }
 
 export default async function RootLayout({ children }: LayoutProps) {
@@ -171,17 +137,6 @@ export default async function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={catamaran.variable}>
       <head>
-        <meta charSet="utf-8" />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
-        <meta name="author" content="Colton McClintock - Webdev Solutions LLC" />
-        <meta name="keywords" content="Last Chance" />
-        <meta name="theme-color" content="#1a1b21" />
-        <meta name="google-adsense-account" content="ca-pub-7507197443167447" />
-        <meta property="og:image" content="/api/og" />
-        <link rel="manifest" href="/site.webmanifest" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7507197443167447"

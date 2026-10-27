@@ -12,65 +12,28 @@ import ItemLike from '../../../../components/Menu/ItemLike'
 import Image from 'next/image'
 
 async function fetchMenuItem(id: string): Promise<Item> {
-  try {
-    const url = `/api/menu/item?id=${encodeURIComponent(id)}`
+  const url = `/api/menu/item?id=${encodeURIComponent(id)}`
+  const response = await fetch(url)
 
-    const response = await fetch(url)
-
-    if (!response.ok) {
-      const errorText = await response.text()
-      console.error('Error response:', {
-        status: response.status,
-        statusText: response.statusText,
-        body: errorText,
-      })
-      throw new Error(
-        `Failed to fetch menu item: ${response.status} ${response.statusText}`
-      )
-    }
-
-    const data = await response.json()
-
-    return data
-  } catch (error) {
-    console.error('fetchMenuItem error details:', {
-      error,
-      errorMessage: error instanceof Error ? error.message : 'Unknown error',
-      errorStack: error instanceof Error ? error.stack : undefined,
-    })
-    throw error
+  if (!response.ok) {
+    throw new Error(
+      `Failed to fetch menu item: ${response.status} ${response.statusText}`
+    )
   }
+
+  return await response.json()
 }
 
 async function fetchLikes(title: string): Promise<number> {
-  try {
-    const url = `/api/menu/likes?title=${encodeURIComponent(title)}`
+  const url = `/api/menu/likes?title=${encodeURIComponent(title)}`
+  const response = await fetch(url)
 
-    const response = await fetch(url)
-
-    if (!response.ok) {
-      const errorText = await response.text()
-      console.error('Error response for likes:', {
-        status: response.status,
-        statusText: response.statusText,
-        body: errorText,
-      })
-      throw new Error(
-        `Failed to fetch likes: ${response.status} ${response.statusText}`
-      )
-    }
-
-    const data = await response.json()
-
-    return data.likes || 0
-  } catch (error) {
-    console.error('fetchLikes error details:', {
-      error,
-      errorMessage: error instanceof Error ? error.message : 'Unknown error',
-      errorStack: error instanceof Error ? error.stack : undefined,
-    })
-    throw error
+  if (!response.ok) {
+    return 0
   }
+
+  const data = await response.json()
+  return data.likes || 0
 }
 
 export default function MenuItemModal({
@@ -91,10 +54,7 @@ export default function MenuItemModal({
       setIsLoading(true)
       setError(null)
 
-      // First fetch the menu item to get its title
       const menuItem = await fetchMenuItem(params.itemTitle)
-
-      // Then fetch likes using the title
       const menuLikes = await fetchLikes(menuItem.title)
 
       setMenuData({
@@ -103,15 +63,7 @@ export default function MenuItemModal({
       })
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
-        const errorDetails = {
-          error,
-          message: error instanceof Error ? error.message : 'Unknown error',
-          stack: error instanceof Error ? error.stack : undefined,
-          params: {
-            itemTitle: params.itemTitle,
-          },
-        }
-        console.error('Error in fetchData:', errorDetails)
+        console.error('Error in fetchData:', error)
       }
       setError(error instanceof Error ? error.message : 'Failed to load menu item')
       setTimeout(() => router.back(), 2000)

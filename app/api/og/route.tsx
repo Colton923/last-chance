@@ -7,39 +7,44 @@ import MetadataUI from './_components/MetadataUI'
 import { NextRequest } from 'next/server'
 export const runtime = 'edge'
 
+const fallbackImage = () =>
+  new ImageResponse(<MetadataUI imageHeight={159} imageWidth={230} />, {
+    width: 1200,
+    height: 630,
+  })
+
 export async function GET(req: NextRequest) {
   const params = req.nextUrl.searchParams
   const itemTitle = params.get('id')
 
   if (!itemTitle) {
-    return new ImageResponse(<MetadataUI imageHeight={159} imageWidth={230} />, {
-      width: 230,
-      height: 159,
-    })
+    return fallbackImage()
   }
 
-  const titleReverted = RevertLink(itemTitle)
-  const item = await client.fetch(menuItem(titleReverted), { title: titleReverted })
-  const imageUrl = urlFor(item[0].image).url()
-  if (!imageUrl) {
-    return new ImageResponse(<MetadataUI imageHeight={159} imageWidth={230} />, {
-      width: 1200,
-      height: 640,
-    })
-  }
-  return new ImageResponse(
-    (
-      <MetadataUI
-        imageHeight={400}
-        imageWidth={400}
-        imageURL={imageUrl}
-        price={item[0].price}
-        description={item[0].description}
-      />
-    ),
-    {
-      width: 1200,
-      height: 640,
+  try {
+    const titleReverted = RevertLink(itemTitle)
+    const items = await client.fetch(menuItem(titleReverted))
+    const item = items?.[0]
+    if (!item?.image) {
+      return fallbackImage()
     }
-  )
+
+    return new ImageResponse(
+      (
+        <MetadataUI
+          imageHeight={400}
+          imageWidth={400}
+          imageURL={urlFor(item.image).format('jpg').url()}
+          price={item.price}
+          description={item.description}
+        />
+      ),
+      {
+        width: 1200,
+        height: 630,
+      }
+    )
+  } catch {
+    return fallbackImage()
+  }
 }

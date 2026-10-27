@@ -1,7 +1,16 @@
 import { item } from 'actions/sanity'
+import { like } from 'actions/firestore'
 import { redirect } from 'next/navigation'
 import { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 import urlFor from '../../../lib/sanity/urlFor'
+import { PageLayout } from '../../../components/PageLayout'
+import { Text } from '../../../components/Text'
+import { Button } from '../../../components/Button'
+import ItemLike from '../../../components/Menu/ItemLike'
+import { FixTitle, MakeLink } from '../../../utils'
+import styles from '../../main.module.scss'
 
 export type Params = {
   itemTitle: string
@@ -22,21 +31,26 @@ export async function generateMetadata({
     }
   }
 
-  const title = `${menuItem.title} | Last Chance Bar & Grill Menu`
+  const cleanTitle = FixTitle(menuItem.title)
+  const title = `${cleanTitle} | Last Chance Bar & Grill Menu`
   const description =
     menuItem.description ||
-    `Try our delicious ${menuItem.title} at Last Chance Bar & Grill in Peoria, IL.`
+    `Try our delicious ${cleanTitle} at Last Chance Bar & Grill in Peoria, IL.`
   const imageUrl = menuItem.image
-    ? urlFor(menuItem.image).width(1200).height(630).url()
+    ? urlFor(menuItem.image).width(1200).height(630).format('jpg').url()
     : '/images/sunday.jpg'
+  const canonicalPath = `/menu/${MakeLink(menuItem.title)}`
 
   return {
     title,
     description,
+    alternates: {
+      canonical: canonicalPath,
+    },
     openGraph: {
       title,
       description,
-      url: `https://lastchancepeoria.com/menu/${itemTitle}`,
+      url: `https://lastchancepeoria.com${canonicalPath}`,
       siteName: 'Last Chance Bar & Grill',
       locale: 'en_US',
       type: 'website',
@@ -45,7 +59,7 @@ export async function generateMetadata({
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: `${menuItem.title} at Last Chance Bar & Grill`,
+          alt: `${cleanTitle} at Last Chance Bar & Grill`,
         },
       ],
     },
@@ -63,8 +77,62 @@ export default async function Page({ params }: { params: Params }) {
   const menuItem = await item(itemTitle)
 
   if (!menuItem) {
-    redirect('/')
+    redirect('/menu')
   }
 
-  return null // This page is intercepted by the modal
+  let itemLikes = 0
+  try {
+    itemLikes = (await like(menuItem.title)) ?? 0
+  } catch {
+    itemLikes = 0
+  }
+
+  return (
+    <PageLayout containerSize="lg">
+      <div className={styles.modalContent}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <Link href="/menu">
+            <Button variant="outline" size="md">
+              ← Back to Full Menu
+            </Button>
+          </Link>
+        </div>
+        <div className={styles.modalMenuItem}>
+          {menuItem.image && (
+            <div className={styles.imageWrapper}>
+              <Image
+                src={urlFor(menuItem.image).width(1920).height(1080).url()}
+                alt={FixTitle(menuItem.title)}
+                priority
+                fill
+                sizes="100vw"
+                style={{
+                  objectFit: 'cover',
+                  objectPosition: 'center',
+                }}
+              />
+            </div>
+          )}
+          <div className={styles.detailsWrapper}>
+            <div className={styles.header}>
+              <Text as="h1" className={styles.title}>
+                {FixTitle(menuItem.title)}
+              </Text>
+              <Text as="span" className={styles.price}>
+                ${parseFloat(menuItem.price).toFixed(2)}
+              </Text>
+            </div>
+            {menuItem.description && (
+              <Text as="p" className={styles.description}>
+                {menuItem.description}
+              </Text>
+            )}
+            <div className={styles.likesSection}>
+              <ItemLike itemName={menuItem.title} likes={itemLikes} />
+            </div>
+          </div>
+        </div>
+      </div>
+    </PageLayout>
+  )
 }

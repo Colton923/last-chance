@@ -970,6 +970,10 @@ $glass-hover-border: rgba(255, 255, 255, 0.2);
 
 // Individual Menu Item Row
 .menuItemRow {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
   padding: $spacing-lg 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   transition: all 0.2s ease;

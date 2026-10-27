@@ -73,21 +73,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ]
 
   // Only add menu items to sitemap if we successfully fetched them
+  const seenUrls = new Set<string>()
   const siteMapItems: MetadataRoute.Sitemap =
     items.length > 0
       ? (items
           .map((group) => {
-            const link = `${baseURL}/menu/${MakeLink(group.title)}`
-            return group.menuItems.map((item) => {
+            return (group.menuItems || []).map((item) => {
               return {
-                url: `${link}/${MakeLink(item.title)}`,
+                url: `${baseURL}/menu/${MakeLink(item.title)}`,
                 lastModified: new Date(),
                 changeFrequency: 'weekly',
                 priority: 0.8,
               }
             })
           })
-          .flat() as MetadataRoute.Sitemap)
+          .flat()
+          .filter((entry) => {
+            if (seenUrls.has(entry.url)) {
+              return false
+            }
+            seenUrls.add(entry.url)
+            return true
+          }) as MetadataRoute.Sitemap)
       : []
 
   return [...baseSiteMap, ...siteMapItems]

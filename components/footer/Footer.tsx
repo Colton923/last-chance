@@ -1,25 +1,53 @@
 import styles from './Footer.module.scss'
 import Link from 'next/link'
 
-interface TimeRange {
-  open: string
-  close: string
+export interface DayHours {
+  closed?: boolean
+  open?: string
+  close?: string
+  note?: string
 }
 
-interface Hours {
+export interface HoursDoc {
+  name?: string
   kitchen?: boolean
   bar?: boolean
-  monday: TimeRange
-  tuesday: TimeRange
-  wednesday: TimeRange
-  thursday: TimeRange
-  friday: TimeRange
-  saturday: TimeRange
-  sunday: TimeRange
+  holidayNote?: string
+  monday?: DayHours
+  tuesday?: DayHours
+  wednesday?: DayHours
+  thursday?: DayHours
+  friday?: DayHours
+  saturday?: DayHours
+  sunday?: DayHours
 }
 
 interface FooterProps {
-  hours: Hours
+  hours: HoursDoc[]
+}
+
+const DAYS = [
+  ['monday', 'Mon'],
+  ['tuesday', 'Tue'],
+  ['wednesday', 'Wed'],
+  ['thursday', 'Thu'],
+  ['friday', 'Fri'],
+  ['saturday', 'Sat'],
+  ['sunday', 'Sun'],
+] as const
+
+const hoursTitle = (doc: HoursDoc) => {
+  if (doc.name) return doc.name
+  if (doc.kitchen) return 'Kitchen Hours'
+  if (doc.bar) return 'Bar Hours'
+  return 'Hours'
+}
+
+const formatDay = (day?: DayHours) => {
+  if (!day) return 'See website'
+  if (day.closed) return 'Closed'
+  if (!day.open || !day.close) return 'Call for hours'
+  return `${day.open} - ${day.close}`
 }
 
 const Footer = ({ hours }: FooterProps) => {
@@ -66,75 +94,21 @@ const Footer = ({ hours }: FooterProps) => {
         </div>
         <div className={styles.footerItem}>
           <div className={styles.footerHours}>
-            {hours.kitchen && (
-              <div className={styles.hours}>
-                <h3 className={styles.footerTitle}>Kitchen Hours</h3>
-                <span>
-                  <strong>Mon-Tue:</strong> 11:00am - 9:00pm
-                </span>
-                <span>
-                  <strong>Wed-Fri:</strong> 8:00am - 9:00pm
-                </span>
-                <span>
-                  <strong>Sat-Sun:</strong> 7:00am -{' '}
-                  {hours.sunday.close === '8:00pm' ? '8:00pm' : '9:00pm'}
-                </span>
+            {hours.map((doc, docIndex) => (
+              <div className={styles.hours} key={`hours-${docIndex}`}>
+                <h3 className={styles.footerTitle}>{hoursTitle(doc)}</h3>
+                {DAYS.map(([key, label]) => {
+                  const day = doc[key]
+                  return (
+                    <span key={key}>
+                      <strong>{label}:</strong> {formatDay(day)}
+                      {day?.note ? ` (${day.note})` : ''}
+                    </span>
+                  )
+                })}
+                {doc.holidayNote ? <span>{doc.holidayNote}</span> : null}
               </div>
-            )}
-            {hours.bar && (
-              <div className={styles.hours}>
-                <h3 className={styles.footerTitle}>Bar Hours</h3>
-                <span>
-                  <strong>Mon-Tue:</strong> 11:00am - 9:00pm
-                </span>
-                <span>
-                  <strong>Wed-Fri:</strong> 8:00am - 2:00am
-                </span>
-                <span>
-                  <strong>Saturday:</strong> 7:00am - 2:00am
-                </span>
-                <span>
-                  <strong>Sunday:</strong> 7:00am - 10:00pm
-                </span>
-              </div>
-            )}
-            <div className={styles.hours}>
-              <h3 className={styles.footerTitle}>Daily Hours</h3>
-              <div className={styles.hoursGrid}>
-                <div className={styles.hoursColumn}>
-                  <span>
-                    <strong>Monday:</strong> {hours.monday.open} -{' '}
-                    {hours.monday.close}
-                  </span>
-                  <span>
-                    <strong>Tuesday:</strong> {hours.tuesday.open} -{' '}
-                    {hours.tuesday.close}
-                  </span>
-                  <span>
-                    <strong>Wednesday:</strong> {hours.wednesday.open} -{' '}
-                    {hours.wednesday.close}
-                  </span>
-                  <span>
-                    <strong>Thursday:</strong> {hours.thursday.open} -{' '}
-                    {hours.thursday.close}
-                  </span>
-                </div>
-                <div className={styles.hoursColumn}>
-                  <span>
-                    <strong>Friday:</strong> {hours.friday.open} -{' '}
-                    {hours.friday.close}
-                  </span>
-                  <span>
-                    <strong>Saturday:</strong> {hours.saturday.open} -{' '}
-                    {hours.saturday.close}
-                  </span>
-                  <span>
-                    <strong>Sunday:</strong> {hours.sunday.open} -{' '}
-                    {hours.sunday.close}
-                  </span>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

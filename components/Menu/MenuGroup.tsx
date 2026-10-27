@@ -1,9 +1,11 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import styles from '../../app/main.module.scss'
 import { Text } from '../Text'
 import { FixTitle } from '../../utils/FixTitle'
+import { MakeLink } from '../../utils/MakeLink'
 import urlFor from '../../lib/sanity/urlFor'
 import type { Group } from '../../actions/sanity'
 
@@ -14,7 +16,11 @@ interface MenuItemRowProps {
 }
 
 const MenuItemRow = ({ title, description, price }: MenuItemRowProps) => (
-  <div className={styles.menuItemRow}>
+  <Link
+    href={`/menu/${MakeLink(title)}`}
+    scroll={false}
+    className={styles.menuItemRow}
+  >
     <div className={styles.menuItemInfo}>
       <div className={styles.menuItemHeader}>
         <Text as="h3" size="lg" weight="semibold" className={styles.menuItemTitle}>
@@ -31,7 +37,7 @@ const MenuItemRow = ({ title, description, price }: MenuItemRowProps) => (
         </Text>
       )}
     </div>
-  </div>
+  </Link>
 )
 
 const MenuGroup = ({ title, menuItems }: Group) => {

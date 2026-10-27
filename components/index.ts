@@ -20,5 +20,4 @@ export { default as Modal } from './Modal'
 export { CookieConsent } from './CookieConsent'
 
 // Menu Components
-export { default as MenuItem } from './Menu/MenuItem'
 export { default as MenuGroup } from './Menu/MenuGroup'
