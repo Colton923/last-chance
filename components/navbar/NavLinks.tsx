@@ -4,15 +4,26 @@ import React from 'react'
 import Link from 'next/link'
 import styles from './Navbar.module.scss'
 
-const NavLinks = (props: any) => {
+interface NavLinksProps {
+  isMobile?: boolean
+  closeMobileMenu?: () => void
+}
+
+const NavLinks = ({ isMobile, closeMobileMenu }: NavLinksProps) => {
+  const handleClick = () => {
+    if (isMobile && closeMobileMenu) {
+      closeMobileMenu()
+    }
+  }
+
   return (
     <div className={styles.navLinksWrapper}>
       <Link
         className={styles.navItem}
         href="/about"
-        onClick={() => props.isMobile && props.closeMobileMenu()}
+        onClick={handleClick}
       >
-        <h2 className={styles.navHeader}>About</h2>
+        <span className={styles.navHeader}>About</span>
         <svg
           className={styles.svg}
           xmlns="http://www.w3.org/2000/svg"
@@ -30,9 +41,9 @@ const NavLinks = (props: any) => {
       <Link
         className={styles.navItem}
         href="/drinks"
-        onClick={() => props.isMobile && props.closeMobileMenu()}
+        onClick={handleClick}
       >
-        <h2 className={styles.navHeader}>Drink</h2>
+        <span className={styles.navHeader}>Drink</span>
 
         <svg
           className={styles.svg}
@@ -51,9 +62,9 @@ const NavLinks = (props: any) => {
       <Link
         className={styles.navItem}
         href="/menu"
-        onClick={() => props.isMobile && props.closeMobileMenu()}
+        onClick={handleClick}
       >
-        <h2 className={styles.navHeader}>Eat</h2>
+        <span className={styles.navHeader}>Eat</span>
         <svg
           className={styles.svg}
           xmlns="http://www.w3.org/2000/svg"
@@ -71,9 +82,9 @@ const NavLinks = (props: any) => {
       <Link
         className={styles.navItem}
         href="/specials"
-        onClick={() => props.isMobile && props.closeMobileMenu()}
+        onClick={handleClick}
       >
-        <h2 className={styles.navHeader}>Specials</h2>
+        <span className={styles.navHeader}>Specials</span>
         <svg
           className={styles.svg}
           xmlns="http://www.w3.org/2000/svg"
@@ -91,9 +102,9 @@ const NavLinks = (props: any) => {
       <Link
         className={styles.navItem}
         href="/faq"
-        onClick={() => props.isMobile && props.closeMobileMenu()}
+        onClick={handleClick}
       >
-        <h2 className={styles.navHeader}>FAQ</h2>
+        <span className={styles.navHeader}>FAQ</span>
         <svg
           className={styles.svg}
           xmlns="http://www.w3.org/2000/svg"
@@ -111,9 +122,9 @@ const NavLinks = (props: any) => {
       <Link
         className={styles.navItem}
         href="/donation"
-        onClick={() => props.isMobile && props.closeMobileMenu()}
+        onClick={handleClick}
       >
-        <h2 className={styles.navHeader}>Donation</h2>
+        <span className={styles.navHeader}>Donation</span>
         <svg
           className={styles.svg}
           xmlns="http://www.w3.org/2000/svg"
@@ -131,9 +142,9 @@ const NavLinks = (props: any) => {
       <Link
         className={styles.navItem}
         href="/apply"
-        onClick={() => props.isMobile && props.closeMobileMenu()}
+        onClick={handleClick}
       >
-        <h2 className={styles.navHeader}>Apply</h2>
+        <span className={styles.navHeader}>Apply</span>
         <svg
           className={styles.svg}
           xmlns="http://www.w3.org/2000/svg"

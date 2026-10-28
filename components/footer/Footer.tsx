@@ -62,6 +62,8 @@ const Footer = ({ hours }: FooterProps) => {
               <Link
                 className={styles.link}
                 href="https://www.google.com/maps/place/Last+Chance+Bar+%26+Grill/@40.8111097,-89.6370073,17z/data=!4m14!1m7!3m6!1s0x880a4344ac8ed925:0x9c0856e3f18ba23f!2sLast+Chance+Bar+%26+Grill!8m2!3d40.8111097!4d-89.6348186!16s%2Fg%2F1w6r8w1y!3m5!1s0x880a4344ac8ed925:0x9c0856e3f18ba23f!8m2!3d40.8111097!4d-89.6348186!16s%2Fg%2F1w6r8w1y"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 2713 W Second St, Peoria, IL 61615
               </Link>
@@ -86,6 +88,8 @@ const Footer = ({ hours }: FooterProps) => {
               <Link
                 className={styles.link}
                 href="https://www.facebook.com/lastchance17"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Facebook
               </Link>

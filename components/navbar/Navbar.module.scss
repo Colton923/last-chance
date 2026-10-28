@@ -53,6 +53,17 @@
         width: 100px;
         height: auto;
       }
+
+      .menuToggle {
+        background: transparent;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: inherit;
+      }
     }
     .navLinksWrapper {
       padding: 1.5rem 0;

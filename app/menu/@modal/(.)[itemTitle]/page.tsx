@@ -36,6 +36,23 @@ async function fetchLikes(title: string): Promise<number> {
   return data.likes || 0
 }
 
+const formatPrice = (price: unknown): string => {
+  if (typeof price === 'number' && !isNaN(price)) {
+    return `$${price.toFixed(2)}`
+  }
+  if (typeof price === 'string') {
+    const trimmed = price.trim()
+    if (!trimmed) return ''
+    const cleaned = trimmed.replace(/[^0-9.]/g, '')
+    const parsed = parseFloat(cleaned)
+    if (!isNaN(parsed) && cleaned.length > 0) {
+      return `$${parsed.toFixed(2)}`
+    }
+    return trimmed
+  }
+  return ''
+}
+
 export default function MenuItemModal({
   params,
 }: {
@@ -109,7 +126,7 @@ export default function MenuItemModal({
                   {FixTitle(menuData.menuItem.title)}
                 </Text>
                 <Text as="span" className={styles.price}>
-                  ${parseFloat(menuData.menuItem.price).toFixed(2)}
+                  {formatPrice(menuData.menuItem.price)}
                 </Text>
               </div>
               {menuData.menuItem.description && (

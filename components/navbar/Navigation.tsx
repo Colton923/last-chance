@@ -11,7 +11,7 @@ const Navigation = () => {
       <Link href="/">
         <Image
           src={logo}
-          alt="logo"
+          alt="Last Chance Bar & Grill Logo"
           width={230}
           height={159}
           className={styles.brandImage}

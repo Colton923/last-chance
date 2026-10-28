@@ -131,12 +131,75 @@ export const viewport: Viewport = {
   themeColor: '#1a1b21',
 }
 
+const restaurantJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': ['BarOrPub', 'Restaurant'],
+  '@id': 'https://lastchancepeoria.com/#restaurant',
+  name: 'The Last Chance Bar & Grill',
+  alternateName: 'Last Chance Bar & Grill',
+  url: 'https://lastchancepeoria.com',
+  image: 'https://lastchancepeoria.com/images/outside_photo.jpg',
+  logo: 'https://lastchancepeoria.com/images/logo.png',
+  telephone: '+1-309-243-5036',
+  email: 'lastchancebarandgrill@yahoo.com',
+  priceRange: '$',
+  servesCuisine: ['American', 'Comfort Food', 'Breakfast', 'Pub Food', 'Burgers'],
+  acceptsReservations: false,
+  hasMenu: 'https://lastchancepeoria.com/menu',
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '2713 W Second St',
+    addressLocality: 'Peoria',
+    addressRegion: 'IL',
+    postalCode: '61615',
+    addressCountry: 'US',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 40.8111097,
+    longitude: -89.6348186,
+  },
+  hasMap:
+    'https://www.google.com/maps/place/Last+Chance+Bar+%26+Grill/@40.8111097,-89.6370073,17z/data=!4m14!1m7!3m6!1s0x880a4344ac8ed925:0x9c0856e3f18ba23f!2sLast+Chance+Bar+%26+Grill!8m2!3d40.8111097!4d-89.6348186!16s%2Fg%2F1w6r8w1y',
+  sameAs: ['https://www.facebook.com/lastchance17'],
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Monday', 'Tuesday'],
+      opens: '11:00',
+      closes: '21:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: ['Wednesday', 'Thursday', 'Friday'],
+      opens: '08:00',
+      closes: '02:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Saturday',
+      opens: '07:00',
+      closes: '02:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: 'Sunday',
+      opens: '07:00',
+      closes: '22:00',
+    },
+  ],
+}
+
 export default async function RootLayout({ children }: LayoutProps) {
   const hours = await getHours()
 
   return (
     <html lang="en" className={catamaran.variable}>
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(restaurantJsonLd) }}
+        />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7507197443167447"

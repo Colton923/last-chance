@@ -18,8 +18,6 @@ const MobileNavigation = () => {
       alt="menu open"
       width={40}
       height={40}
-      className=""
-      onClick={() => setOpen(!open)}
       style={{
         transition: 'all',
         transitionTimingFunction: 'ease-in-out',
@@ -34,7 +32,6 @@ const MobileNavigation = () => {
       alt="close menu"
       width={50}
       height={50}
-      onClick={() => setOpen(!open)}
       style={{
         transition: 'all',
         transitionTimingFunction: 'ease-in-out',
@@ -58,13 +55,21 @@ const MobileNavigation = () => {
         >
           <Image
             src={logo}
-            alt="logo"
+            alt="Last Chance Bar & Grill Logo"
             width={230}
             height={159}
             className={styles.brandImage}
           />
         </Link>
-        {open ? closeIcon : hamburgerIcon}
+        <button
+          type="button"
+          className={styles.menuToggle}
+          onClick={() => setOpen(!open)}
+          aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+          aria-expanded={open}
+        >
+          {open ? closeIcon : hamburgerIcon}
+        </button>
       </div>
       {open && <NavLinks isMobile={true} closeMobileMenu={closeMobileMenu} />}
     </div>

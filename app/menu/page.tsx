@@ -52,8 +52,19 @@ export const metadata: Metadata = {
 }
 
 export default async function Menu() {
-  const menuItems = await menu()
-  const menuDownload = await menuPDF()
+  const menuItems = (await menu()) || []
+  let pdfUrl = '/menu.pdf'
+  try {
+    const menuDownload = await menuPDF()
+    if (menuDownload?.[0]?.menuPDF) {
+      pdfUrl = menuDownload[0].menuPDF
+    }
+  } catch (error) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Error fetching menu PDF:', error)
+    }
+    pdfUrl = '/menu.pdf'
+  }
 
   return (
     <PageLayout
@@ -62,7 +73,7 @@ export default async function Menu() {
       containerSize="lg"
     >
       <div className={styles.menuContent}>
-        <MenuPDFButton pdf={menuDownload[0].menuPDF} />
+        <MenuPDFButton pdf={pdfUrl} />
         {menuItems.map((menuGroup: any, groupIndex: number) => (
           <MenuGroup
             key={`menu-group-${groupIndex}`}

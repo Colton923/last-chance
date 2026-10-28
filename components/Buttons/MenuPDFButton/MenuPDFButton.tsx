@@ -1,10 +1,11 @@
 import { Button } from '../../Button'
 import styles from './MenuPDFButton.module.scss'
 
-export const MenuPDFButton = (url: { pdf: string }) => {
+export const MenuPDFButton = ({ pdf }: { pdf: string }) => {
+  const downloadHref = pdf.startsWith('http') ? `${pdf}?dl=` : pdf
   return (
     <div className={styles.wrapper}>
-      <a href={`${url.pdf}?dl=`} download className={styles.downloadLink}>
+      <a href={downloadHref} download="Last-Chance-Peoria-Menu.pdf" className={styles.downloadLink}>
         <Button variant="secondary" size="md" className={styles.button}>
           <svg
             xmlns="http://www.w3.org/2000/svg"

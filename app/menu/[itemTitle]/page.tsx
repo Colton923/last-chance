@@ -87,6 +87,18 @@ export default async function Page({ params }: { params: Params }) {
     itemLikes = 0
   }
 
+  const formattedPrice = (() => {
+    const p = menuItem.price as unknown
+    if (typeof p === 'number' && !isNaN(p)) return `$${p.toFixed(2)}`
+    if (typeof p === 'string') {
+      const cleaned = p.trim().replace(/[^0-9.]/g, '')
+      const parsed = parseFloat(cleaned)
+      if (!isNaN(parsed) && cleaned.length > 0) return `$${parsed.toFixed(2)}`
+      return p.trim()
+    }
+    return ''
+  })()
+
   return (
     <PageLayout containerSize="lg">
       <div className={styles.modalContent}>
@@ -118,9 +130,11 @@ export default async function Page({ params }: { params: Params }) {
               <Text as="h1" className={styles.title}>
                 {FixTitle(menuItem.title)}
               </Text>
-              <Text as="span" className={styles.price}>
-                ${parseFloat(menuItem.price).toFixed(2)}
-              </Text>
+              {formattedPrice && (
+                <Text as="span" className={styles.price}>
+                  {formattedPrice}
+                </Text>
+              )}
             </div>
             {menuItem.description && (
               <Text as="p" className={styles.description}>

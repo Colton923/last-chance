@@ -105,57 +105,6 @@ const FeatureSection = memo(
 
 FeatureSection.displayName = 'FeatureSection'
 
-// // Special Offers Component
-// const SpecialOffers = memo(() => (
-//   <div className={styles.specialOffers}>
-//     <Container>
-//       <Text color="default" size="2xl" weight="bold" className={styles.sectionTitle}>
-//         Today's Specials
-//       </Text>
-//       <div className={styles.offersGrid}>
-//         <div className={styles.offerCard}>
-//           <BeerIcon />
-//           <Text color="default" size="xl" weight="bold">
-//             Happy Hour
-//           </Text>
-//           <Text color="default" size="base">
-//             4PM - 7PM Daily
-//           </Text>
-//           <Text color="default" size="lg">
-//             $2 Off All Draft Beers
-//           </Text>
-//         </div>
-//         <div className={styles.offerCard}>
-//           <EatIcon />
-//           <Text color="default" size="xl" weight="bold">
-//             Sunday Brunch
-//           </Text>
-//           <Text color="default" size="base">
-//             10AM - 2PM
-//           </Text>
-//           <Text color="default" size="lg">
-//             All-You-Can-Eat Breakfast
-//           </Text>
-//         </div>
-//         <div className={styles.offerCard}>
-//           <SlotsIcon />
-//           <Text color="default" size="xl" weight="bold">
-//             Gaming Special
-//           </Text>
-//           <Text color="default" size="base">
-//             Monday - Thursday
-//           </Text>
-//           <Text color="default" size="lg">
-//             Free Play with Dinner Purchase
-//           </Text>
-//         </div>
-//       </div>
-//     </Container>
-//   </div>
-// ))
-
-// SpecialOffers.displayName = 'SpecialOffers'
-
 // Welcome Section Component
 const WelcomeSection = memo(() => (
   <Container>
@@ -218,8 +167,6 @@ export default function HomePage() {
           alt="Gaming slots at Last Chance"
         />
       </Container>
-      <div className={styles.spacer} />
-      {/* <SpecialOffers /> */}
     </PageLayout>
   )
 }

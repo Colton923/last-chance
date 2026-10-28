@@ -15,6 +15,23 @@ interface MenuItemRowProps {
   price: string
 }
 
+const formatPrice = (price: unknown): string => {
+  if (typeof price === 'number' && !isNaN(price)) {
+    return `$${price.toFixed(2)}`
+  }
+  if (typeof price === 'string') {
+    const trimmed = price.trim()
+    if (!trimmed) return ''
+    const cleaned = trimmed.replace(/[^0-9.]/g, '')
+    const parsed = parseFloat(cleaned)
+    if (!isNaN(parsed) && cleaned.length > 0) {
+      return `$${parsed.toFixed(2)}`
+    }
+    return trimmed
+  }
+  return ''
+}
+
 const MenuItemRow = ({ title, description, price }: MenuItemRowProps) => (
   <Link
     href={`/menu/${MakeLink(title)}`}
@@ -28,7 +45,7 @@ const MenuItemRow = ({ title, description, price }: MenuItemRowProps) => (
         </Text>
         <span className={styles.menuLeaderDots}></span>
         <Text as="span" size="lg" weight="bold" className={styles.menuItemPrice}>
-          ${parseFloat(price).toFixed(2)}
+          {formatPrice(price)}
         </Text>
       </div>
       {description && (
@@ -41,8 +58,9 @@ const MenuItemRow = ({ title, description, price }: MenuItemRowProps) => (
 )
 
 const MenuGroup = ({ title, menuItems }: Group) => {
+  const safeItems = menuItems || []
   // Get first item with image for hero
-  const heroItem = menuItems.find(item => item.image)
+  const heroItem = safeItems.find(item => item?.image)
   
   return (
     <section className={styles.menuSection}>
@@ -78,7 +96,7 @@ const MenuGroup = ({ title, menuItems }: Group) => {
       
       {/* Menu Items Grid */}
       <div className={styles.menuItemsGrid}>
-        {menuItems.map((item, index) => (
+        {safeItems.map((item, index) => (
           <MenuItemRow
             key={`menu-item-${index}`}
             title={item.title}

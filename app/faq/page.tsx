@@ -153,12 +153,31 @@ export default function FAQ() {
     },
   ]
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.flatMap((category) =>
+      category.questions.map((faq) => ({
+        '@type': 'Question',
+        name: faq.q,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: faq.a,
+        },
+      }))
+    ),
+  }
+
   return (
     <PageLayout
       title="Frequently Asked Questions"
       description="Everything you need to know about Last Chance Bar & Grill"
       containerSize="lg"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <div className={styles.faqIntro}>
         <Text as="p" size="lg" className={styles.faqIntroParagraph}>
           Have questions about Last Chance Bar & Grill? We&apos;ve compiled answers
